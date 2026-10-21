@@ -1,0 +1,30 @@
+---
+/** Le calculateur d'une page, choisi par `tool`, avec ses props calculées au build (lib/tool-props.ts). */
+import PrecosCalc from './calc/PrecosCalc';
+import PrevisaoCalc from './calc/PrevisaoCalc';
+import ImpostosCalc from './calc/ImpostosCalc';
+import CustoCalc from './calc/CustoCalc';
+import HistoricoCalc from './calc/HistoricoCalc';
+import MarcasCalc from './calc/MarcasCalc';
+import MadeiraCalc from './calc/MadeiraCalc';
+import AcoresCalc from './calc/AcoresCalc';
+import QuandoCalc from './calc/QuandoCalc';
+import AditivadoCalc from './calc/AditivadoCalc';
+import { toolProps } from '../lib/tool-props';
+import { bundlePrecos } from '../lib/bundle';
+import type { Locale } from '../i18n/routes';
+interface Props { tool: string; lang: Locale; opts?: Record<string, string | number | undefined>; methodHref: string }
+const { tool, lang, opts = {}, methodHref } = Astro.props;
+const p: any = toolProps(tool);
+const o: any = opts;
+---
+{tool === 'precos' && <PrecosCalc client:load lang={lang} datos={bundlePrecos((o.distrito as string) ?? 'Lisboa')} fuel={o.fuel} concelho={o.concelho} litros={o.litros} methodHref={methodHref} />}
+{tool === 'previsao' && <PrevisaoCalc client:load lang={lang} {...p} fuel={o.fuel} methodHref={methodHref} />}
+{tool === 'impostos' && <ImpostosCalc client:load lang={lang} {...p} fuel={o.fuel} methodHref={methodHref} />}
+{tool === 'custo' && <CustoCalc client:load lang={lang} {...p} fuel={o.fuel} methodHref={methodHref} />}
+{tool === 'historico' && <HistoricoCalc client:load lang={lang} {...p} fuel={o.fuel} methodHref={methodHref} />}
+{tool === 'marcas' && <MarcasCalc client:load lang={lang} {...p} fuel={o.fuel} methodHref={methodHref} />}
+{tool === 'madeira' && <MadeiraCalc client:load lang={lang} {...p} methodHref={methodHref} />}
+{tool === 'acores' && <AcoresCalc client:load lang={lang} {...p} methodHref={methodHref} />}
+{tool === 'quando' && <QuandoCalc client:load lang={lang} {...p} fuel={o.fuel} methodHref={methodHref} />}
+{tool === 'aditivado' && <AditivadoCalc client:load lang={lang} {...p} familia={o.familia} methodHref={methodHref} />}

@@ -1,0 +1,22 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE_URL } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { breadcrumbSchema } from '../../lib/seo';
+const lang = 'pt';
+const code = `<iframe src="${SITE_URL}/embed/precos-combustiveis/" title="Preço dos combustíveis hoje por concelho" width="100%" height="1200" style="border:0;max-width:1100px" loading="lazy"></iframe>`;
+---
+<PageLayout title="Inserir a calculadora dos preços dos combustíveis – Combustíveis Hoje" description="Copie o código e mostre na sua página o preço afixado do gasóleo e da gasolina em cada concelho, atualizado todos os dias com os dados da DGEG. Gratuito, com ligação." lang={lang} noindex={true} jsonLd={[breadcrumbSchema([{ name: 'Início', path: route('home', lang) }, { name: 'Widget', path: route('widget', lang) }])]} breadcrumbs={[{ label: 'Widget' }]} showAuthor={false}>
+  <header class="mb-6">
+    <h1 class="text-3xl font-bold text-navy-900 md:text-4xl">Inserir a calculadora dos preços dos combustíveis</h1>
+    <p class="mt-3 text-lg text-navy-700">Copie o código e cole-o na sua página. Atualiza-se sozinha todos os dias com os preços que os postos comunicam à DGEG.</p>
+  </header>
+  <div class="prose prose-slate max-w-none">
+    <pre class="overflow-x-auto rounded-lg bg-navy-900 p-4 text-sm text-white"><code>{code}</code></pre>
+    <p>Condições: a ligação por baixo da calculadora fica visível, a calculadora não é alterada e é oferecida sem garantia. Versão inglesa: <code>{`${SITE_URL}/embed/fuel-prices/`}</code>.</p>
+    <p><a href={route('contact', lang)}>Contacto</a></p>
+  </div>
+  <div class="mt-8 overflow-hidden rounded-xl border border-navy-200">
+    <iframe src="/embed/precos-combustiveis/" title="Preço dos combustíveis hoje por concelho" width="100%" height="1200" style="border:0" loading="lazy"></iframe>
+  </div>
+</PageLayout>

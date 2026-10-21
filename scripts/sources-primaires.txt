@@ -1,0 +1,6 @@
+# Sources primaires propres à ce site (RECETTE §7).
+# ENSE — Entidade Nacional para o Setor Energético, E.P.E. : entité publique qui publie le prix de référence
+# journalier des combustibles et sa décomposition ; domaine public non « gov ».
+ense-epe.pt
+# Diário da República — journal officiel de la République portugaise (texte des décrets-lois cités).
+diariodarepublica.pt

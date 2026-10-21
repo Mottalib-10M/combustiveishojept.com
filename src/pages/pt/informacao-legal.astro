@@ -1,0 +1,30 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import LegalIdentity from '../../components/LegalIdentity.astro';
+import { AUTHOR_NAME, CLARITY_ID, LEGAL, CONTACT_EMAIL, GA4_ID, LAST_UPDATED, SITE_NAMES, SITE_URL } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { displayDate } from '../../lib/format';
+const lang = 'pt';
+---
+<PageLayout title={`Informação legal – ${SITE_NAMES[lang]}`} description="Informação legal do Combustíveis Hoje: editor, alojamento, responsabilidade, propriedade intelectual, origem dos dados da DGEG, da ENSE e do JORAM e lei aplicável ao site." lang={lang} noindex={true} breadcrumbs={[{ label: 'Informação legal' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Informação legal</h1>
+    <p>Em cumprimento do Decreto-Lei n.º 7/2004, de 7 de janeiro (comércio eletrónico), indicam-se os dados do titular deste site.</p>
+    <h2>Editor</h2>
+    <LegalIdentity lang={lang} />
+    <p>Responsável pelos conteúdos de {SITE_URL}: {AUTHOR_NAME}. Contacto: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+    <h2>Alojamento</h2>
+    <p>O site é servido em páginas estáticas pelo serviço {LEGAL.hosting.name}, da empresa com sede em {LEGAL.hosting.address}. Informação sobre o serviço: <a href={LEGAL.hosting.url} rel="nofollow noopener" target="_blank">{LEGAL.hosting.url}</a>.</p>
+    <h2>O que o site faz</h2>
+    <p>O Combustíveis Hoje mostra os preços de combustíveis que os postos do continente comunicam à Direção-Geral de Energia e Geologia, calcula médias por concelho e distrito e uma estimativa da variação de segunda-feira. Os resultados são <strong>informação e estimativas</strong>: o preço que conta é o afixado no posto. O site é independente e não tem qualquer relação com a DGEG, a ENSE, o Governo Regional da Madeira, os Açores ou qualquer marca de combustíveis. Método e limites: <a href={route('method', lang)}>método e fontes</a>.</p>
+    <h2>Origem dos dados</h2>
+    <p>Preços por posto e preço médio diário: Direção-Geral de Energia e Geologia (DGEG), informação de utilização livre, reproduzida fielmente, com a data e hora da última atualização dos preços. Preços de referência e decomposição: Entidade Nacional para o Setor Energético (ENSE). Madeira: despachos conjuntos publicados no Jornal Oficial da Região Autónoma da Madeira.</p>
+    <h2>Responsabilidade</h2>
+    <p>Os dados são lidos todos os dias e os cálculos testados automaticamente, mas não podemos garantir a ausência de erros, a atualidade da comunicação de cada posto nem a disponibilidade contínua das fontes. O editor não responde por decisões tomadas apenas com base numa estimativa. Os erros podem ser comunicados na <a href={route('contact', lang)}>página de contacto</a>.</p>
+    <h2>Propriedade intelectual</h2>
+    <p>Os textos, gráficos e código do site pertencem ao editor; os dados oficiais pertencem às respetivas entidades. A calculadora pode ser inserida gratuitamente com uma ligação visível: ver <a href={route('widget', lang)}>inserir a calculadora</a>.</p>
+    <h2>Dados pessoais e cookies</h2>
+    {GA4_ID ? (<p>O que escreve nas calculadoras não sai do seu navegador. O site instala cookies de medição de audiência do Google Analytics (<code>_ga</code>, <code>_ga_{GA4_ID.replace('G-', '')}</code>, 13 meses no máximo), sem publicidade{CLARITY_ID && '; a estabilidade das páginas é medida com o Microsoft Clarity, sem cookies'}. Detalhes: <a href={route('privacy', lang)}>política de privacidade</a> e página de <a href={route('cookies', lang)}>cookies</a>.</p>) : (<p>O que escreve nas calculadoras não sai do seu navegador e o site não instala cookies{CLARITY_ID && '; a estabilidade das páginas é medida de forma anónima com o Microsoft Clarity, sem cookies'}. Ver a <a href={route('privacy', lang)}>política de privacidade</a> e a página de <a href={route('cookies', lang)}>cookies</a>.</p>)}
+    <h2>Lei aplicável</h2><p>Lei francesa, onde o editor está estabelecido, sem prejuízo da proteção que a lei portuguesa dá aos consumidores residentes em Portugal. Atualizado em <time datetime={LAST_UPDATED}>{displayDate(LAST_UPDATED, 'pt-PT')}</time>.</p>
+  </div>
+</PageLayout>

@@ -1,0 +1,17 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { CONTACT_EMAIL, SITE_NAMES } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+const lang = 'pt';
+---
+<PageLayout title={`Contacto – ${SITE_NAMES[lang]}`} description="Contacto do Combustíveis Hoje: assinale um preço, um posto ou uma estimativa que não bate certo. Respondemos por correio eletrónico e cada correção fica datada. Sem telefone." lang={lang} noindex={true} breadcrumbs={[{ label: 'Contacto' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Contacto</h1>
+    <p>Escreva para <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Lemos tudo o que diga respeito aos preços e aos cálculos. Não há telefone e não ligamos a ninguém.</p>
+    <h2>Assinalar um erro</h2>
+    <p>Um preço não coincide com o que o posto afixa, um posto mudou de marca ou fechou, ou a estimativa de segunda-feira parece estranha? Indique a página, o posto, o dia e a hora. Os preços por posto são os que cada posto comunica à DGEG: se o posto não atualizou a sua comunicação, a correção tem de partir dele, e nós voltamos a ler os dados todos os dias.</p>
+    <h2>O que não podemos fazer</h2>
+    <p>Não vendemos combustível, não temos cartões de desconto e não negociamos preços com marcas. Uma reclamação sobre um preço cobrado ou afixado dirige-se ao próprio posto, ao livro de reclamações e, se for o caso, à ENSE, que fiscaliza o setor.</p>
+    <h2>Inserir a calculadora</h2><p>O código está na <a href={route('widget', lang)}>página para inserir a calculadora</a>. Editor e alojamento: <a href={route('terms', lang)}>informação legal</a>.</p>
+  </div>
+</PageLayout>

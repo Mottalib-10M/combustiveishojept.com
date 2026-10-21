@@ -1,0 +1,22 @@
+---
+/** Page pour iframe : le calculateur sans navigation. noindex, hors sitemap (astro.config). */
+import '../../styles/global.css';
+import PrecosCalc from '../../components/calc/PrecosCalc';
+import { SITE_URL } from '../../data/site-config';
+import { bundlePrecos } from '../../lib/bundle';
+const datos = bundlePrecos('Lisboa');
+---
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Preço dos combustíveis hoje por concelho – Combustíveis Hoje</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={`${SITE_URL}/pt/`} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="bg-white p-2 text-navy-900">
+    <PrecosCalc client:load lang="pt" datos={datos} />
+    <p class="mt-2 text-center text-xs text-navy-600"><a href={`${SITE_URL}/pt/`} target="_blank" rel="noopener" class="underline">Combustíveis Hoje · Preço dos combustíveis hoje por concelho</a></p>
+  </body>
+</html>

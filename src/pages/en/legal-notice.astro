@@ -1,0 +1,29 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import LegalIdentity from '../../components/LegalIdentity.astro';
+import { AUTHOR_NAME, CLARITY_ID, CONTACT_EMAIL, GA4_ID, LAST_UPDATED, SITE_NAMES, SITE_URL } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { displayDate } from '../../lib/format';
+const lang = 'en';
+---
+<PageLayout title={`Legal notice – ${SITE_NAMES[lang]}`} description="Legal notice for Combustíveis Hoje: publisher, hosting, liability, intellectual property, where the DGEG, ENSE and JORAM data come from, and the law that applies to the site." lang={lang} noindex={true} breadcrumbs={[{ label: 'Legal notice' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Legal notice</h1>
+    <h2>Publisher</h2>
+    <LegalIdentity lang={lang} />
+    <p>Responsible for the content of {SITE_URL}: {AUTHOR_NAME}. Contact: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+    <h2>Hosting</h2>
+    <LegalIdentity mode="hosting" lang={lang} />
+    <h2>What the site does</h2>
+    <p>Combustíveis Hoje shows the fuel prices that mainland filling stations report to the Directorate-General for Energy and Geology, works out averages by municipality and district and an estimate of Monday’s change. Results are <strong>information and estimates</strong>: the price that counts is the one on the pump. The site is independent and has no link with the DGEG, the ENSE, the regional governments of Madeira or the Azores, or any fuel brand. Method and limits: <a href={route('method', lang)}>method and sources</a>.</p>
+    <h2>Where the data come from</h2>
+    <p>Station prices and the daily average: Directorate-General for Energy and Geology (DGEG), information free to reuse, reproduced faithfully with the date and time of the last price update. Reference prices and breakdown: National Entity for the Energy Sector (ENSE). Madeira: joint orders published in the Official Journal of the Autonomous Region of Madeira.</p>
+    <h2>Liability</h2>
+    <p>Data are read every day and the sums tested automatically, but we cannot guarantee the absence of errors, that every station’s report is current, or that the sources are always available. The publisher is not liable for decisions taken on the basis of an estimate alone. Errors can be reported on the <a href={route('contact', lang)}>contact page</a>.</p>
+    <h2>Intellectual property</h2>
+    <p>The site’s text, charts and code belong to the publisher; the official data belong to their bodies. The calculator may be embedded free of charge with a visible link: see <a href={route('widget', lang)}>embed the calculator</a>.</p>
+    <h2>Personal data and cookies</h2>
+    {GA4_ID ? (<p>What you type into the calculators never leaves your browser. The site sets Google Analytics audience-measurement cookies (<code>_ga</code>, <code>_ga_{GA4_ID.replace('G-', '')}</code>, 13 months at most), with no advertising{CLARITY_ID && '; page stability is measured with Microsoft Clarity, without cookies'}. Details: <a href={route('privacy', lang)}>privacy policy</a> and <a href={route('cookies', lang)}>cookies</a>.</p>) : (<p>What you type into the calculators never leaves your browser and the site sets no cookies{CLARITY_ID && '; page stability is measured anonymously with Microsoft Clarity, without cookies'}. See the <a href={route('privacy', lang)}>privacy policy</a> and the <a href={route('cookies', lang)}>cookies</a> page.</p>)}
+    <h2>Applicable law</h2><p>French law, where the publisher is established, without prejudice to the protection Portuguese law gives consumers resident in Portugal. Updated on <time datetime={LAST_UPDATED}>{displayDate(LAST_UPDATED, 'en-GB')}</time>.</p>
+  </div>
+</PageLayout>

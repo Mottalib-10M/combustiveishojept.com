@@ -1,0 +1,49 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import LegalIdentity from '../../components/LegalIdentity.astro';
+import { CLARITY_ID, CONTACT_EMAIL, GA4_ID, LAST_UPDATED, LEGAL, SITE_NAMES, SITE_URL } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+const lang = 'en';
+const title = `Privacy policy – ${SITE_NAMES[lang]}`;
+const description = GA4_ID ? 'Audience measurement with Google Analytics and cookies, no advertising; what you type stays in your browser; hosting logs; your rights under the GDPR.' : 'What you type stays in your browser, no cookies, hosting logs only: how the site handles data, your rights under the GDPR and the supervisory authority.';
+---
+<PageLayout title={title} description={description} lang={lang} noindex={true} breadcrumbs={[{ label: 'Privacy' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Privacy policy</h1>
+    <p>This page describes the personal data processing linked to the use of {SITE_URL}, under articles 12 to 14 of Regulation (EU) 2016/679 (GDPR).</p>
+    <h2>1. Controller</h2>
+    <LegalIdentity lang={lang} />
+    <p>For any question about your data: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. No data protection officer has been appointed, as the conditions of GDPR article 37 are not met.</p>
+    <h2>2. What you type stays in your browser</h2>
+    <p>Calculations run in your browser. The litres, kilometres, prices and municipalities you choose <strong>are sent to no server</strong>, are not stored and are linked to no identifier. When you switch district, your browser downloads that district’s price file, the same for every visitor. The site asks for no account, name or e-mail. A share link carries your choices in the page address: share it only with whom you choose.</p>
+    <h2>3. Processing carried out</h2>
+    <h3>Hosting logs</h3>
+    <p>The hosting provider logs, for each request, the IP address, date and time, page requested, browser and referring page. Purpose: service security and fault diagnosis. Legal basis: the publisher’s legitimate interest (GDPR art. 6(1)(f)). Retention: per the provider’s policy.</p>
+    {GA4_ID ? (<>
+    <h3>Audience measurement with Google Analytics</h3>
+    <p>The site uses Google Analytics 4 to count visits and learn which pages are useful: pages viewed, referrer, visit length, device and browser type, approximate country and city. To do so Google Analytics sets two cookies: <code>_ga</code>, which tells visitors apart with a random identifier, and <code>_ga_{GA4_ID.replace('G-', '')}</code>, which keeps the visit’s state. Their lifetime is capped at 13 months (390 days) and is not extended at each visit.</p>
+    <p>Google Analytics 4 neither logs nor keeps IP addresses. The page address sent to Google Analytics has its parameters removed, so the choices in a share link are not included. The site shows no advertising: ad storage, ad data, ad personalisation and Google signals are switched off.</p>
+    <p>Purpose: audience measurement. Legal basis: the publisher’s legitimate interest (GDPR art. 6(1)(f)). Provider: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland. Retention at Google: 14 months.</p>
+    </>) : (<>
+    <h3>No audience measurement</h3>
+    <p>The site sets no cookies and uses no analytics or advertising tool.</p>
+    </>)}
+    {CLARITY_ID && (<>
+    <h3>Technical stability measurement with Microsoft Clarity, without cookies</h3>
+    <p>To spot errors, slow pages and unresponsive buttons, the site uses Microsoft Clarity in cookieless mode: Clarity sets no cookies, each page view gets its own identifier and page text is masked. Legal basis: the publisher’s legitimate interest. Provider: Microsoft Ireland Operations Limited, One Microsoft Place, South County Business Park, Leopardstown, Dublin 18, Ireland. Retention: 30 days for recordings, at most 13 months for aggregated data.</p>
+    </>)}
+    <h3>Messages you send us</h3>
+    <p>If you write to the contact address, your e-mail and message are kept as long as needed to reply and, where relevant, fix an error, and are deleted at the latest three years after the last exchange. Legal basis: the publisher’s legitimate interest.</p>
+    <h2>4. Recipients</h2>
+    <p>No data are sold, rented or passed on. Only the hosting provider{GA4_ID && ', Google Ireland Limited for Google Analytics'}{CLARITY_ID && ', Microsoft Ireland Operations Limited for Clarity'} have access, as processors under GDPR article 28.</p>
+    <h2>5. Transfers outside the European Union</h2>
+    <p>Hosting logs may be processed in the United States.{GA4_ID && ' Google Analytics data may be transferred to Google LLC in the United States.'}{CLARITY_ID && ' Clarity data may be transferred to Microsoft Corporation in the United States.'} These transfers rely on the EU–U.S. Data Privacy Framework and the European Commission’s standard contractual clauses.</p>
+    <h2>6. Your rights</h2>
+    <p>You have the rights of access, rectification, erasure, restriction, objection and portability (GDPR articles 15 to 22). Write to <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>; we answer within one month. With no user accounts, we most likely hold no data that identify you, and we will tell you so.</p>
+    {GA4_ID && (<p>To object to audience measurement without writing to us: block or delete cookies in your browser settings, or install the <a href="https://tools.google.com/dlpage/gaoptout" rel="nofollow noopener" target="_blank">Google Analytics opt-out add-on</a>.</p>)}
+    <p>You may complain to the supervisory authority: {LEGAL.supervisoryAuthority} (<a href={LEGAL.supervisoryAuthorityUrl} rel="nofollow noopener" target="_blank">{LEGAL.supervisoryAuthorityUrl}</a>). In Portugal, also to the Comissão Nacional de Proteção de Dados (CNPD).</p>
+    <h2>7. No automated decisions</h2>
+    <p>A calculation result is an estimate made at your request, in your browser. It has no legal effect and is not an automated decision within the meaning of GDPR article 22. No profiles are built.</p>
+    <p>See also the <a href={route('cookies', lang)}>cookies</a> page. Last updated: {LAST_UPDATED}.</p>
+  </div>
+</PageLayout>

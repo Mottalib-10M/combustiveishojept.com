@@ -1,0 +1,20 @@
+{
+ "accent": "#046A38",
+ "symbol": "€/L",
+ "variants": [
+  {
+   "file": "og-pt.png",
+   "title": "Preço dos combustíveis hoje\ne na próxima semana",
+   "subtitle": "Gasóleo · gasolina 95 e 98 · GPL · 278 concelhos · dados DGEG",
+   "badge": "Estimativa de segunda-feira com erro publicado",
+   "brand": "Combustíveis Hoje"
+  },
+  {
+   "file": "og-en.png",
+   "title": "Fuel prices in Portugal today\nand next week",
+   "subtitle": "Diesel · petrol 95 and 98 · LPG · 278 municipalities · DGEG data",
+   "badge": "Monday estimate with its past error shown",
+   "brand": "Combustíveis Hoje"
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { CONTACT_EMAIL, SITE_NAMES } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { P } from '../../lib/params';
+const lang = 'pt';
+---
+<PageLayout title={`Política editorial – ${SITE_NAMES[lang]}`} description="Como o Combustíveis Hoje verifica os preços: só dados oficiais da DGEG, da ENSE e do JORAM, uma data para cada valor, testes automáticos e estimativas com o erro à vista." lang={lang} noindex={true} breadcrumbs={[{ label: 'Política editorial' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Política editorial</h1>
+    <h2>Fontes</h2><p>Só fontes primárias: a DGEG para os preços afixados e o preço médio diário, a ENSE para os preços de referência e a decomposição do litro, o Jornal Oficial da Região Autónoma da Madeira para os preços máximos da ilha, o Diário da República e o Portal das Finanças para as regras. Um blogue, um comparador ou a página de uma marca nunca são fonte. As regras fixas estão num ficheiro de parâmetros com a data em que foram lidas ({P.retrieved_at}).</p>
+    <h2>O que não publicamos</h2><p>Um valor que não conseguimos ler numa fonte oficial não aparece: os preços máximos dos Açores não são mostrados porque o jornal oficial da região não se deixa ler automaticamente, e as taxas de IVA das regiões autónomas não entram nos cálculos. A estimativa de segunda-feira só é publicada para os combustíveis em que bate, nas semanas passadas, a simples hipótese «o preço fica igual». Não classificamos marcas nem cobramos para mencionar quem quer que seja.</p>
+    <h2>Verificações</h2><p>Os cálculos são testados a cada publicação com casos feitos à mão e com os dados reais: 18 distritos, 278 concelhos, decomposição da ENSE que soma o seu preço, retroteste da estimativa sem usar a semana testada. Se um ficheiro oficial falhar, a versão anterior fica no lugar e a data à vista é a dos dados lidos.</p>
+    <h2>Correções</h2><p>Os erros são corrigidos assim que confirmados. Escreva para <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Mais em <a href={route('method', lang)}>método e fontes</a> e <a href={route('about', lang)}>quem somos</a>.</p>
+  </div>
+</PageLayout>

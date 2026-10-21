@@ -1,0 +1,73 @@
+---
+/**
+ * Accueil d'une langue (page pilier, RECETTE §5) : réponse chiffrée du jour, calculateur par concelho au premier
+ * écran, cartes (moyennes, estimation du lundi), texte, puis l'index des pages par famille. Textes : content/inicio.ts.
+ */
+import PageLayout from '../layouts/PageLayout.astro';
+import Clamp from './Clamp.astro';
+import PrecosCalc from './calc/PrecosCalc';
+import { HOME } from '../content/inicio';
+import { route, type Locale } from '../i18n/routes';
+import { navCategories } from '../i18n/nav';
+import { helpers } from '../lib/helpers';
+import { P, type SourceKey } from '../lib/params';
+import { bundlePrecos } from '../lib/bundle';
+import { faqSchema, organizationSchema, websiteSchema, webPageSchema, webApplicationSchema } from '../lib/seo';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const x = HOME[lang];
+const H = helpers(lang);
+const path = route('home', lang);
+const resume = x.resume(H);
+const faqs = x.faqs(H);
+const keys: SourceKey[] = ['dgegPortal', 'dgegPmd', 'dl243', 'enseRef', 'enseDecomp', 'civa18', 'joramPrecos'];
+const sources = keys.map((k) => ({ name: P.sources[k].label[lang], url: P.sources[k].url }));
+const jsonLd = [websiteSchema(lang), organizationSchema(lang), webPageSchema({ name: x.h1, description: x.description, path, lang }), webApplicationSchema({ name: x.h1, description: x.description, path, lang }), faqSchema(faqs, lang)];
+const pt = lang === 'pt';
+const groups = navCategories(lang);
+const D = H.D;
+const lido = D.POSTOS.ultimaAtualizacao;
+const card = (f: 'gs' | 'g95') => {
+  const e = D.est(f);
+  return e && e.qualidade.publica
+    ? { t: pt ? `${H.fn(f)}, ${H.dia(e.segunda, true)}` : `${H.fn(f)}, ${H.dia(e.segunda, true)}`, v: H.c(e.variacao, true), d: pt ? `estimativa: ${H.l(e.preco)} (preço médio DGEG)` : `estimate: ${H.l(e.preco)} (DGEG average)`, href: route('proxima-semana', lang) }
+    : null;
+};
+const tarjetas = [
+  { t: pt ? 'Gasóleo simples, média afixada' : 'Standard diesel, posted average', v: H.l(D.statsDe('gs')!.media), d: pt ? `mínimo ${H.l(D.statsDe('gs')!.min)}` : `lowest ${H.l(D.statsDe('gs')!.min)}`, href: route('preco-gasoleo', lang) },
+  { t: pt ? 'Gasolina 95, média afixada' : 'Petrol 95, posted average', v: H.l(D.statsDe('g95')!.media), d: pt ? `mínimo ${H.l(D.statsDe('g95')!.min)}` : `lowest ${H.l(D.statsDe('g95')!.min)}`, href: route('preco-gasolina-95', lang) },
+  card('gs'), card('g95'),
+].filter(Boolean) as Array<{ t: string; v: string; d: string; href: string }>;
+---
+<PageLayout title={x.title} description={x.description} lang={lang} jsonLd={jsonLd} faqs={faqs} sources={sources}>
+  <header class="mb-3">
+    <h1 class="text-3xl font-bold text-navy-900 md:text-4xl">{x.h1}</h1>
+    <p class="mt-2 text-lg text-navy-700">{x.intro(H)}</p>
+  </header>
+  <Clamp text={resume} lang={lang} id="clamp-home" sentences={1} class="mb-4" />
+  <div data-outil>
+    <PrecosCalc client:load lang={lang} datos={bundlePrecos('Lisboa')} methodHref={route('method', lang)} />
+  </div>
+  <p class="mt-2 text-sm text-navy-600" data-chrome>{pt ? 'Dados: DGEG, última atualização dos preços ' : 'Data: DGEG, last price update '}<time datetime={lido.replace(' ', 'T')}>{lido}</time> · <a class="underline" href={route('method', lang)}>{pt ? 'Método e fontes' : 'Method and sources'}</a> · <a class="underline" href={route('about', lang)}>{pt ? 'Quem somos' : 'About'}</a></p>
+  <section class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4" data-chrome aria-label={pt ? 'Resumo' : 'Summary'}>
+    {tarjetas.map((c) => (
+      <a href={c.href} class="block border-l-4 border-accent-500 bg-navy-50 px-4 py-3 hover:bg-accent-50">
+        <span class="block text-xs font-semibold uppercase tracking-wide text-navy-600">{c.t}</span>
+        <span class="tabular-nums block text-2xl font-bold text-navy-900">{c.v}</span>
+        <span class="block text-sm text-navy-700">{c.d}</span>
+      </a>
+    ))}
+  </section>
+  <div class="prose prose-slate mt-10 max-w-none">
+    <Fragment set:html={x.body(H)} />
+  </div>
+  <section class="mt-12" data-chrome>
+    <h2 class="mb-4 text-2xl font-bold text-navy-900">{pt ? 'Todas as páginas' : 'All pages'}</h2>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {groups.map((g) => (
+        <div><h3 class="mb-2 text-sm font-semibold uppercase tracking-wide text-navy-700">{g.label}</h3>
+          <ul class="space-y-1 text-navy-800">{g.links.map((l) => <li><a class="underline decoration-navy-300 underline-offset-2 hover:text-accent-700" href={l.href}>{l.label}</a></li>)}</ul></div>
+      ))}
+    </div>
+  </section>
+</PageLayout>

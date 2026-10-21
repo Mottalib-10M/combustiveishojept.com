@@ -1,0 +1,49 @@
+---
+/** Quem somos (page de confiance, RECETTE §8.2) : qui publie, pourquoi ce site, comment il se finance. */
+import PageLayout from '../layouts/PageLayout.astro';
+import LegalIdentity from './LegalIdentity.astro';
+import { route, type Locale } from '../i18n/routes';
+import { P } from '../lib/params';
+import { POSTOS, DIAS_PMD } from '../lib/dados';
+import { formatNumber } from '../lib/format';
+import { breadcrumbSchema, profilePageSchema } from '../lib/seo';
+import { CONTACT_EMAIL } from '../data/site-config';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const pt = lang === 'pt';
+const title = pt ? 'Combustíveis Hoje: quem publica estes preços e porquê' : 'Combustíveis Hoje: who publishes these fuel prices and why';
+const description = pt ? 'A Radif Partners publica o Combustíveis Hoje com os dados abertos da DGEG e da ENSE, sem vender combustível, sem acordos com marcas e sem pedir dados pessoais.' : 'Radif Partners publishes Combustíveis Hoje from open DGEG and ENSE data, selling no fuel, with no deals with any brand and asking for no personal data at all.';
+const h1 = pt ? 'Quem somos' : 'About Combustíveis Hoje';
+const path = route('about', lang);
+const n = formatNumber(POSTOS.postos.length, 0, lang), dias = formatNumber(DIAS_PMD.length, 0, lang);
+---
+<PageLayout title={title} description={description} lang={lang} jsonLd={[profilePageSchema({ path, lang }), breadcrumbSchema([{ name: pt ? 'Início' : 'Home', path: route('home', lang) }, { name: h1, path }])]} breadcrumbs={[{ label: h1 }]}>
+  <header class="mb-6"><h1 class="text-3xl font-bold text-navy-900 md:text-4xl">{h1}</h1></header>
+  {pt ? (
+  <div class="prose prose-slate max-w-none">
+    <p>O Combustíveis Hoje é publicado pela Radif Partners, um editor independente de calculadoras e guias práticos. O site existe para responder depressa a duas perguntas que quem conduz faz todas as semanas: quanto custa hoje o litro perto de mim, e vale a pena esperar por segunda-feira? A informação oficial existe, mas o portal da DGEG obriga a preencher um formulário para ver os postos um a um, e as páginas mais visitadas pedem uma conta ou mostram preços de outro dia. Aqui o preço aparece logo, sem registo.</p>
+    <h2>O que fazemos melhor do que a primeira página do Google</h2>
+    <p>Lemos todos os dias o registo completo da DGEG, hoje {n} postos, e calculamos a média de cada um dos 278 concelhos e 18 distritos do continente, com os cinco postos mais baratos e a hora da sua última atualização. Juntamos o custo do depósito, a parte dos impostos e uma estimativa do preço de segunda-feira cujo erro nas semanas passadas está publicado ao lado. O histórico guarda {dias} dias de preço médio diário oficial.</p>
+    <h2>Financiamento e independência</h2>
+    <p>O site não vende combustível, não tem cartões de desconto, não recebe comissões de marcas ou postos e não recolhe contactos. Pode mostrar publicidade, no máximo três espaços por página, nunca por cima da calculadora e nunca de uma empresa do setor que possa influenciar os números. Nenhuma marca pode pagar para aparecer melhor colocada.</p>
+    <h2>Como trabalhamos</h2>
+    <p>Um programa descarrega diariamente os ficheiros da DGEG, da ENSE e do Jornal Oficial da Madeira e reconstrói o site. Se uma fonte falhar, a versão anterior fica e a data à vista é a dos dados lidos. Os textos não têm números escritos à mão: são calculados com o mesmo código das calculadoras. As regras fixas, como a taxa de IVA, estão num ficheiro com a data da última leitura ({P.retrieved_at}). O detalhe está em <a href={route('method', lang)}>método e fontes</a> e na <a href={route('editorial', lang)}>política editorial</a>.</p>
+    <h2>Quem responde</h2>
+    <LegalIdentity lang={lang} />
+    <p>Para assinalar um erro: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+  </div>
+  ) : (
+  <div class="prose prose-slate max-w-none">
+    <p>Combustíveis Hoje is published by Radif Partners, an independent publisher of calculators and practical guides. The site exists to answer, quickly, two questions drivers in Portugal ask every week: what does a litre cost near me today, and is it worth waiting for Monday? The official data exist, but the DGEG portal makes you fill in a form to see stations one by one, and the most visited pages ask for an account or show another day’s prices. Here the price is on screen at once, with no sign-up, in Portuguese and in English for residents and visitors.</p>
+    <h2>What we do better than the top Google results</h2>
+    <p>Every day we read the full DGEG register, {n} stations today, and work out the average for each of the 278 municipalities and 18 mainland districts, with the five cheapest stations and the time of their last update. We add the cost of a full tank, the tax share and an estimate of Monday’s price whose error in past weeks is published next to it. The history holds {dias} days of the official daily average.</p>
+    <h2>Funding and independence</h2>
+    <p>The site sells no fuel, offers no discount cards, takes no commission from brands or stations and collects no contact details. It may show advertising, at most three slots a page, never above the calculator and never from a company in the sector that could influence the figures. No brand can pay for a better placing.</p>
+    <h2>How we work</h2>
+    <p>A script downloads the DGEG, ENSE and Madeira Official Journal files every day and rebuilds the site. If a source fails, the previous version stays and the date shown is that of the data read. The texts carry no hand-typed figures: they are worked out by the same code as the calculators. Fixed rules such as the VAT rate sit in a file with the date they were last read ({P.retrieved_at}). Details in <a href={route('method', lang)}>method and sources</a> and the <a href={route('editorial', lang)}>editorial policy</a>.</p>
+    <h2>Who is responsible</h2>
+    <LegalIdentity lang={lang} />
+    <p>To report an error: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+  </div>
+  )}
+</PageLayout>

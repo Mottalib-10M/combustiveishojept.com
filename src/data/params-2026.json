@@ -1,0 +1,77 @@
+{
+  "_lisezmoi": "Règles fixes du site (RECETTE §4). Les prix quotidiens ne sont pas ici : ils viennent de scripts/update-data.py (postos.json, pmd.json, ense.json, madeira.json). Chaque valeur ci-dessous a été lue sur sa source le jour indiqué par retrieved_at.",
+  "year": 2026,
+  "retrieved_at": "2026-10-21",
+  "valid_from": "2026-01-01",
+  "valid_to": "2026-12-31",
+  "iva": {
+    "continente": 0.23,
+    "artigo": "Código do IVA, artigo 18.º, n.º 1, alínea c)"
+  },
+  "exemplos": {
+    "_nota": "Valeurs par défaut des calculateurs : des exemples que l'utilisateur change, jamais présentés comme des moyennes nationales.",
+    "deposito_l": 50,
+    "km_ano": 15000,
+    "consumo_gasoleo": 5.5,
+    "consumo_gasolina": 6.5,
+    "consumo_gpl": 8.5
+  },
+  "sources": {
+    "dgegPortal": {
+      "url": "https://precoscombustiveis.dgeg.gov.pt/",
+      "label": {
+        "pt": "DGEG, Preços dos Combustíveis Online: preços afixados por posto",
+        "en": "DGEG, Preços dos Combustíveis Online: posted price at each station"
+      }
+    },
+    "dgegPmd": {
+      "url": "https://precoscombustiveis.dgeg.gov.pt/estatistica/preco-medio-diario/",
+      "label": {
+        "pt": "DGEG, preço médio diário (Portugal continental)",
+        "en": "DGEG, daily average price (mainland Portugal)"
+      }
+    },
+    "dl243": {
+      "url": "https://diariodarepublica.pt/dr/detalhe/decreto-lei/243-2008-443909",
+      "label": {
+        "pt": "Decreto-Lei n.º 243/2008, de 18 de dezembro: comunicação obrigatória dos preços à DGEG",
+        "en": "Decree-Law 243/2008 of 18 December: stations must report their prices to the DGEG"
+      }
+    },
+    "enseRef": {
+      "url": "https://www.ense-epe.pt/precos-de-referencia/",
+      "label": {
+        "pt": "ENSE, preços de referência diários dos combustíveis",
+        "en": "ENSE, daily fuel reference prices"
+      }
+    },
+    "enseDecomp": {
+      "url": "https://www.ense-epe.pt/decomposicao/",
+      "label": {
+        "pt": "ENSE, decomposição do preço de referência (cotação, frete, ISP, IVA)",
+        "en": "ENSE, breakdown of the reference price (quote, freight, ISP, VAT)"
+      }
+    },
+    "enseIspAfixacao": {
+      "url": "https://www.ense-epe.pt/news/nova-obrigacao-determina-afixacao-do-valor-da-reducao-do-isp-nos-postos-de-abastecimento/",
+      "label": {
+        "pt": "ENSE, Decreto-Lei n.º 199/2026: afixação da «Redução ISP+IVA» nos postos desde 17 de outubro de 2026",
+        "en": "ENSE, Decree-Law 199/2026: stations must post the “Redução ISP+IVA” from 17 October 2026"
+      }
+    },
+    "civa18": {
+      "url": "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/civa_rep/Pages/iva18.aspx",
+      "label": {
+        "pt": "Código do IVA, artigo 18.º: taxa normal de 23 %",
+        "en": "VAT Code, article 18: standard rate of 23%"
+      }
+    },
+    "joramPrecos": {
+      "url": "https://joram.madeira.gov.pt/joram/2serie/Ano%20de%202026/IISerie-188-2026-10-16Supl.pdf",
+      "label": {
+        "pt": "JORAM, II série, Despacho Conjunto n.º 93/2026: preços máximos na Madeira",
+        "en": "JORAM, series II, Joint Order 93/2026: maximum prices in Madeira"
+      }
+    }
+  }
+}

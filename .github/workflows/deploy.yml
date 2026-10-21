@@ -1,0 +1,75 @@
+name: Preços dos combustíveis (DGEG, ENSE, JORAM) e publicação no GitHub Pages
+
+# Os postos comunicam os preços à DGEG ao longo do dia; o preço médio diário sai no dia
+# seguinte; a ENSE publica o preço de referência de cada dia útil; o JORAM publica o
+# despacho da Madeira no fim da semana. Três passagens por dia (horas UTC; Lisboa = UTC+1
+# no verão, UTC no inverno): de manhã (preço médio de ontem), ao início da tarde (preço de
+# referência ENSE do dia) e ao fim da tarde (preços dos postos atualizados durante o dia).
+on:
+  push:
+    branches: ['main']
+  workflow_dispatch:
+  schedule:
+    - cron: '30 6 * * *'
+    - cron: '30 13 * * *'
+    - cron: '30 18 * * *'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: |
+          npm ci --legacy-peer-deps
+          pip install pypdf
+      - name: Descarregar os dados oficiais (DGEG, ENSE, JORAM)
+        # Uma fonte em falha deixa o ficheiro anterior intacto (o script escreve os erros em estado.json).
+        run: python3 scripts/update-data.py
+      - name: Guardar os dados no repositório
+        run: |
+          git config user.name "combustiveis-dados"
+          git config user.email "actions@users.noreply.github.com"
+          git add src/data/*.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Dados DGEG/ENSE de $(TZ=Europe/Lisbon date +%F) ($(TZ=Europe/Lisbon date +%H:%M) Lisboa)"
+            git push
+          fi
+      - name: Testes do motor e dos dados
+        run: npx vitest run
+      - name: Build (com controlo dos snippets)
+        run: npm run build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

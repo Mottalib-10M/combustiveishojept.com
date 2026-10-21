@@ -1,0 +1,83 @@
+---
+/** Método e fontes (page de confiance, RECETTE §8.2) : données, moyennes, estimation et son rétro-test, limites, conditions DGEG. */
+import PageLayout from '../layouts/PageLayout.astro';
+import { route, type Locale } from '../i18n/routes';
+import { P } from '../lib/params';
+import { POSTOS, DIAS_PMD, ULTIMO_PMD, ULTIMO_ENSE, FUELS, FUEL_NOME, est, MADEIRA, ispLitro } from '../lib/dados';
+import { formatNumber, displayDate } from '../lib/format';
+import { breadcrumbSchema, webPageSchema, faqSchema } from '../lib/seo';
+import { CONTACT_EMAIL } from '../data/site-config';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const pt = lang === 'pt';
+const tag = pt ? 'pt-PT' : 'en-GB';
+const n = (x: number, d = 0) => formatNumber(x, d, lang);
+const c = (x: number) => `${n(x * 100, 2)} ${pt ? 'cênt.' : 'c'}`;
+const title = pt ? 'Método: como calculamos os preços e a estimativa semanal' : 'Method: how we work out fuel prices and the weekly estimate';
+const description = pt ? 'De onde vêm os preços por posto, como se calcula cada média, como se estima a segunda-feira e qual foi o erro dessa estimativa nas semanas já passadas.' : 'Method and sources: where station prices come from, how each average is built, how Monday is estimated and how large that estimate’s error was in past weeks.';
+const h1 = pt ? 'Método e fontes' : 'Method and sources';
+const path = route('method', lang);
+const linhas = FUELS.map((f) => ({ f, e: est(f) })).filter((x) => x.e);
+const sources = Object.values(P.sources);
+const faqs = pt ? [
+  { q: 'Porque é que a estimativa não é publicada para o GPL Auto?', a: 'Porque nas semanas testadas errou mais do que a hipótese mais simples, a de que o preço não muda. O preço do GPL varia pouco de semana para semana e segue mal o preço de referência diário, por isso uma estimativa traria mais ruído do que informação. A regra é a mesma para todos: só se publica o que bate essa referência.' },
+  { q: 'O que acontece se a DGEG não publicar um dia?', a: 'O site não inventa preços. Se um ficheiro oficial não estiver disponível, a versão anterior fica no lugar e cada página mostra a data e a hora dos dados efetivamente lidos. A estimativa usa só os dias úteis já publicados pela ENSE e diz quantos são, de um a cinco.' },
+  { q: 'Guardam o que escrevo nas calculadoras?', a: 'Não. Os cálculos são feitos no seu navegador com os dados que a página já traz. Quando muda de distrito, o navegador descarrega o ficheiro de preços desse distrito, igual para todos. Se usar a ligação para partilhar, as suas escolhas vão no endereço da página.' },
+] : [
+  { q: 'Why is no estimate published for LPG?', a: 'Because over the tested weeks it missed by more than the simplest assumption, that the price does not change. LPG prices move little from week to week and track the daily reference price poorly, so an estimate would add more noise than information. The rule is the same for every fuel: only what beats that benchmark is published.' },
+  { q: 'What happens if the DGEG does not publish one day?', a: 'The site never makes up prices. If an official file is unavailable, the previous version stays in place and every page shows the date and time of the data actually read. The estimate uses only the working days the ENSE has already published and says how many there are, from one to five.' },
+  { q: 'Do you store what I type into the calculators?', a: 'No. Sums run in your browser with the data the page already carries. When you switch district, your browser downloads that district’s price file, the same for everyone. If you use the share link, your choices travel in the page address.' },
+];
+---
+<PageLayout title={title} description={description} lang={lang} jsonLd={[webPageSchema({ name: h1, description, path, lang }), breadcrumbSchema([{ name: pt ? 'Início' : 'Home', path: route('home', lang) }, { name: h1, path }]), faqSchema(faqs, lang)]} faqs={faqs} breadcrumbs={[{ label: h1 }]}>
+  <header class="mb-6"><h1 class="text-3xl font-bold text-navy-900 md:text-4xl">{h1}</h1></header>
+  {pt ? (
+  <div class="prose prose-slate max-w-none">
+    <p>O Combustíveis Hoje junta três fontes oficiais. Os preços por posto vêm do registo que a Direção-Geral de Energia e Geologia mantém ao abrigo do Decreto-Lei n.º 243/2008: cada posto do continente comunica os preços que afixa. Lemos os {n(POSTOS.postos.length)} postos todos os dias; a última atualização lida é de {POSTOS.ultimaAtualizacao}. O preço médio diário da DGEG, publicado com um dia de atraso, cobre {n(DIAS_PMD.length)} dias, de <time datetime={DIAS_PMD[0]}>{displayDate(DIAS_PMD[0], tag)}</time> a <time datetime={ULTIMO_PMD}>{displayDate(ULTIMO_PMD, tag)}</time>. Os preços de referência diários da ENSE estão lidos até <time datetime={ULTIMO_ENSE}>{displayDate(ULTIMO_ENSE, tag)}</time>.</p>
+    <h2>As médias</h2>
+    <p>Média afixada de uma zona = soma dos preços dos postos da zona que vendem esse combustível ÷ número desses postos. Cada posto conta uma vez. Preços fora do intervalo de 0,30 € a 5 € por litro são postos de lado como erros de comunicação. O preço médio diário da DGEG é outra medida: pondera as vendas e desconta as promoções; mostramo-lo sempre com esse nome, nunca misturado com a nossa média.</p>
+    <h2>A estimativa de segunda-feira</h2>
+    <p>Variação estimada = β × (média dos preços de referência diários da ENSE dos dias úteis já publicados nesta semana − média da semana anterior). A estimativa aplica-se ao preço médio diário DGEG da segunda-feira em curso. A série da ENSE usada é a da gasolina para as gasolinas, a do gasóleo para os gasóleos e a do GPL para o GPL Auto. O coeficiente β é ajustado por mínimos quadrados, pela origem, só com as semanas anteriores à semana estimada. Cada semana do retroteste é estimada sem conhecer o seu resultado, depois de pelo menos 52 semanas de aprendizagem.</p>
+    <h2>Resultado do retroteste</h2>
+    <div class="overflow-x-auto"><table><thead><tr><th>Combustível</th><th>Semanas</th><th>Erro médio</th><th>Erro de «fica igual»</th><th>Sentido certo</th><th>Publicada</th></tr></thead><tbody>
+      {linhas.map(({ f, e }) => <tr><td>{FUEL_NOME.pt[f]}</td><td>{n(e!.qualidade.semanas)}</td><td>{c(e!.qualidade.mae)}</td><td>{c(e!.qualidade.maeIgual)}</td><td>{n(e!.qualidade.sentido * 100)} %</td><td>{e!.qualidade.publica ? 'sim' : 'não'}</td></tr>)}
+    </tbody></table></div>
+    <p>Uma variação de menos de meio cêntimo conta como «estável» no cálculo do sentido. A estimativa só é publicada quando o erro médio é menor do que o da hipótese «fica igual».</p>
+    <h2>Impostos</h2>
+    <p>IVA por litro = preço × 23 ÷ 123, com a taxa normal do continente do artigo 18.º do Código do IVA. O ISP por litro, que inclui a contribuição de serviço rodoviário e a taxa de carbono tal como a ENSE o apresenta, é o da última decomposição do preço de referência: {n(ispLitro('gs'), 3)} € no gasóleo, {n(ispLitro('g95'), 3)} € na gasolina e {n(ispLitro('gpl'), 3)} € no GPL. O resto é produto, frete, armazenagem, biocombustíveis e margem.</p>
+    <h2>Madeira e Açores</h2>
+    <p>Na Madeira, os preços máximos semanais são lidos nos despachos conjuntos publicados na II série do Jornal Oficial da Região; temos {n(MADEIRA.despachos.length)} despachos lidos. Nos Açores, o jornal oficial está protegido contra a leitura automática; não reproduzimos os seus preços e a calculadora usa o preço que o visitante escreve. As taxas de IVA das regiões autónomas não entram em nenhuma conta.</p>
+    <h2>O que o site não calcula</h2>
+    <p>Descontos de cartões, preços de frotas, o gasóleo agrícola ou de aquecimento, e o efeito do combustível aditivado no consumo. Todo o resultado é informativo: o preço que conta é o da bomba.</p>
+    <h2>Condições de utilização dos dados da DGEG</h2>
+    <p>A DGEG indica que a informação do seu portal é gratuita e de utilização livre, devendo a reutilização identificar a DGEG como fonte, indicar a data e hora da última atualização dos preços e reproduzir fielmente a informação. Cada página do site faz as três coisas.</p>
+    <h2>Fontes</h2>
+    <ul>{sources.map((s) => <li><a href={s.url} rel="nofollow noopener" target="_blank">{s.label.pt}</a></li>)}</ul>
+    <p>Viu um erro? Escreva para <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+  </div>
+  ) : (
+  <div class="prose prose-slate max-w-none">
+    <p>Combustíveis Hoje brings together three official sources. Station prices come from the register the Directorate-General for Energy and Geology keeps under Decree-Law 243/2008: every mainland station reports the prices it posts. We read all {n(POSTOS.postos.length)} stations every day; the latest update read is from {POSTOS.ultimaAtualizacao}. The DGEG daily average, published a day later, covers {n(DIAS_PMD.length)} days, from <time datetime={DIAS_PMD[0]}>{displayDate(DIAS_PMD[0], tag)}</time> to <time datetime={ULTIMO_PMD}>{displayDate(ULTIMO_PMD, tag)}</time>. ENSE daily reference prices are read up to <time datetime={ULTIMO_ENSE}>{displayDate(ULTIMO_ENSE, tag)}</time>.</p>
+    <h2>The averages</h2>
+    <p>Posted average for an area = sum of the prices of the stations there that sell the fuel ÷ the number of those stations. Each station counts once. Prices outside €0.30 to €5 a litre are set aside as reporting errors. The DGEG daily average is another measure: it weights sales and nets out discounts; we always show it under that name, never mixed with our average.</p>
+    <h2>The Monday estimate</h2>
+    <p>Estimated change = β × (average ENSE daily reference price over the working days already published this week − last week’s average). It is applied to the DGEG daily average of the current Monday. The ENSE series used is petrol for petrols, diesel for diesels and LPG for LPG. The coefficient β is fitted by least squares through the origin, using only the weeks before the week being estimated. Each back-test week is estimated without knowing its outcome, after at least 52 learning weeks.</p>
+    <h2>Back-test results</h2>
+    <div class="overflow-x-auto"><table><thead><tr><th>Fuel</th><th>Weeks</th><th>Average error</th><th>“No change” error</th><th>Direction right</th><th>Published</th></tr></thead><tbody>
+      {linhas.map(({ f, e }) => <tr><td>{FUEL_NOME.en[f]}</td><td>{n(e!.qualidade.semanas)}</td><td>{c(e!.qualidade.mae)}</td><td>{c(e!.qualidade.maeIgual)}</td><td>{n(e!.qualidade.sentido * 100)}%</td><td>{e!.qualidade.publica ? 'yes' : 'no'}</td></tr>)}
+    </tbody></table></div>
+    <p>A change of less than half a cent counts as “unchanged” when scoring direction. The estimate is only published when its average error is smaller than that of the “no change” assumption.</p>
+    <h2>Taxes</h2>
+    <p>VAT per litre = price × 23 ÷ 123, the mainland standard rate in article 18 of the VAT Code. ISP per litre, which includes the road service contribution and the carbon levy as the ENSE presents it, is taken from the latest breakdown of the reference price: €{n(ispLitro('gs'), 3)} for diesel, €{n(ispLitro('g95'), 3)} for petrol and €{n(ispLitro('gpl'), 3)} for LPG. The rest is product, freight, storage, biofuels and margin.</p>
+    <h2>Madeira and the Azores</h2>
+    <p>For Madeira, weekly maximum prices are read from the joint orders in series II of the Region’s Official Journal; {n(MADEIRA.despachos.length)} orders have been read. The Azores official journal is protected against automated reading; we do not reproduce its prices and the calculator uses the price the visitor types. The autonomous regions’ VAT rates are not used in any sum.</p>
+    <h2>What the site does not calculate</h2>
+    <p>Card discounts, fleet prices, agricultural or heating diesel, and any effect of premium fuel on consumption. Every result is for information: the price that counts is the one on the pump.</p>
+    <h2>Terms of use of DGEG data</h2>
+    <p>The DGEG states that the information on its portal is free and may be used freely, provided reuse identifies the DGEG as the source, shows the date and time of the last price update and reproduces the information faithfully. Every page of the site does all three.</p>
+    <h2>Sources</h2>
+    <ul>{sources.map((s) => <li><a href={s.url} rel="nofollow noopener" target="_blank">{s.label.en}</a></li>)}</ul>
+    <p>Spotted an error? Write to <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+  </div>
+  )}
+</PageLayout>

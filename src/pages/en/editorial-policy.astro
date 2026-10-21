@@ -1,0 +1,16 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { CONTACT_EMAIL, SITE_NAMES } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { P } from '../../lib/params';
+const lang = 'en';
+---
+<PageLayout title={`Editorial policy – ${SITE_NAMES[lang]}`} description="How Combustíveis Hoje checks its prices: official DGEG, ENSE and JORAM data only, a date on every value, automated tests and Monday estimates published with their past error." lang={lang} noindex={true} breadcrumbs={[{ label: 'Editorial policy' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Editorial policy</h1>
+    <h2>Sources</h2><p>Primary sources only: the DGEG for posted prices and the daily average, the ENSE for reference prices and the breakdown of a litre, the Official Journal of the Autonomous Region of Madeira for the island’s maximum prices, and the Diário da República and the Tax Portal for the rules. A blog, a comparison site or a brand’s page is never a source. Fixed rules sit in a parameter file with the date they were read ({P.retrieved_at}).</p>
+    <h2>What we do not publish</h2><p>A value we could not read in an official source does not appear: Azores maximum prices are not shown because the region’s official journal cannot be read automatically, and the autonomous regions’ VAT rates are not used in any sum. The Monday estimate is only published for fuels where, over past weeks, it beats the plain assumption that “the price stays the same”. We rank no brands and take no money to mention anyone.</p>
+    <h2>Checks</h2><p>The sums are tested at each release with hand-made cases and with the real data: 18 districts, 278 municipalities, an ENSE breakdown that adds up to its price, and a back-test of the estimate that never uses the week being tested. If an official file fails, the previous version stays in place and the date shown is that of the data read.</p>
+    <h2>Corrections</h2><p>Errors are fixed as soon as they are confirmed. Write to <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. More in <a href={route('method', lang)}>method and sources</a> and <a href={route('about', lang)}>about</a>.</p>
+  </div>
+</PageLayout>
