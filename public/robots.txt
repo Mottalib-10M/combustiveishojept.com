@@ -3,4 +3,4 @@ Allow: /
 
 Disallow: /*?*
 
-Sitemap: https://pt-combustiveis.example/sitemap-index.xml
+Sitemap: https://combustiveishojept.com/sitemap-index.xml

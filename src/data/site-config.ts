@@ -1,6 +1,6 @@
 import estado from './estado.json';
 /** Configuration centrale du site (générée par new-site.py). */
-export const SITE_URL = "https://pt-combustiveis.example";
+export const SITE_URL = "https://combustiveishojept.com";
 export const SITE_NAMES: Record<string, string> = {"pt": "Combustíveis Hoje", "en": "Combustíveis Hoje"};
 export const LANG_TAGS: Record<string, string> = {"pt": "pt-PT", "en": "en-PT"};
 export const OG_LOCALES: Record<string, string> = {"pt": "pt_PT", "en": "en_GB"};
@@ -21,7 +21,7 @@ export const AUTHOR_DESC: Record<string, string> = {"pt": "A Radif Partners lê 
  *  themes reellement traites par le site, pas une liste de mots-cles : un sujet
  *  declare ici sans page qui le couvre est une declaration fausse. */
 export const KNOWS_ABOUT: Record<string, string[]> = {"pt": ["Preços de venda ao público dos combustíveis por posto, concelho e distrito", "Preços de referência da ENSE e variação semanal", "Imposto sobre os produtos petrolíferos (ISP), taxa de carbono e IVA", "Preços máximos dos combustíveis na Madeira e regime dos Açores", "Custo de um depósito e orçamento anual de combustível"], "en": ["Retail fuel prices by station, municipality and district in Portugal", "ENSE reference prices and the weekly price change", "Portuguese fuel tax (ISP), carbon levy and VAT", "Maximum fuel prices in Madeira and the Azores regime", "Cost of a full tank and yearly fuel budget"]};
-export const CONTACT_EMAIL = "contacto@pt-combustiveis.example";
+export const CONTACT_EMAIL = "contacto@combustiveishojept.com";
 export const THEME_COLOR = '#046A38';
 export const LOGO_SYMBOL = '€/L';
 export const BING_VERIFY_CODE = '';
