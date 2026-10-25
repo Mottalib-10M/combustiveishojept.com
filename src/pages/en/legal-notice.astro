@@ -6,7 +6,7 @@ import { route } from '../../i18n/routes';
 import { displayDate } from '../../lib/format';
 const lang = 'en';
 ---
-<PageLayout title={`Legal notice – ${SITE_NAMES[lang]}`} description="Legal notice for Combustíveis Hoje: publisher, hosting, liability, intellectual property, where the DGEG, ENSE and JORAM data come from, and the law that applies to the site." lang={lang} noindex={true} breadcrumbs={[{ label: 'Legal notice' }]} showAuthor={false}>
+<PageLayout title={`Legal notice – ${SITE_NAMES[lang]}`} description="Legal notice for Combustíveis Hoje PT: publisher, hosting, liability, intellectual property, where the DGEG, ENSE and JORAM data come from, and the law that applies to the site." lang={lang} noindex={true} breadcrumbs={[{ label: 'Legal notice' }]} showAuthor={false}>
   <div class="prose prose-slate max-w-none">
     <h1>Legal notice</h1>
     <h2>Publisher</h2>
@@ -15,7 +15,7 @@ const lang = 'en';
     <h2>Hosting</h2>
     <LegalIdentity mode="hosting" lang={lang} />
     <h2>What the site does</h2>
-    <p>Combustíveis Hoje shows the fuel prices that mainland filling stations report to the Directorate-General for Energy and Geology, works out averages by municipality and district and an estimate of Monday’s change. Results are <strong>information and estimates</strong>: the price that counts is the one on the pump. The site is independent and has no link with the DGEG, the ENSE, the regional governments of Madeira or the Azores, or any fuel brand. Method and limits: <a href={route('method', lang)}>method and sources</a>.</p>
+    <p>Combustíveis Hoje PT shows the fuel prices that mainland filling stations report to the Directorate-General for Energy and Geology, works out averages by municipality and district and an estimate of Monday’s change. Results are <strong>information and estimates</strong>: the price that counts is the one on the pump. The site is independent and has no link with the DGEG, the ENSE, the regional governments of Madeira or the Azores, or any fuel brand. Method and limits: <a href={route('method', lang)}>method and sources</a>.</p>
     <h2>Where the data come from</h2>
     <p>Station prices and the daily average: Directorate-General for Energy and Geology (DGEG), information free to reuse, reproduced faithfully with the date and time of the last price update. Reference prices and breakdown: National Entity for the Energy Sector (ENSE). Madeira: joint orders published in the Official Journal of the Autonomous Region of Madeira.</p>
     <h2>Liability</h2>

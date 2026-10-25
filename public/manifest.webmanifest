@@ -1,6 +1,6 @@
 {
- "name": "Combustíveis Hoje",
- "short_name": "Combustíveis Hoje",
+ "name": "Combustíveis Hoje PT",
+ "short_name": "Combustíveis Hoje PT",
  "description": "Preço dos combustíveis hoje em Portugal por distrito e concelho, postos mais baratos (dados DGEG) e estimativa da próxima semana, com o erro passado à vista.",
  "start_url": "/pt/",
  "display": "standalone",

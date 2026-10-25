@@ -11,9 +11,9 @@ import { CONTACT_EMAIL } from '../data/site-config';
 interface Props { lang: Locale }
 const { lang } = Astro.props;
 const pt = lang === 'pt';
-const title = pt ? 'Combustíveis Hoje: quem publica estes preços e porquê' : 'Combustíveis Hoje: who publishes these fuel prices and why';
-const description = pt ? 'A Radif Partners publica o Combustíveis Hoje com os dados abertos da DGEG e da ENSE, sem vender combustível, sem acordos com marcas e sem pedir dados pessoais.' : 'Radif Partners publishes Combustíveis Hoje from open DGEG and ENSE data, selling no fuel, with no deals with any brand and asking for no personal data at all.';
-const h1 = pt ? 'Quem somos' : 'About Combustíveis Hoje';
+const title = pt ? 'Combustíveis Hoje PT: quem publica estes preços e porquê' : 'Combustíveis Hoje PT: who publishes these fuel prices';
+const description = pt ? 'A Radif Partners publica o Combustíveis Hoje PT com dados abertos da DGEG e da ENSE, sem vender combustível, sem acordos com marcas e sem pedir dados pessoais.' : 'Radif Partners publishes Combustíveis Hoje PT from open DGEG and ENSE data, selling no fuel, with no deals with any brand and asking for no personal data.';
+const h1 = pt ? 'Quem somos' : 'About Combustíveis Hoje PT';
 const path = route('about', lang);
 const n = formatNumber(POSTOS.postos.length, 0, lang), dias = formatNumber(DIAS_PMD.length, 0, lang);
 ---
@@ -21,7 +21,7 @@ const n = formatNumber(POSTOS.postos.length, 0, lang), dias = formatNumber(DIAS_
   <header class="mb-6"><h1 class="text-3xl font-bold text-navy-900 md:text-4xl">{h1}</h1></header>
   {pt ? (
   <div class="prose prose-slate max-w-none">
-    <p>O Combustíveis Hoje é publicado pela Radif Partners, um editor independente de calculadoras e guias práticos. O site existe para responder depressa a duas perguntas que quem conduz faz todas as semanas: quanto custa hoje o litro perto de mim, e vale a pena esperar por segunda-feira? A informação oficial existe, mas o portal da DGEG obriga a preencher um formulário para ver os postos um a um, e as páginas mais visitadas pedem uma conta ou mostram preços de outro dia. Aqui o preço aparece logo, sem registo.</p>
+    <p>O Combustíveis Hoje PT é publicado pela Radif Partners, um editor independente de calculadoras e guias práticos. O site existe para responder depressa a duas perguntas que quem conduz faz todas as semanas: quanto custa hoje o litro perto de mim, e vale a pena esperar por segunda-feira? A informação oficial existe, mas o portal da DGEG obriga a preencher um formulário para ver os postos um a um, e as páginas mais visitadas pedem uma conta ou mostram preços de outro dia. Aqui o preço aparece logo, sem registo.</p>
     <h2>O que fazemos melhor do que a primeira página do Google</h2>
     <p>Lemos todos os dias o registo completo da DGEG, hoje {n} postos, e calculamos a média de cada um dos 278 concelhos e 18 distritos do continente, com os cinco postos mais baratos e a hora da sua última atualização. Juntamos o custo do depósito, a parte dos impostos e uma estimativa do preço de segunda-feira cujo erro nas semanas passadas está publicado ao lado. O histórico guarda {dias} dias de preço médio diário oficial.</p>
     <h2>Financiamento e independência</h2>
@@ -34,7 +34,7 @@ const n = formatNumber(POSTOS.postos.length, 0, lang), dias = formatNumber(DIAS_
   </div>
   ) : (
   <div class="prose prose-slate max-w-none">
-    <p>Combustíveis Hoje is published by Radif Partners, an independent publisher of calculators and practical guides. The site exists to answer, quickly, two questions drivers in Portugal ask every week: what does a litre cost near me today, and is it worth waiting for Monday? The official data exist, but the DGEG portal makes you fill in a form to see stations one by one, and the most visited pages ask for an account or show another day’s prices. Here the price is on screen at once, with no sign-up, in Portuguese and in English for residents and visitors.</p>
+    <p>Combustíveis Hoje PT is published by Radif Partners, an independent publisher of calculators and practical guides. The site exists to answer, quickly, two questions drivers in Portugal ask every week: what does a litre cost near me today, and is it worth waiting for Monday? The official data exist, but the DGEG portal makes you fill in a form to see stations one by one, and the most visited pages ask for an account or show another day’s prices. Here the price is on screen at once, with no sign-up, in Portuguese and in English for residents and visitors.</p>
     <h2>What we do better than the top Google results</h2>
     <p>Every day we read the full DGEG register, {n} stations today, and work out the average for each of the 278 municipalities and 18 mainland districts, with the five cheapest stations and the time of their last update. We add the cost of a full tank, the tax share and an estimate of Monday’s price whose error in past weeks is published next to it. The history holds {dias} days of the official daily average.</p>
     <h2>Funding and independence</h2>

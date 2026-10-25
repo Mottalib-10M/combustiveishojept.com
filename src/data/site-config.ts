@@ -1,7 +1,9 @@
 import estado from './estado.json';
 /** Configuration centrale du site (générée par new-site.py). */
 export const SITE_URL = "https://combustiveishojept.com";
-export const SITE_NAMES: Record<string, string> = {"pt": "Combustíveis Hoje", "en": "Combustíveis Hoje"};
+// Partie du nom en couleur dans l'en-tete ('' = aucune).
+export const BRAND_ACCENT = 'Hoje';
+export const SITE_NAMES: Record<string, string> = {"pt": "Combustíveis Hoje PT", "en": "Combustíveis Hoje PT"};
 export const LANG_TAGS: Record<string, string> = {"pt": "pt-PT", "en": "en-PT"};
 export const OG_LOCALES: Record<string, string> = {"pt": "pt_PT", "en": "en_GB"};
 export const LOCALE_TAG = 'pt-PT';
