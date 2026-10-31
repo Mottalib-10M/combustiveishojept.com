@@ -108,14 +108,14 @@ export function TabelaPostos({ lang, postos, titulo, refPreco }: { lang: L; post
           <th scope="col" className="px-2 py-2 font-semibold">{T(lang, 'Posto', 'Station')}</th>
           <th scope="col" className="px-2 py-2 font-semibold">{T(lang, 'Localidade', 'Locality')}</th>
           <th scope="col" className="px-2 py-2 text-right font-semibold">{T(lang, 'Preço', 'Price')}</th>
-          <th scope="col" className="px-2 py-2 text-right font-semibold">{T(lang, 'Atualizado', 'Updated')}</th>
+          <th scope="col" className="hidden px-2 py-2 text-right font-semibold sm:table-cell">{T(lang, 'Atualizado', 'Updated')}</th>
         </tr></thead>
         <tbody>{postos.map((p, i) => (
           <tr key={i} className="border-b border-navy-100">
             <td className="px-2 py-1.5 text-navy-900">{p[0]}<span className="block text-xs text-navy-600">{p[1]}</span></td>
             <td className="px-2 py-1.5 text-navy-700">{p[2]}</td>
-            <td className="tabular-nums px-2 py-1.5 text-right font-semibold text-navy-900">{litro(p[3], lang)}{refPreco != null && <span className="block text-xs font-normal text-navy-600">{cent(p[3] - refPreco, lang)}</span>}</td>
-            <td className="tabular-nums px-2 py-1.5 text-right text-navy-700">{quando(p[4], lang)}</td>
+            <td className="tabular-nums px-2 py-1.5 text-right font-semibold text-navy-900">{litro(p[3], lang)}{refPreco != null && <span className="block text-xs font-normal text-navy-600">{cent(p[3] - refPreco, lang)}</span>}<span className="block text-xs font-normal text-navy-600 sm:hidden">{T(lang, 'atualizado', 'updated')} {quando(p[4], lang)}</span></td>
+            <td className="tabular-nums hidden px-2 py-1.5 text-right text-navy-700 sm:table-cell">{quando(p[4], lang)}</td>
           </tr>
         ))}</tbody>
       </table>

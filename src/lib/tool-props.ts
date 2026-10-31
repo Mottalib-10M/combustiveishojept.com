@@ -4,7 +4,8 @@ import { IVA_CONTINENTE } from './engine/custos';
 import { P } from './params';
 import type { Estimativa } from './engine/previsao';
 
-const r3 = (x: number) => Math.round(x * 1000) / 1000;
+// + 1e-9 : 2,2725 doit donner 2,273 et non 2,272 (2.2725 × 1000 = 2272.4999… en binaire ; audit de Sami, 2026-10-28)
+const r3 = (x: number) => Math.round(x * 1000 + 1e-9) / 1000;
 const porFuel = <T,>(f: (x: Fuel) => T | null | undefined) => Object.fromEntries(FUELS.map((x) => [x, f(x)]).filter(([, v]) => v != null)) as Partial<Record<Fuel, T>>;
 
 export const precoAfixado = () => porFuel((f) => { const s = statsDe(f); return s ? r3(s.media) : null; });

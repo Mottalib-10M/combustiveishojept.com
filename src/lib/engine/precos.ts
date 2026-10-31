@@ -11,7 +11,8 @@ import type { Fuel, Posto } from './tipos';
 export interface Stats { media: number; min: number; max: number; n: number }
 export interface PostoPreco { id: number; nome: string; marca: string; tipo: string; distrito: string; concelho: string; localidade: string; preco: number; atualizado: string }
 
-const r3 = (x: number) => Math.round(x * 1000) / 1000;
+// + 1e-9 : 2,2725 doit donner 2,273 et non 2,272 (2.2725 × 1000 = 2272.4999… en binaire ; audit de Sami, 2026-10-28)
+const r3 = (x: number) => Math.round(x * 1000 + 1e-9) / 1000;
 
 /** Postes qui affichent ce combustible, éventuellement filtrés. Un prix nul ou absurde (< 0,3 € ou > 5 €) est écarté. */
 export function comPreco(postos: Posto[], fuel: Fuel, filtro: (p: Posto) => boolean = () => true): PostoPreco[] {
