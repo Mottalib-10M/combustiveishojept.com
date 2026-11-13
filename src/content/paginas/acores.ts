@@ -11,7 +11,7 @@ export default defineGuide({
     title: 'Combustíveis nos Açores: custo do abastecimento e do ano',
     description: 'Calcule nos Açores quanto custa um abastecimento e um ano de gasóleo ou gasolina com o preço da sua bomba, e compare-o com o preço médio diário do continente.',
     h1: 'Combustíveis nos Açores: quanto custa abastecer',
-    intro: () => 'Escreva o preço afixado no seu posto: a calculadora faz o abastecimento, o mês e o ano.',
+    intro: () => 'Escreva o preço afixado no seu posto nos Açores: a calculadora faz o abastecimento, o mês e o ano.',
     resume: (h) => {
       const c = cont(h);
       return `Nos Açores, os preços máximos dos combustíveis são fixados pelo Governo Regional e revistos uma vez por mês, ao contrário do continente, onde são livres, e da Madeira, onde mudam todas as semanas. A DGEG não recolhe os preços dos postos açorianos e o Jornal Oficial da Região não se deixa ler de forma automática, por isso este site não reproduz os preços máximos dos Açores: preferimos não mostrar um número do que mostrar um número que não conseguimos confirmar. A calculadora faz a conta com o preço que lê na bomba: quanto custa o abastecimento, quanto gasta por mês e por ano com os seus quilómetros, e a diferença por litro face ao preço médio diário do continente, que a DGEG fixou a ${h.date(c.gs.dia)} em ${h.l(c.gs.media)} no gasóleo e ${h.l(c.g95.media)} na gasolina 95. O preço que aparece no formulário ao abrir é só um exemplo para a calculadora funcionar.`;
@@ -23,7 +23,7 @@ export default defineGuide({
     ],
     body: (h) => {
       const c = cont(h);
-      return `<h2>Três regimes de preços no mesmo país</h2>
+      return `<h2>Três regimes de preços dos combustíveis no mesmo país</h2>
 <p>No continente, cada posto fixa o seu preço e comunica-o à DGEG, que publica uma média diária: hoje ${h.l(c.gs.media)} no gasóleo. Na Madeira, um despacho conjunto semanal fixa os máximos, que reproduzimos na ${h.a('madeira', 'página da Madeira')}. Nos Açores, o Governo Regional fixa os máximos uma vez por mês. As regras dos impostos também mudam de região para região, por isso a página dos ${h.a('impostos-combustiveis', 'impostos')} só se aplica ao continente.</p>
 <h2>O que a calculadora faz</h2>
 <p>Multiplica os litros pelo preço que escrever, para o abastecimento; os quilómetros por ano pelo consumo de exemplo e pelo preço, para o ano. O consumo de exemplo é de 5,5 litros aos 100 km a gasóleo e 6,5 a gasolina; o seu carro pode gastar outro valor, que pode usar na página do ${h.a('custo-deposito', 'custo do depósito')}. Nenhum valor escrito sai do seu navegador.</p>
@@ -36,7 +36,7 @@ export default defineGuide({
     title: 'Fuel in the Azores: cost of a full tank and of a whole year',
     description: 'Work out what a fill and a year of diesel or petrol cost in the Azores at your pump’s price, and compare it with the DGEG daily average for mainland Portugal.',
     h1: 'Fuel in the Azores: what filling up costs',
-    intro: () => 'Type the price posted at your station: the calculator does the fill, the month and the year.',
+    intro: () => 'Type the price posted at your station in the Azores: the calculator does the fill, the month and the year.',
     resume: (h) => {
       const c = cont(h);
       return `In the Azores, maximum fuel prices are set by the Regional Government and reviewed once a month, unlike the mainland, where prices are free, and Madeira, where they change every week. The DGEG does not collect prices from Azorean stations and the Region’s Official Journal cannot be read automatically, so this site does not reproduce the Azores maximum prices: we would rather show no figure than one we cannot confirm. The calculator works with the price you read on the pump: what the fill costs, what you spend per month and per year for your mileage, and the gap per litre against the mainland daily average, which the DGEG put on ${h.date(c.gs.dia)} at ${h.l(c.gs.media)} for diesel and ${h.l(c.g95.media)} for petrol 95. The price shown in the form when it opens is just an example so the calculator works.`;

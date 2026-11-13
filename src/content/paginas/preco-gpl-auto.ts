@@ -27,7 +27,7 @@ export default defineGuide({
 ${h.table(['Distrito', 'Postos com GPL', 'Média', 'Mínimo'], ds.map(([d, s]) => [h.a(h.D.slug(d), d), s.n, h.l(s.media), h.l(s.min)]), 'GPL Auto, preço afixado comunicado à DGEG', ['l', 'r', 'r', 'r'])}
 <h2>Compensa um carro a GPL?</h2>
 <p>A conta faz-se por quilómetro, não por litro. Com os consumos de exemplo, um carro a GPL gasta hoje ${h.eur(k.gpl, 2)} aos 100 km e um a gasolina 95 ${h.eur(k.g95, 2)}. Em 15 000 km por ano, a diferença é de ${h.eur((k.g95 - k.gpl) * 150)}. O consumo real depende do carro: use o seu na página do ${h.a('custo-deposito', 'custo do depósito')}, que aceita qualquer combustível e qualquer consumo.</p>
-<h2>Média afixada e preço oficial</h2>
+<h2>Preço do GPL Auto: média afixada e preço oficial</h2>
 <p>${(() => { const gap = (f: 'gpl' | 'gs') => h.D.statsDe(f)!.media - h.D.pmd(f)!.media; return `Hoje a média afixada do GPL fica ${h.c(gap('gpl'))} acima do preço médio diário da DGEG; no gasóleo, a mesma diferença é de ${h.c(gap('gs'))}.`; })()} A média ponderada dá mais peso aos postos que vendem mais litros e desconta as promoções. Para comparar a sua bomba com o resto do país, use a média afixada; para seguir a tendência, o ${h.a('historico-precos', 'histórico')} do preço médio diário.</p>`;
     },
   },
@@ -36,7 +36,7 @@ ${h.table(['Distrito', 'Postos com GPL', 'Média', 'Mínimo'], ds.map(([d, s]) =
     title: 'LPG price in Portugal today: stations and cost per 100 km',
     description: 'LPG autogas price today in mainland Portugal: posted average, cheapest station, how many stations sell it per district and what 100 km costs against petrol 95.',
     h1: 'LPG (autogas) price today',
-    intro: (h) => `Autogas at the ${h.num(h.D.statsDe('gpl')!.n)} stations that report its price to the DGEG.`,
+    intro: (h) => `LPG (autogas) prices today at the ${h.num(h.D.statsDe('gpl')!.n)} stations that report them to the DGEG.`,
     resume: (h) => {
       const s = h.D.statsDe('gpl')!, p = h.D.pmd('gpl')!, k = custo100(h), q = h.D.est('gpl')?.qualidade;
       return `LPG autogas is posted today at ${h.l(s.media)} a litre on average, with the cheapest station at ${h.l(s.min)}, across ${h.num(s.n)} mainland stations. The DGEG daily average, weighted by sales, was ${h.l(p.media)} on ${h.date(p.dia)}. An LPG car burns more litres than a petrol one: at 8.5 litres per 100 km, every 100 km costs ${h.eur(k.gpl, 2)}, against ${h.eur(k.g95, 2)} for a petrol 95 car at 6.5 litres, at today’s average prices. Unlike diesel and petrol, we publish no Monday estimate: ${q ? `over ${h.num(q.semanas)} tested weeks it missed by ${h.c(q.mae)} on average, more than saying the price would not change (${h.c(q.maeIgual)})` : 'there is not enough data to test it'}. The calculator lists the LPG stations in each municipality, with their last update time. The district table further down shows how many LPG stations each district has, which matters more for autogas drivers than a cent or two.`;
@@ -52,7 +52,7 @@ ${h.table(['Distrito', 'Postos com GPL', 'Média', 'Mínimo'], ds.map(([d, s]) =
 ${h.table(['District', 'LPG stations', 'Average', 'Lowest'], ds.map(([d, s]) => [h.a(h.D.slug(d), d), s.n, h.l(s.media), h.l(s.min)]), 'LPG autogas, posted price reported to the DGEG', ['l', 'r', 'r', 'r'])}
 <h2>Does an LPG car pay off?</h2>
 <p>The sum is per kilometre, not per litre. With the example consumptions, an LPG car costs ${h.eur(k.gpl, 2)} per 100 km today and a petrol 95 car ${h.eur(k.g95, 2)}. Over 15,000 km a year, the gap is ${h.eur((k.g95 - k.gpl) * 150)}. Real consumption depends on the car: use yours on the ${h.a('custo-deposito', 'tank cost')} page, which takes any fuel and any consumption.</p>
-<h2>Posted average and official price</h2>
+<h2>LPG price today: posted average and official price</h2>
 <p>${(() => { const gap = (f: 'gpl' | 'gs') => h.D.statsDe(f)!.media - h.D.pmd(f)!.media; return `Today the LPG posted average sits ${h.c(gap('gpl'))} above the DGEG daily average; for diesel, the same gap is ${h.c(gap('gs'))}.`; })()} The weighted average gives more weight to stations that sell more litres and nets out promotions. To compare your pump with the rest of the country, use the posted average; to follow the trend, the ${h.a('historico-precos', 'history')} of the daily average.</p>`;
     },
   },

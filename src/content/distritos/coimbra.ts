@@ -21,8 +21,8 @@ export default defineGuide({
     slug: 'coimbra', nav: 'Coimbra', card: 'Marcas acima e abaixo da média, hipermercados e a poupança possível em cada concelho do distrito de Coimbra.',
     title: 'Preço da gasolina e do gasóleo em Coimbra hoje, por marca',
     description: 'Gasolina e gasóleo hoje no distrito de Coimbra: as marcas acima e abaixo da média, rua contra hipermercado e quanto se poupa num depósito em cada concelho.',
-    h1: 'Gasolina e gasóleo no distrito de Coimbra',
-    intro: (h) => `Marca a marca e concelho a concelho, o que custa hoje abastecer num dos ${h.num(h.D.postosDistrito(D).total)} postos do distrito de Coimbra.`,
+    h1: 'Preço da gasolina e do gasóleo no distrito de Coimbra hoje',
+    intro: (h) => `Marca a marca e concelho a concelho, o que custa hoje abastecer de gasolina ou gasóleo num dos ${h.num(h.D.postosDistrito(D).total)} postos do distrito de Coimbra.`,
     resume: (h) => {
       const { gs, g95, r, rg, marcas, c } = dados(h);
       const lo = c[0], hi = c[c.length - 1];
@@ -36,7 +36,7 @@ export default defineGuide({
     ],
     body: (h) => {
       const { gs, gpl, marcas, hip, rua, ae, c, viz, r } = dados(h);
-      return `<h2>Marcas acima e abaixo da média</h2>
+      return `<h2>Gasolina e gasóleo em Coimbra: marcas acima e abaixo da média</h2>
 <p>No distrito convivem marcas de bandeira, marcas de preço baixo e postos sem marca. Comparar a média de cada uma com a do distrito, ${h.l(gs.media)}, mostra onde está hoje o preço mais baixo: ${marcas.map((m) => `${mk(h, m.marca)} ${h.c(m.media - gs.media, true)}`).join(', ')}. A diferença de uma marca é uma média; postos da mesma bandeira podem ter preços bem diferentes.</p>
 ${h.table(['Marca', 'Postos', 'Média', 'Face ao distrito'], marcas.map((m) => [mk(h, m.marca), m.n, h.l(m.media), h.c(m.media - gs.media, true)]), 'Gasóleo simples, as marcas com mais postos no distrito', ['l', 'r', 'r', 'r'])}
 <h2>Rua, hipermercado e autoestrada</h2>
@@ -52,8 +52,8 @@ ${h.table(['Concelho', 'Postos', 'Mínimo', 'Poupança em 50 l'], c.map((x) => [
     slug: 'coimbra', nav: 'Coimbra', card: 'Brands above and below the average, hypermarkets and the possible saving in each municipality of Coimbra district.',
     title: 'Petrol and diesel prices in Coimbra today, brand by brand',
     description: 'Petrol and diesel today in Coimbra district: the brands above and below the average, street versus hypermarket, and what a full tank saves in each municipality.',
-    h1: 'Petrol and diesel in Coimbra district',
-    intro: (h) => `Brand by brand and municipality by municipality, what it costs today to fill up at one of the ${h.num(h.D.postosDistrito(D).total)} stations in Coimbra district.`,
+    h1: 'Petrol and diesel prices in Coimbra district today',
+    intro: (h) => `Brand by brand and municipality by municipality, what it costs today to fill up with petrol or diesel at one of the ${h.num(h.D.postosDistrito(D).total)} stations in Coimbra district.`,
     resume: (h) => {
       const { gs, g95, r, rg, marcas, c } = dados(h);
       const lo = c[0], hi = c[c.length - 1];
@@ -67,7 +67,7 @@ ${h.table(['Concelho', 'Postos', 'Mínimo', 'Poupança em 50 l'], c.map((x) => [
     ],
     body: (h) => {
       const { gs, gpl, marcas, hip, rua, ae, c, viz, r } = dados(h);
-      return `<h2>Brands above and below the average</h2>
+      return `<h2>Petrol and diesel brands in Coimbra above and below the average</h2>
 <p>The district mixes major brands, low-price chains and unbranded stations. Comparing each brand's average with the district one, ${h.l(gs.media)}, shows where the lowest price is today: ${marcas.map((m) => `${mk(h, m.marca)} ${h.c(m.media - gs.media, true)}`).join(', ')}. A brand's gap is an average; stations under the same flag can have quite different prices.</p>
 ${h.table(['Brand', 'Stations', 'Average', 'Against district'], marcas.map((m) => [mk(h, m.marca), m.n, h.l(m.media), h.c(m.media - gs.media, true)]), 'Standard diesel, the brands with the most stations in the district', ['l', 'r', 'r', 'r'])}
 <h2>Street, hypermarket and motorway</h2>

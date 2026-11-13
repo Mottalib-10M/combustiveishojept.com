@@ -46,7 +46,7 @@ export default defineGuide({
     body: (h) => {
       const { gs, tabela, marcas, conc, viz, gpl, p } = dados(h);
       const lo = conc[0], hi = conc[conc.length - 1];
-      return `<h2>Bragança na tabela dos distritos</h2>
+      return `<h2>Os combustíveis de Bragança na tabela dos distritos</h2>
 <p>A posição de um distrito não é a mesma em todos os combustíveis. A tabela compara a média de Bragança com a do continente em cada um e indica o lugar do distrito, do preço mais baixo para o mais alto.${gpl ? ` No GPL Auto, a média assenta em apenas ${h.num(p.gpl)} postos, o que a torna mais instável.` : ''} Gasolina e gasóleo nem sempre andam juntos, e um distrito pode estar barato num e caro no outro no mesmo dia.</p>
 ${h.table(['Combustível', 'Bragança', 'Continente', 'Lugar'], tabela.map((x) => [h.fn(x.f), h.l(x.s!.media), h.l(x.pt!.media), `${h.ord(x.r.pos)} de ${x.r.de}`]), 'Média afixada hoje por combustível', ['l', 'r', 'r', 'r'])}
 <h2>Concelho a concelho</h2>
@@ -77,7 +77,7 @@ ${h.table(['Concelho', 'Postos', 'Média', 'Mínimo'], conc.map((x) => [x.concel
     body: (h) => {
       const { gs, tabela, marcas, conc, viz, gpl, p } = dados(h);
       const lo = conc[0], hi = conc[conc.length - 1];
-      return `<h2>Bragança in the district table</h2>
+      return `<h2>Bragança fuel prices in the district table</h2>
 <p>A district's position is not the same for every fuel. The table compares Bragança's average with the mainland one for each fuel and gives the district's place, from lowest price to highest.${gpl ? ` For LPG, the average rests on just ${h.num(p.gpl)} stations, which makes it less stable.` : ''} Petrol and diesel do not always move together, so a district can be cheap for one and dear for the other on the same day.</p>
 ${h.table(['Fuel', 'Bragança', 'Mainland', 'Rank'], tabela.map((x) => [h.fn(x.f), h.l(x.s!.media), h.l(x.pt!.media), `${h.ord(x.r.pos)} of ${x.r.de}`]), 'Posted average today by fuel', ['l', 'r', 'r', 'r'])}
 <h2>Municipality by municipality</h2>

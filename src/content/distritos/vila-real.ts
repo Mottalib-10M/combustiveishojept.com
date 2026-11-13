@@ -39,7 +39,7 @@ ${listaGpl.length ? h.table(['Posto', 'Concelho', 'Preço'], listaGpl.map((x) =>
 <h2>O concelho muda a conta do depósito</h2>
 <p>${lo && hi && gs ? `Entre ${lo.concelho} e ${hi.concelho}, a média do gasóleo afasta-se ${h.c(hi.media - lo.media)} por litro: ${h.eur((hi.media - lo.media) * 50, 2)} num depósito de 50 litros. A média do distrito, ${h.l(gs.media)}, fica entre as duas.` : ''} A tabela inclui os concelhos com dois postos ou mais.</p>
 ${h.table(['Concelho', 'Postos', 'Média', 'Mínimo'], c.map((x) => [x.concelho, x.n, h.l(x.media), h.l(x.min)]), 'Gasóleo simples por concelho, do mais barato ao mais caro', ['l', 'r', 'r', 'r'])}
-<h2>Gasolina simples ou especial</h2>
+<h2>Gasolina simples ou especial em Vila Real</h2>
 <p>${g95 && g95e ? `A gasolina especial 95 está à venda em ${h.num(g95e.n)} postos, a ${h.l(g95e.media)} em média, contra ${h.l(g95.media)} da simples em ${h.num(g95.n)} postos. São ${h.c(g95e.media - g95.media)} por litro de diferença.` : 'Hoje não há preços suficientes para comparar as duas gasolinas.'} A evolução da gasolina no continente está na página da ${h.a('preco-gasolina-95', 'gasolina 95')}.</p>
 <h2>Braga, Porto, Viseu e Bragança</h2>
 <p>Vila Real faz fronteira com Espanha e com estes quatro distritos. A gasolina simples 95 está hoje em média a ${VIZ.map(([id, n]) => { const s = h.D.statsDe('g95', n); return s ? `${h.l(s.media)} ${n === 'Porto' ? 'no' : 'em'} ${h.a(id, n)}` : ''; }).filter(Boolean).join(', ')}${(() => { const s = h.D.statsDe('g95', D); return s ? `, contra ${h.l(s.media)} em Vila Real` : ''; })()}.</p>
@@ -73,7 +73,7 @@ ${listaGpl.length ? h.table(['Station', 'Municipality', 'Price'], listaGpl.map((
 <h2>The municipality changes the cost of a tank</h2>
 <p>${lo && hi && gs ? `Between ${lo.concelho} and ${hi.concelho}, the diesel average is ${h.c(hi.media - lo.media)} a litre apart: ${h.eur((hi.media - lo.media) * 50, 2)} on a 50-litre tank. The district average, ${h.l(gs.media)}, sits between the two.` : ''} The table covers municipalities with two stations or more.</p>
 ${h.table(['Municipality', 'Stations', 'Average', 'Lowest'], c.map((x) => [x.concelho, x.n, h.l(x.media), h.l(x.min)]), 'Standard diesel by municipality, cheapest to dearest', ['l', 'r', 'r', 'r'])}
-<h2>Standard or premium petrol</h2>
+<h2>Standard or premium petrol in Vila Real</h2>
 <p>${g95 && g95e ? `Premium petrol 95 is on sale at ${h.num(g95e.n)} stations, at ${h.l(g95e.media)} on average, against ${h.l(g95.media)} for standard at ${h.num(g95.n)} stations. That is ${h.c(g95e.media - g95.media)} a litre between them.` : 'There are not enough prices today to compare the two grades of petrol.'} How petrol has moved on the mainland is on the ${h.a('preco-gasolina-95', 'petrol 95')} page.</p>
 <h2>Braga, Porto, Viseu and Bragança</h2>
 <p>Vila Real borders Spain and these four districts. Standard petrol 95 averages ${VIZ.map(([id, n]) => { const s = h.D.statsDe('g95', n); return s ? `${h.l(s.media)} in ${h.a(id, n)}` : ''; }).filter(Boolean).join(', ')} today${(() => { const s = h.D.statsDe('g95', D); return s ? `, against ${h.l(s.media)} in Vila Real` : ''; })()}.</p>

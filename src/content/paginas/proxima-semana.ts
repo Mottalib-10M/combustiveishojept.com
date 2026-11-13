@@ -9,7 +9,7 @@ export default defineGuide({
     title: 'Combustíveis na próxima semana: sobe ou desce na segunda?',
     description: 'Estimativa da variação do gasóleo e da gasolina para a próxima segunda-feira, calculada com os preços de referência da ENSE e com o erro das semanas passadas.',
     h1: 'Combustíveis na próxima semana: estimativa para segunda-feira',
-    intro: (h) => `Quanto devem mudar os preços em ${h.dia(h.D.est('gs')!.segunda, true)}, a partir dos preços de referência da ENSE desta semana.`,
+    intro: (h) => `Quanto devem mudar os preços dos combustíveis em ${h.dia(h.D.est('gs')!.segunda, true)}, a partir dos preços de referência da ENSE desta semana.`,
     resume: (h) => {
       const e = h.D.est('gs')!, g = h.D.est('g95')!;
       return `Para segunda-feira, ${h.date(e.segunda)}, a estimativa é de ${h.c(e.variacao, true)} por litro no gasóleo simples e de ${h.c(g.variacao, true)} na gasolina simples 95, o que levaria o preço médio diário da DGEG para ${h.l(e.preco)} e ${h.l(g.preco)}. A conta usa ${e.dias} dos 5 dias úteis desta semana já publicados pela ENSE, até ${h.date(e.ultimoEnse)}, e compara-os com a média da semana anterior. Quando a semana fecha, na sexta-feira, a estimativa fica completa. Nas ${h.num(e.qualidade.semanas)} semanas testadas, o erro médio foi de ${h.c(e.qualidade.mae)} no gasóleo e de ${h.c(g.qualidade.mae)} na gasolina, contra ${h.c(e.qualidade.maeIgual)} e ${h.c(g.qualidade.maeIgual)} para quem dissesse que o preço não muda. O sentido da variação foi certo em ${h.pct(e.qualidade.sentido, 0)} das semanas no gasóleo. É uma estimativa estatística, não um preço oficial: cada marca decide o seu preço.`;
@@ -23,7 +23,7 @@ export default defineGuide({
     body: (h) => {
       const e = h.D.est('gs')!;
       const linhas = h.D.FUELS.map((f) => [f, h.D.est(f)] as const).filter(([, x]) => x);
-      return `<h2>Como se faz a conta</h2>
+      return `<h2>Como se faz a conta para a próxima semana</h2>
 <p>Primeiro, a média dos preços de referência diários da ENSE desta semana, só com os dias já publicados. Depois, a média da semana anterior. A diferença entre as duas, multiplicada por um coeficiente β, é a variação estimada do preço médio diário da DGEG de segunda-feira para segunda-feira. O coeficiente mede quanto da variação da referência costuma chegar à bomba: no gasóleo é hoje ${h.num(e.beta, 2)}. Não chega a 1 porque parte da variação é absorvida por margens e descontos, e porque as marcas não seguem a referência ao cêntimo.</p>
 <p>O coeficiente é recalculado em cada semana só com o passado: a semana que se estima nunca entra na sua própria conta. É assim que se mede o erro honestamente, como se a estimativa tivesse sido publicada nessa altura.</p>
 <h2>O erro, combustível a combustível</h2>
@@ -38,7 +38,7 @@ ${h.table(['Combustível', 'Erro médio', 'Erro de «fica igual»', 'Estimativa'
     title: 'Fuel prices next week in Portugal: up or down on Monday?',
     description: 'Estimated change in diesel and petrol prices for next Monday in Portugal, worked out from ENSE reference prices and shown with the error of past weeks.',
     h1: 'Fuel prices next week: the Monday estimate',
-    intro: (h) => `How much prices should move on ${h.dia(h.D.est('gs')!.segunda, true)}, from this week’s ENSE reference prices.`,
+    intro: (h) => `How much fuel prices should move on ${h.dia(h.D.est('gs')!.segunda, true)}, from this week’s ENSE reference prices.`,
     resume: (h) => {
       const e = h.D.est('gs')!, g = h.D.est('g95')!;
       return `For Monday ${h.date(e.segunda)}, the estimate is ${h.c(e.variacao, true)} a litre on standard diesel and ${h.c(g.variacao, true)} on standard petrol 95, which would take the DGEG daily average to ${h.l(e.preco)} and ${h.l(g.preco)}. The sum uses ${e.dias} of this week’s 5 working days already published by the ENSE, up to ${h.date(e.ultimoEnse)}, and compares them with last week’s average. Once the week closes on Friday, the estimate is complete. Over ${h.num(e.qualidade.semanas)} tested weeks, the average error was ${h.c(e.qualidade.mae)} on diesel and ${h.c(g.qualidade.mae)} on petrol, against ${h.c(e.qualidade.maeIgual)} and ${h.c(g.qualidade.maeIgual)} for anyone saying the price would not change. The direction was right in ${h.pct(e.qualidade.sentido, 0)} of weeks for diesel. It is a statistical estimate, not an official price: each brand sets its own.`;
@@ -58,7 +58,7 @@ ${h.table(['Combustível', 'Erro médio', 'Erro de «fica igual»', 'Estimativa'
 <h2>The error, fuel by fuel</h2>
 ${h.table(['Fuel', 'Average error', '“No change” error', 'Estimate'], linhas.map(([f, x]) => [h.fn(f), h.c(x!.qualidade.mae), h.c(x!.qualidade.maeIgual), x!.qualidade.publica ? `${h.c(x!.variacao, true)}` : 'not published']), `Back-test over ${h.num(e.qualidade.semanas)} weeks, mean absolute error per litre`, ['l', 'r', 'r', 'r'])}
 <p>LPG is the exception: its price moves little and tracks the daily reference poorly, and the estimate missed by more than saying nothing would change. So the ${h.a('preco-gpl-auto', 'LPG page')} shows prices with no estimate.</p>
-<h2>What the estimate cannot know</h2>
+<h2>What the estimate of next week’s fuel prices cannot know</h2>
 <p>A tax change announced for the following week, a brand’s promotion or a sharp oil move late on Friday are not in the week’s reference price. Each station’s price can also stray from the average: the estimate is about the DGEG daily average, not the station on your street. For that one, see the posted price on the ${h.a('preco-gasoleo', 'diesel')} or ${h.a('preco-gasolina-95', 'petrol 95')} pages.</p>`;
     },
   },

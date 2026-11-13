@@ -24,7 +24,7 @@ export default defineGuide({
     title: 'Preço da gasolina no Algarve hoje: distrito de Faro',
     description: 'Gasolina e gasóleo hoje no Algarve: os cinco postos mais baratos do distrito de Faro, a média de cada concelho, o preço na autoestrada e o GPL Auto, dados DGEG.',
     h1: 'Gasolina e gasóleo no Algarve hoje',
-    intro: (h) => `Os ${h.num(h.D.postosDistrito(D).total)} postos do distrito de Faro, que cobre todo o Algarve, começando pela gasolina e com o gasóleo ao lado.`,
+    intro: (h) => `Os ${h.num(h.D.postosDistrito(D).total)} postos do distrito de Faro, que cobre todo o Algarve, começando pelo preço da gasolina e com o gasóleo ao lado.`,
     resume: (h) => {
       const { g95, gs, r, rd, top, ae, rua } = dados(h);
       const t0 = top[0];
@@ -38,7 +38,7 @@ export default defineGuide({
     body: (h) => {
       const { g95, gs, g98, top, c, gsc, poucos, ae, rua, hip, beja } = dados(h);
       const lo = c[0], hi = c[c.length - 1];
-      return `<h2>Os cinco postos de gasolina mais baratos</h2>
+      return `<h2>Os cinco postos de gasolina mais baratos do Algarve hoje</h2>
 <p>A lista é a de agora: um posto pode baixar ou subir o preço a qualquer hora e entrar ou sair destes cinco. Antes de fazer quilómetros para abastecer, confirme a hora da atualização na última coluna. Para o gasóleo ou o GPL Auto, mude o combustível na calculadora: a lista dos mais baratos é refeita para esse combustível.</p>
 ${h.table(['Posto', 'Concelho', 'Gasolina 95', 'Atualizado'], top.map((x) => [x.nome, x.concelho, h.l(x.preco), hora(h, x.atualizado)]), 'Gasolina simples 95, preço afixado comunicado à DGEG', ['l', 'l', 'r', 'r'])}
 <h2>Gasolina e gasóleo em cada concelho</h2>
@@ -55,7 +55,7 @@ ${h.table(['Concelho', 'Postos', 'Gasolina 95', 'Gasóleo'], c.map((x) => [x.con
     title: 'Petrol prices in the Algarve today: Faro district list',
     description: 'Petrol and diesel in the Algarve today: the five cheapest stations in Faro district, the average in each municipality, motorway prices and LPG, from DGEG data.',
     h1: 'Petrol and diesel in the Algarve today',
-    intro: (h) => `The ${h.num(h.D.postosDistrito(D).total)} stations in Faro district, which covers the whole Algarve, starting with petrol and with diesel alongside.`,
+    intro: (h) => `The ${h.num(h.D.postosDistrito(D).total)} stations in Faro district, which covers the whole Algarve, starting with petrol prices and with diesel alongside.`,
     resume: (h) => {
       const { g95, gs, r, rd, top, ae, rua } = dados(h);
       const t0 = top[0];
@@ -69,7 +69,7 @@ ${h.table(['Concelho', 'Postos', 'Gasolina 95', 'Gasóleo'], c.map((x) => [x.con
     body: (h) => {
       const { g95, gs, g98, top, c, gsc, poucos, ae, rua, hip, beja } = dados(h);
       const lo = c[0], hi = c[c.length - 1];
-      return `<h2>The five cheapest petrol stations</h2>
+      return `<h2>The five cheapest petrol stations in the Algarve today</h2>
 <p>This is the list as it stands now: a station can lower or raise its price at any time and move in or out of these five. Before driving far to fill up, check the update time in the last column. For diesel or LPG, switch the fuel in the calculator: the list of the cheapest is rebuilt for that fuel.</p>
 ${h.table(['Station', 'Municipality', 'Petrol 95', 'Updated'], top.map((x) => [x.nome, x.concelho, h.l(x.preco), hora(h, x.atualizado)]), 'Standard petrol 95, posted price reported to the DGEG', ['l', 'l', 'r', 'r'])}
 <h2>Petrol and diesel in each municipality</h2>

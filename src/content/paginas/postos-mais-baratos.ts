@@ -12,7 +12,7 @@ export default defineGuide({
     title: 'Postos de combustível mais baratos hoje: gasóleo e gasolina',
     description: 'Os postos mais baratos do continente hoje, para o gasóleo e a gasolina 95, com a localidade, a marca e a hora da última atualização comunicada à DGEG.',
     h1: 'Postos de combustível mais baratos hoje',
-    intro: () => 'Os preços mais baixos do país, posto a posto, e os de cada concelho na calculadora.',
+    intro: () => 'Os preços de combustível mais baixos do país hoje, posto a posto, e os de cada concelho na calculadora.',
     resume: (h) => {
       const g = h.D.baratos('gs', 1)[0], b = h.D.baratos('g95', 1)[0], s = h.D.statsDe('gs')!, fr = frescos(h, 'gs');
       return `O gasóleo simples mais barato do continente está hoje em ${g.nome}, em ${g.localidade} (${g.concelho}), a ${h.l(g.preco)} por litro, preço comunicado à DGEG a ${g.atualizado}. A gasolina simples 95 mais barata está em ${b.nome}, em ${b.localidade} (${b.concelho}), a ${h.l(b.preco)}. Face à média afixada do gasóleo, ${h.l(s.media)}, o posto mais barato poupa ${h.c(s.media - g.preco)} por litro, ou ${h.eur((s.media - g.preco) * 50, 2)} num depósito de 50 litros. Antes de fazer quilómetros para lá chegar, veja a hora da atualização: dos ${h.num(fr.n)} postos com preço de gasóleo, ${h.num(fr.hoje)} atualizaram-no hoje e ${h.num(fr.velhos)} não o mudam há mais de uma semana. Um preço antigo pode já não estar na bomba. Na calculadora, escolha o seu distrito e concelho para ver os cinco mais baratos perto de si.`;
@@ -28,7 +28,7 @@ export default defineGuide({
 ${h.table(['Posto', 'Localidade', 'Preço', 'Atualizado'], linhas(h, 'gs'), 'Gasóleo simples, preço afixado comunicado à DGEG', ['l', 'l', 'r', 'r'])}
 <h2>As 15 gasolinas 95 mais baratas</h2>
 ${h.table(['Posto', 'Localidade', 'Preço', 'Atualizado'], linhas(h, 'g95'), 'Gasolina simples 95, preço afixado comunicado à DGEG', ['l', 'l', 'r', 'r'])}
-<h2>Como usar estas listas</h2>
+<h2>Como usar estas listas de postos mais baratos</h2>
 <p>As duas tabelas reproduzem os dados da DGEG tal como os postos os comunicam, ordenados do mais barato para o mais caro e, a preço igual, do mais recente para o mais antigo. Na gasolina 95, ${h.num(fr.hoje)} dos ${h.num(fr.n)} postos atualizaram o preço hoje. Os mais baratos do país raramente estão no caminho de quem vive longe: o mais útil é a lista do seu concelho, na calculadora, e a comparação entre ${h.a('precos-por-marca', 'marcas e tipos de posto')}. Um posto que comunique preços errados pode ser assinalado à própria DGEG, que gere o registo ao abrigo do ${h.src('dl243', 'Decreto-Lei n.º 243/2008')}.</p>`;
     },
   },
@@ -37,7 +37,7 @@ ${h.table(['Posto', 'Localidade', 'Preço', 'Atualizado'], linhas(h, 'g95'), 'Ga
     title: 'Cheapest fuel stations in Portugal today: diesel and petrol',
     description: 'The cheapest stations in mainland Portugal today for diesel and petrol 95, with the town, the brand and the time of the last price update sent to the DGEG.',
     h1: 'Cheapest fuel stations in Portugal today',
-    intro: () => 'The lowest prices in the country, station by station, and those of each municipality in the calculator.',
+    intro: () => 'The lowest fuel prices in Portugal today, station by station, and those of each municipality in the calculator.',
     resume: (h) => {
       const g = h.D.baratos('gs', 1)[0], b = h.D.baratos('g95', 1)[0], s = h.D.statsDe('gs')!, fr = frescos(h, 'gs');
       return `The cheapest standard diesel in mainland Portugal today is at ${g.nome}, in ${g.localidade} (${g.concelho}), at ${h.l(g.preco)} a litre, a price reported to the DGEG at ${g.atualizado}. The cheapest standard petrol 95 is at ${b.nome}, in ${b.localidade} (${b.concelho}), at ${h.l(b.preco)}. Against the diesel posted average of ${h.l(s.media)}, the cheapest station saves ${h.c(s.media - g.preco)} a litre, or ${h.eur((s.media - g.preco) * 50, 2)} on a 50-litre tank. Before driving there, check the update time: of the ${h.num(fr.n)} stations with a diesel price, ${h.num(fr.hoje)} updated it today and ${h.num(fr.velhos)} have not changed it for over a week. An old price may no longer be on the pump. In the calculator, pick your district and municipality to see the five cheapest near you.`;
@@ -53,7 +53,7 @@ ${h.table(['Posto', 'Localidade', 'Preço', 'Atualizado'], linhas(h, 'g95'), 'Ga
 ${h.table(['Station', 'Town', 'Price', 'Updated'], linhas(h, 'gs'), 'Standard diesel, posted price reported to the DGEG', ['l', 'l', 'r', 'r'])}
 <h2>The 15 cheapest petrol 95 prices</h2>
 ${h.table(['Station', 'Town', 'Price', 'Updated'], linhas(h, 'g95'), 'Standard petrol 95, posted price reported to the DGEG', ['l', 'l', 'r', 'r'])}
-<h2>How to use these lists</h2>
+<h2>How to use these lists of the cheapest fuel stations</h2>
 <p>Both tables reproduce DGEG data exactly as stations report it, sorted from cheapest to dearest and, at equal price, from most to least recent. For petrol 95, ${h.num(fr.hoje)} of ${h.num(fr.n)} stations updated their price today. The cheapest in the country are rarely on the way for people who live far off: the most useful list is your own municipality’s, in the calculator, and the comparison between ${h.a('precos-por-marca', 'brands and station types')}. A station reporting wrong prices can be flagged to the DGEG itself, which runs the register under ${h.src('dl243', 'Decree-Law 243/2008')}.</p>`;
     },
   },

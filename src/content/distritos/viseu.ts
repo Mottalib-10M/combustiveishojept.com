@@ -21,7 +21,7 @@ export default defineGuide({
     title: 'Gasóleo em Viseu hoje: média do distrito e dos concelhos',
     description: 'Gasóleo e gasolina em Viseu hoje: cada concelho face à média do continente, onde há gasolina 98, concelhos com um só posto e os cinco distritos vizinhos.',
     h1: 'Preço do gasóleo e da gasolina em Viseu hoje',
-    intro: (h) => `Cada um dos ${h.num(h.D.postosDistrito(D).concelhos)} concelhos do distrito de Viseu comparado com a média do continente, a partir dos preços que ${h.num(h.D.postosDistrito(D).total)} postos comunicam à DGEG.`,
+    intro: (h) => `Cada um dos ${h.num(h.D.postosDistrito(D).concelhos)} concelhos do distrito de Viseu comparado com a média do continente, a partir dos preços que ${h.num(h.D.postosDistrito(D).total)} postos comunicam hoje à DGEG.`,
     resume: (h) => {
       const { gs, g95, cont, todos, abaixo, posGrupo, grupo, p, rg } = base(h);
       if (!gs || !g95) return `Hoje ainda não há preços suficientes dos postos do distrito de Viseu na DGEG para calcular as médias do gasóleo e da gasolina. A lista acima mostra o último preço de cada posto e a hora a que foi comunicado. A comparação de cada concelho com o continente e com os distritos vizinhos é refeita logo que a DGEG publique dados novos, várias vezes por dia.`;
@@ -45,7 +45,7 @@ ${cont ? h.table(['Concelho', 'Postos', 'Média', 'Face ao continente'], todos.m
 <p>${unico.length ? `Em ${unico.length > 1 ? `${unico.slice(0, -1).join(', ')} e ${unico[unico.length - 1]}` : unico[0]}, a DGEG só tem hoje um posto a comunicar preço de gasóleo. Nesses concelhos não há escolha local, e um posto do concelho ao lado pode valer o desvio.` : 'Hoje todos os concelhos do distrito com postos têm pelo menos dois a comunicar preço de gasóleo.'} A calculadora acima permite escolher o concelho e ver os cinco postos mais baratos.</p>
 <h2>Gasolina 98 no distrito</h2>
 <p>${g98 ? `${h.num(g98.n)} postos em ${h.num(c98)} concelhos vendem gasolina 98, a ${h.l(g98.media)} em média${g95 ? ` contra ${h.l(g95.media)} da 95 simples` : ''}.` : 'Hoje não há preços de gasolina 98 no distrito.'} A página da ${h.a('preco-gasolina-98', 'gasolina 98')} acompanha o preço deste combustível, e o ${h.a('historico-precos', 'histórico de preços')} mostra a evolução de todos os combustíveis.</p>
-<h2>Viseu entre cinco distritos</h2>
+<h2>O gasóleo em Viseu e nos distritos à volta</h2>
 <p>Ordenados pela média do gasóleo simples, do mais barato para o mais caro, Viseu e os distritos que o rodeiam ficam hoje assim: ${grupo.map((x) => `${x.id === 'viseu' ? x.n : h.a(x.id, x.n)} (${h.l(x.s!.media)})`).join(', ')}.</p>
 <p>${(() => { const s = h.D.statsDe('gs', D, 'Viseu'), ge = h.D.statsDe('ge', D), gs = h.D.statsDe('gs', D); return `${s ? `O concelho de Viseu, onde fica a capital do distrito, reúne ${h.num(s.n)} postos com gasóleo, a ${h.l(s.media)} em média. ` : ''}${ge && gs ? `Quem prefere o gasóleo especial paga no distrito ${h.l(ge.media)} em média, ${h.c(ge.media - gs.media)} a mais por litro do que pelo simples.` : ''}`; })()}</p>`;
     },
@@ -55,7 +55,7 @@ ${cont ? h.table(['Concelho', 'Postos', 'Média', 'Face ao continente'], todos.m
     title: 'Diesel in Viseu today: district and municipality averages',
     description: 'Diesel and petrol in Viseu today: each municipality against the mainland average, where to buy petrol 98, single-station areas and the five nearby districts.',
     h1: 'Diesel and petrol prices in Viseu today',
-    intro: (h) => `Each of the ${h.num(h.D.postosDistrito(D).concelhos)} municipalities of Viseu district set against the mainland average, from the prices ${h.num(h.D.postosDistrito(D).total)} stations report to the DGEG.`,
+    intro: (h) => `Each of the ${h.num(h.D.postosDistrito(D).concelhos)} municipalities of Viseu district set against the mainland average, from the prices ${h.num(h.D.postosDistrito(D).total)} stations report to the DGEG today.`,
     resume: (h) => {
       const { gs, g95, cont, todos, abaixo, posGrupo, grupo, p, rg } = base(h);
       if (!gs || !g95) return `There are not yet enough prices from stations in Viseu district at the DGEG today to work out diesel and petrol averages. The list above shows each station’s last price and the time it was reported. The comparison of each municipality with the mainland and with neighbouring districts is redone as soon as the DGEG publishes new data, several times a day.`;
@@ -79,7 +79,7 @@ ${cont ? h.table(['Municipality', 'Stations', 'Average', 'Against mainland'], to
 <p>${unico.length ? `In ${unico.length > 1 ? `${unico.slice(0, -1).join(', ')} and ${unico[unico.length - 1]}` : unico[0]}, the DGEG has only one station reporting a diesel price today. There is no local choice there, and a station in the next municipality may be worth the detour.` : 'Today every municipality in the district with stations has at least two reporting a diesel price.'} The calculator above lets you pick a municipality and see its five cheapest stations.</p>
 <h2>Petrol 98 in the district</h2>
 <p>${g98 ? `${h.num(g98.n)} stations in ${h.num(c98)} municipalities sell petrol 98, at ${h.l(g98.media)} on average${g95 ? ` against ${h.l(g95.media)} for standard 95` : ''}.` : 'There are no petrol 98 prices in the district today.'} The ${h.a('preco-gasolina-98', 'petrol 98')} page follows the price of this fuel, and the ${h.a('historico-precos', 'price history')} shows how every fuel has moved.</p>
-<h2>Viseu among five districts</h2>
+<h2>Diesel in Viseu and the districts around it</h2>
 <p>Ranked by standard diesel average, cheapest first, Viseu and the districts around it line up like this today: ${grupo.map((x) => `${x.id === 'viseu' ? x.n : h.a(x.id, x.n)} (${h.l(x.s!.media)})`).join(', ')}.</p>
 <p>${(() => { const s = h.D.statsDe('gs', D, 'Viseu'), ge = h.D.statsDe('ge', D), gs = h.D.statsDe('gs', D); return `${s ? `Viseu municipality, home to the district capital, has ${h.num(s.n)} diesel stations averaging ${h.l(s.media)}. ` : ''}${ge && gs ? `Drivers who prefer premium diesel pay ${h.l(ge.media)} on average in the district, ${h.c(ge.media - gs.media)} a litre more than for standard.` : ''}`; })()}</p>`;
     },

@@ -35,7 +35,7 @@ export default defineGuide({
     ],
     body: (h) => {
       const { gs, g95, g98, gpl, ae, rua, ae95, rua95, conc, unicos, viz } = dados(h);
-      return `<h2>Posto de rua ou área de serviço</h2>
+      return `<h2>Gasóleo em Castelo Branco: posto de rua ou área de serviço</h2>
 <p>${ae && rua ? `No gasóleo, a área de serviço fica ${h.c(ae.media - rua.media, true)} por litro face ao posto de rua, com ${h.num(ae.n)} postos de autoestrada contra ${h.num(rua.n)} de rua. Num depósito de 50 litros, isso dá ${h.eur(Math.abs(ae.media - rua.media) * 50, 2)}.` : 'Hoje não há dados de autoestrada e de rua suficientes para comparar no gasóleo.'} ${ae95 && rua95 ? `Na gasolina 95, a diferença é de ${h.c(ae95.media - rua95.media, true)} por litro.` : ''} A diferença existe sobretudo nas médias: um posto de autoestrada pode, num dado dia, ficar abaixo de um posto de rua mais caro, e a calculadora indica o tipo de cada um.</p>
 <h2>Concelhos com poucos postos</h2>
 <p>${unicos.length ? `Em ${unicos.map((x) => `${x.concelho} (${h.l(x.media)})`).join(', ')}, só um posto vende gasóleo, e a média do concelho é o preço desse posto.` : 'Hoje nenhum concelho do distrito depende de um único posto para o gasóleo.'} A tabela ordena os concelhos pelo número de postos, do menor para o maior, com a média e o mínimo de cada um.</p>
@@ -64,7 +64,7 @@ ${h.table(['Distrito', 'Gasóleo', 'GPL Auto'], [[`<strong>${D}</strong>`, h.l(g
     ],
     body: (h) => {
       const { gs, g95, g98, gpl, ae, rua, ae95, rua95, conc, unicos, viz } = dados(h);
-      return `<h2>Street station or service area</h2>
+      return `<h2>Diesel in Castelo Branco: street station or service area</h2>
 <p>${ae && rua ? `For diesel, the service area is ${h.c(ae.media - rua.media, true)} a litre against the street station, with ${h.num(ae.n)} motorway stations against ${h.num(rua.n)} street ones. On a 50-litre tank, that comes to ${h.eur(Math.abs(ae.media - rua.media) * 50, 2)}.` : 'Today there is not enough motorway and street data to compare for diesel.'} ${ae95 && rua95 ? `For petrol 95, the gap is ${h.c(ae95.media - rua95.media, true)} a litre.` : ''} The difference lives mostly in the averages: on a given day a motorway station can come in below a dearer street station, and the calculator shows the type of each one.</p>
 <h2>Municipalities with few stations</h2>
 <p>${unicos.length ? `In ${unicos.map((x) => `${x.concelho} (${h.l(x.media)})`).join(', ')}, only one station sells diesel, and the municipal average is simply that station's price.` : 'Today no municipality in the district relies on a single station for diesel.'} The table orders municipalities by number of stations, fewest first, with the average and lowest price in each.</p>

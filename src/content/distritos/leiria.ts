@@ -38,7 +38,7 @@ export default defineGuide({
       return `<h2>Quanto custa encher o depósito em Leiria</h2>
 <p>Um depósito cheio é a forma mais simples de ver o que valem alguns cêntimos por litro. A tabela compara três volumes comuns ao preço médio do distrito e no posto mais barato.</p>
 ${gs ? h.table(['Depósito', 'Preço médio', 'Posto mais barato', 'Poupança'], LITROS.map((v) => [`${v} litros`, h.eur(gs.media * v, 2), h.eur(gs.min * v, 2), h.eur((gs.media - gs.min) * v, 2)]), 'Gasóleo simples no distrito de Leiria, preços afixados de hoje', ['l', 'r', 'r', 'r']) : ''}
-<h2>Do concelho mais barato ao mais caro</h2>
+<h2>O preço do gasóleo em Leiria, do concelho mais barato ao mais caro</h2>
 <p>${lo && hi ? `Entre ${lo.concelho} e ${hi.concelho}, a média do gasóleo separa-se ${h.c(hi.media - lo.media)} por litro. ` : ''}A ordem completa, com o preço mínimo de cada concelho, ajuda a escolher onde parar quando o trajeto passa por mais do que um. Contam apenas os concelhos com pelo menos dois postos a comunicar.</p>
 ${h.table(['Concelho', 'Postos', 'Média', 'Mínimo'], c.map((x) => [x.concelho, x.n, h.l(x.media), h.l(x.min)]), 'Gasóleo simples por concelho, do mais barato ao mais caro', ['l', 'r', 'r', 'r'])}
 <h2>As marcas com mais postos no distrito</h2>
@@ -73,7 +73,7 @@ ${h.table(['Concelho', 'Postos', 'Média', 'Mínimo'], c.map((x) => [x.concelho,
       return `<h2>What a full tank costs in Leiria</h2>
 <p>A full tank is the simplest way to see what a few cents a litre are worth. The table compares three common volumes at the district average and at the cheapest station.</p>
 ${gs ? h.table(['Tank', 'Average price', 'Cheapest station', 'Saving'], LITROS.map((v) => [`${v} litres`, h.eur(gs.media * v, 2), h.eur(gs.min * v, 2), h.eur((gs.media - gs.min) * v, 2)]), 'Standard diesel in Leiria district, today’s posted prices', ['l', 'r', 'r', 'r']) : ''}
-<h2>From the cheapest municipality to the dearest</h2>
+<h2>Diesel price in Leiria, from the cheapest municipality to the dearest</h2>
 <p>${lo && hi ? `Between ${lo.concelho} and ${hi.concelho}, the diesel average is ${h.c(hi.media - lo.media)} a litre apart. ` : ''}The full order, with each municipality’s lowest price, helps you choose where to stop when your route crosses more than one. Only municipalities with at least two reporting stations are included.</p>
 ${h.table(['Municipality', 'Stations', 'Average', 'Lowest'], c.map((x) => [x.concelho, x.n, h.l(x.media), h.l(x.min)]), 'Standard diesel by municipality, cheapest to dearest', ['l', 'r', 'r', 'r'])}
 <h2>The brands with most stations in the district</h2>

@@ -11,7 +11,7 @@ export default defineGuide({
     title: 'Preço da gasolina 98 hoje: média, mínimo e diferença da 95',
     description: 'Preço da gasolina 98 hoje no continente: média afixada, posto mais barato, quantos postos a vendem e quanto custa a mais do que a gasolina 95 num depósito.',
     h1: 'Preço da gasolina 98 hoje',
-    intro: (h) => `Gasolina sem chumbo 98 em ${h.num(h.D.statsDe('g98')!.n)} postos que a comunicam à DGEG.`,
+    intro: (h) => `Gasolina sem chumbo 98 hoje em ${h.num(h.D.statsDe('g98')!.n)} postos que a comunicam à DGEG.`,
     resume: (h) => {
       const s = h.D.statsDe('g98')!, g = h.D.statsDe('g95')!, p = h.D.pmd('g98')!, c = cobertura(h);
       return `A gasolina 98 está hoje afixada em média a ${h.l(s.media)} por litro, entre ${h.l(s.min)} no posto mais barato e ${h.l(s.max)} no mais caro. Fica ${h.c(s.media - g.media)} acima da gasolina simples 95, o que num depósito de 45 litros dá ${h.eur((s.media - g.media) * 45, 2)} a mais. Nem todos os postos a vendem: ${h.num(c.n98)} comunicam preço de 98, contra ${h.num(c.n95)} para a 95, ou seja ${h.pct(c.parte, 0)}. O preço médio diário da DGEG, ponderado pelas vendas, foi de ${h.l(p.media)} a ${h.date(p.dia)}. Como a gasolina 98 segue a mesma cotação de referência da 95, a sua variação semanal costuma acompanhar a da 95; a estimativa para segunda-feira está na página da ${h.a('proxima-semana', 'próxima semana')}. Na calculadora, escolha o distrito e o concelho para ver onde há 98 perto de si.`;
@@ -29,7 +29,7 @@ export default defineGuide({
 ${h.table(['Distrito', 'Postos com 98', 'Média', 'Mínimo'], ds.map(([d, s]) => [h.a(h.D.slug(d), d), s.n, h.l(s.media), h.l(s.min)]), 'Gasolina 98, preço afixado comunicado à DGEG', ['l', 'r', 'r', 'r'])}
 <h2>A diferença entre marcas</h2>
 <p>Nas marcas com pelo menos 20 postos a vender 98, a média vai de ${h.l(top[0][1].media)} (${top[0][0]}) a ${h.l(top[top.length - 1][1].media)} (${top[top.length - 1][0]}). É uma diferença maior do que na gasolina 95, porque a 98 é um produto de nicho em que cada marca tem mais margem para fixar o preço. A comparação completa está em ${h.a('precos-por-marca', 'preços por marca')}.</p>
-<h2>O preço médio diário oficial</h2>
+<h2>O preço médio diário oficial da gasolina 98</h2>
 <p>A DGEG publica também o preço médio diário da 98, com os mesmos critérios da 95: média ponderada pelas vendas, com descontos. É esse número que serve de base à ${h.a('historico-precos', 'evolução mensal')} e à estimativa semanal.</p>`;
     },
   },
@@ -38,7 +38,7 @@ ${h.table(['Distrito', 'Postos com 98', 'Média', 'Mínimo'], ds.map(([d, s]) =>
     title: 'Petrol 98 price in Portugal today: average, lowest, vs 95',
     description: 'Petrol 98 price today in mainland Portugal: posted average, cheapest station, how many stations sell it and how much more than petrol 95 it costs per tank.',
     h1: 'Petrol 98 price today',
-    intro: (h) => `Unleaded petrol 98 at ${h.num(h.D.statsDe('g98')!.n)} stations that report it to the DGEG.`,
+    intro: (h) => `Unleaded petrol 98 prices today at ${h.num(h.D.statsDe('g98')!.n)} stations that report them to the DGEG.`,
     resume: (h) => {
       const s = h.D.statsDe('g98')!, g = h.D.statsDe('g95')!, p = h.D.pmd('g98')!, c = cobertura(h);
       return `Petrol 98 is posted today at ${h.l(s.media)} a litre on average, from ${h.l(s.min)} at the cheapest station to ${h.l(s.max)} at the dearest. That is ${h.c(s.media - g.media)} above standard petrol 95, or ${h.eur((s.media - g.media) * 45, 2)} more on a 45-litre tank. Not every station sells it: ${h.num(c.n98)} report a 98 price, against ${h.num(c.n95)} for 95, or ${h.pct(c.parte, 0)}. The DGEG daily average, weighted by sales, was ${h.l(p.media)} on ${h.date(p.dia)}. Because petrol 98 follows the same reference quote as 95, its weekly move usually tracks 95’s; the Monday estimate is on the ${h.a('proxima-semana', 'next week')} page. In the calculator, choose a district and municipality to find 98 near you. Further down, a table lists how many stations sell 98 in each district, and another paragraph compares the brands with the widest 98 networks.`;
@@ -56,7 +56,7 @@ ${h.table(['Distrito', 'Postos com 98', 'Média', 'Mínimo'], ds.map(([d, s]) =>
 ${h.table(['District', 'Stations with 98', 'Average', 'Lowest'], ds.map(([d, s]) => [h.a(h.D.slug(d), d), s.n, h.l(s.media), h.l(s.min)]), 'Petrol 98, posted price reported to the DGEG', ['l', 'r', 'r', 'r'])}
 <h2>The gap between brands</h2>
 <p>Among brands with at least 20 stations selling 98, the average runs from ${h.l(top[0][1].media)} (${top[0][0]}) to ${h.l(top[top.length - 1][1].media)} (${top[top.length - 1][0]}). That gap is wider than on petrol 95, because 98 is a niche product where each brand has more room to set its price. The full comparison is in ${h.a('precos-por-marca', 'prices by brand')}.</p>
-<h2>The official daily average</h2>
+<h2>The official daily average price of petrol 98</h2>
 <p>The DGEG also publishes a daily average for 98, on the same basis as 95: sales-weighted, net of discounts. That figure underpins the ${h.a('historico-precos', 'monthly history')} and the weekly estimate.</p>`;
     },
   },

@@ -17,7 +17,7 @@ export default defineGuide({
     title: 'Histórico dos preços dos combustíveis desde 2023, mês a mês',
     description: 'Evolução do preço do gasóleo, da gasolina e do GPL mês a mês desde janeiro de 2023, com o preço médio diário da DGEG, o mês mais caro e o mais barato.',
     h1: 'Histórico dos preços dos combustíveis',
-    intro: (h) => `Média mensal do preço médio diário da DGEG, de ${nomeMes(h, h.D.mensal('gs')[0].mes)} até hoje.`,
+    intro: (h) => `Histórico dos preços dos combustíveis: média mensal do preço médio diário da DGEG, de ${nomeMes(h, h.D.mensal('gs')[0].mes)} até hoje.`,
     resume: (h) => {
       const g = resumo(h, 'gs'), b = resumo(h, 'g95');
       return `Em ${nomeMes(h, g.ult.mes)}, o gasóleo simples custa em média ${h.l(g.ult.media)} por litro e a gasolina simples 95 ${h.l(b.ult.media)}, segundo o preço médio diário da DGEG, ponderado pelas vendas e com descontos. ${g.ant ? `Há um ano, em ${nomeMes(h, g.ant.mes)}, o gasóleo estava a ${h.l(g.ant.media)}, ou seja ${h.c(g.ult.media - g.ant.media, true)} por litro de diferença.` : ''} Desde ${nomeMes(h, g.primeiro.mes)}, o mês mais caro do gasóleo foi ${nomeMes(h, g.hi.mes)}, a ${h.l(g.hi.media)}, e o mais barato ${nomeMes(h, g.lo.mes)}, a ${h.l(g.lo.media)}: ${h.c(g.hi.media - g.lo.media)} entre os dois extremos, o que num depósito de 50 litros são ${h.eur((g.hi.media - g.lo.media) * 50, 2)}. Na gasolina 95, o extremo alto foi ${nomeMes(h, b.hi.mes)} e o baixo ${nomeMes(h, b.lo.mes)}. A calculadora desenha a curva do combustível escolhido em 12 ou 24 meses ou desde 2023 e compara o depósito de hoje com o do mês mais barato.`;
@@ -34,7 +34,7 @@ export default defineGuide({
 ${h.table(['Mês', 'Gasóleo simples', 'Gasolina 95', 'Dias'], ult.map((x) => { const y = b.m.find((z) => z.mes === x.mes); return [nomeMes(h, x.mes), h.l(x.media), y ? h.l(y.media) : '—', x.dias]; }), 'Média mensal do preço médio diário DGEG, continente', ['l', 'r', 'r', 'r'])}
 <h2>Gasóleo e gasolina não andam juntos</h2>
 <p>Os dois combustíveis seguem cotações diferentes: o gasóleo depende do mercado dos destilados médios, a gasolina do das gasolinas, e cada um tem o seu ISP. Em ${nomeMes(h, g.ult.mes)}, a gasolina 95 está ${h.c(Math.abs(b.ult.media - g.ult.media))} ${b.ult.media < g.ult.media ? 'abaixo' : 'acima'} do gasóleo; em ${nomeMes(h, g.primeiro.mes)} estava ${h.c(Math.abs(b.primeiro.media - g.primeiro.media))} ${b.primeiro.media < g.primeiro.media ? 'abaixo' : 'acima'}. Quem compara um carro a gasóleo com um a gasolina deve olhar para vários meses, não para um dia.</p>
-<h2>De onde vem a série</h2>
+<h2>De onde vem o histórico dos preços dos combustíveis</h2>
 <p>A DGEG publica um preço médio diário por combustível para o continente, com mínimo, máximo e número de postos. Guardamos todos os dias desde janeiro de 2023 e calculamos a média simples dos dias de cada mês. Para a semana seguinte, a ${h.a('proxima-semana', 'estimativa de segunda-feira')} usa a mesma série como ponto de partida.</p>`;
     },
   },
@@ -43,7 +43,7 @@ ${h.table(['Mês', 'Gasóleo simples', 'Gasolina 95', 'Dias'], ult.map((x) => { 
     title: 'Fuel price history in Portugal since 2023, month by month',
     description: 'How diesel, petrol and LPG prices in Portugal have moved month by month since January 2023, from the DGEG daily average, with the dearest and cheapest months.',
     h1: 'Fuel price history in Portugal',
-    intro: (h) => `Monthly mean of the DGEG daily average, from ${nomeMes(h, h.D.mensal('gs')[0].mes)} to today.`,
+    intro: (h) => `Fuel price history in Portugal: monthly mean of the DGEG daily average, from ${nomeMes(h, h.D.mensal('gs')[0].mes)} to today.`,
     resume: (h) => {
       const g = resumo(h, 'gs'), b = resumo(h, 'g95');
       return `In ${nomeMes(h, g.ult.mes)}, standard diesel costs ${h.l(g.ult.media)} a litre on average and standard petrol 95 ${h.l(b.ult.media)}, according to the DGEG daily average, weighted by sales and net of discounts. ${g.ant ? `A year ago, in ${nomeMes(h, g.ant.mes)}, diesel was ${h.l(g.ant.media)}, a gap of ${h.c(g.ult.media - g.ant.media, true)} a litre.` : ''} Since ${nomeMes(h, g.primeiro.mes)}, diesel’s dearest month was ${nomeMes(h, g.hi.mes)}, at ${h.l(g.hi.media)}, and its cheapest ${nomeMes(h, g.lo.mes)}, at ${h.l(g.lo.media)}: ${h.c(g.hi.media - g.lo.media)} between the two, or ${h.eur((g.hi.media - g.lo.media) * 50, 2)} on a 50-litre tank. For petrol 95, the high was ${nomeMes(h, b.hi.mes)} and the low ${nomeMes(h, b.lo.mes)}. The calculator draws the chosen fuel’s curve over 12 or 24 months or since 2023, and compares today’s tank with the cheapest month’s. The table below lists the last 13 months for diesel and petrol 95 side by side, with the number of days behind each monthly figure.`;
@@ -60,7 +60,7 @@ ${h.table(['Mês', 'Gasóleo simples', 'Gasolina 95', 'Dias'], ult.map((x) => { 
 ${h.table(['Month', 'Standard diesel', 'Petrol 95', 'Days'], ult.map((x) => { const y = b.m.find((z) => z.mes === x.mes); return [nomeMes(h, x.mes), h.l(x.media), y ? h.l(y.media) : '—', x.dias]; }), 'Monthly mean of the DGEG daily average, mainland', ['l', 'r', 'r', 'r'])}
 <h2>Diesel and petrol do not move together</h2>
 <p>The two fuels follow different quotes: diesel depends on the middle-distillates market, petrol on the gasoline market, and each has its own ISP. In ${nomeMes(h, g.ult.mes)}, petrol 95 is ${h.c(Math.abs(b.ult.media - g.ult.media))} ${b.ult.media < g.ult.media ? 'below' : 'above'} diesel; in ${nomeMes(h, g.primeiro.mes)} it was ${h.c(Math.abs(b.primeiro.media - g.primeiro.media))} ${b.primeiro.media < g.primeiro.media ? 'below' : 'above'}. Anyone comparing a diesel car with a petrol one should look at several months, not one day.</p>
-<h2>Where the series comes from</h2>
+<h2>Where the fuel price history comes from</h2>
 <p>The DGEG publishes a daily average per fuel for the mainland, with minimum, maximum and number of stations. We keep every day since January 2023 and take the simple mean of each month’s days. For the coming week, the ${h.a('proxima-semana', 'Monday estimate')} uses the same series as its starting point.</p>`;
     },
   },

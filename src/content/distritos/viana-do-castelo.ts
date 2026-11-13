@@ -18,7 +18,7 @@ export default defineGuide({
     title: 'Combustíveis em Viana do Castelo hoje: postos mais baratos',
     description: 'Combustíveis em Viana do Castelo hoje: os cinco postos mais baratos, a média de cada concelho, o gasóleo especial e a comparação com Braga. Preços da DGEG.',
     h1: 'Gasóleo e gasolina em Viana do Castelo hoje',
-    intro: (h) => `Os postos mais baratos dos ${h.num(h.D.postosDistrito(D).concelhos)} concelhos do distrito de Viana do Castelo, com o preço e a hora que cada um comunicou à DGEG.`,
+    intro: (h) => `Os postos mais baratos dos ${h.num(h.D.postosDistrito(D).concelhos)} concelhos do distrito de Viana do Castelo, com o preço e a hora que cada um comunicou hoje à DGEG.`,
     resume: (h) => {
       const { gs, g95, br, top, rg, rp, p } = base(h);
       if (!gs || !g95) return `Os postos do distrito de Viana do Castelo ainda não enviaram hoje à DGEG preços suficientes para uma média de gasóleo e de gasolina. A lista acima mostra o último preço conhecido de cada posto e a hora de envio. Os cinco postos mais baratos, a média de cada concelho e a comparação com o distrito de Braga voltam a ser calculados logo que existam dados novos.`;
@@ -43,7 +43,7 @@ ${top.length ? h.table(['Posto', 'Concelho', 'Preço', 'Atualizado'], top.map((x
 ${h.table(['Concelho', 'Postos', 'Média', 'Mínimo'], c.map((x) => [x.concelho, x.n, h.l(x.media), h.l(x.min)]), 'Gasóleo simples por concelho', ['l', 'r', 'r', 'r'])}
 <h2>Gasóleo especial: quantos postos o vendem</h2>
 <p>${ge && gs ? `${h.num(ge.n)} postos vendem gasóleo especial, ${h.pct(ge.n / p.total)} dos postos do distrito, contra ${h.num(gs.n)} que vendem o simples; a média do especial é ${h.l(ge.media)}.` : ''} ${soEsp ? `Em ${h.num(soEsp)} postos só há gasóleo especial, e quem lá abastece paga o preço do aditivado.` : 'Hoje todos os postos com gasóleo especial vendem também o simples.'} A página ${h.a('simples-ou-aditivado', 'simples ou aditivado')} explica a diferença, e ${h.a('quando-abastecer', 'quando abastecer')} mostra os dias em que os preços costumam mudar.</p>
-<h2>Viana do Castelo e Braga</h2>
+<h2>Combustíveis em Viana do Castelo e Braga</h2>
 <p>O distrito faz fronteira com Espanha e, do lado português, apenas com ${h.a('braga', 'Braga')}${br ? `, onde o gasóleo está hoje a ${h.l(br.media)}` : ''}. Mais a sul, o distrito do ${h.a('porto', 'Porto')} soma ${h.num(h.D.postosDistrito('Porto').total)} postos, contra ${h.num(p.total)} em Viana do Castelo.</p>
 <p>${(() => { const g = h.D.baratos('gpl', 1, D)[0], n = h.D.postosDistrito(D).gpl, s = h.D.statsDe('gs', D, 'Viana do Castelo'); return `${s ? `No concelho de Viana do Castelo, sede do distrito, a média do gasóleo é de ${h.l(s.media)} em ${h.num(s.n)} postos. ` : ''}${g ? `O GPL Auto existe em ${h.num(n)} postos; o mais barato é ${g.nome}, em ${g.concelho}, a ${h.l(g.preco)}.` : 'Nenhum posto do distrito comunica hoje preço de GPL Auto.'}`; })()}</p>`;
     },
@@ -78,7 +78,7 @@ ${top.length ? h.table(['Station', 'Municipality', 'Price', 'Updated'], top.map(
 ${h.table(['Municipality', 'Stations', 'Average', 'Lowest'], c.map((x) => [x.concelho, x.n, h.l(x.media), h.l(x.min)]), 'Standard diesel by municipality', ['l', 'r', 'r', 'r'])}
 <h2>Premium diesel: how many stations sell it</h2>
 <p>${ge && gs ? `${h.num(ge.n)} stations sell premium diesel, ${h.pct(ge.n / p.total)} of the district’s stations, against ${h.num(gs.n)} selling standard; premium averages ${h.l(ge.media)}.` : ''} ${soEsp ? `At ${h.num(soEsp)} stations premium is the only diesel on offer, so anyone filling up there pays the additive price.` : 'Today every station with premium diesel also sells standard.'} The ${h.a('simples-ou-aditivado', 'standard or premium')} page explains the difference, and ${h.a('quando-abastecer', 'when to fill up')} shows the days on which prices tend to change.</p>
-<h2>Viana do Castelo and Braga</h2>
+<h2>Fuel prices in Viana do Castelo and Braga</h2>
 <p>The district borders Spain and, on the Portuguese side, only ${h.a('braga', 'Braga')}${br ? `, where diesel stands at ${h.l(br.media)} today` : ''}. Further south, ${h.a('porto', 'Porto')} district counts ${h.num(h.D.postosDistrito('Porto').total)} stations, against ${h.num(p.total)} in Viana do Castelo.</p>
 <p>${(() => { const g = h.D.baratos('gpl', 1, D)[0], n = h.D.postosDistrito(D).gpl, s = h.D.statsDe('gs', D, 'Viana do Castelo'); return `${s ? `In Viana do Castelo municipality, the district seat, diesel averages ${h.l(s.media)} across ${h.num(s.n)} stations. ` : ''}${g ? `LPG is sold at ${h.num(n)} stations; the cheapest is ${g.nome}, in ${g.concelho}, at ${h.l(g.preco)}.` : 'No station in the district reports an LPG price today.'}`; })()}</p>`;
     },

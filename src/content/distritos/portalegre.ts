@@ -20,7 +20,7 @@ export default defineGuide({
     title: 'Combustíveis em Portalegre hoje: postos de cada concelho',
     description: 'Combustíveis em Portalegre hoje: gasóleo e gasolina em cada concelho, quantos postos há em cada um, onde só existe um e o mais barato do distrito. Dados DGEG.',
     h1: 'Gasóleo e gasolina em Portalegre hoje',
-    intro: (h) => `Num distrito com ${h.num(h.D.postosDistrito(D).total)} postos registados na DGEG, saber onde fica o próximo conta tanto como o preço: aqui estão os dois, concelho a concelho.`,
+    intro: (h) => `No distrito de Portalegre, com ${h.num(h.D.postosDistrito(D).total)} postos de combustíveis registados na DGEG, saber onde fica o próximo conta tanto como o preço: aqui estão os dois, concelho a concelho.`,
     resume: (h) => {
       const { gs, g95, p, poucos, total, rg, rp } = base(h);
       if (!gs || !g95) return `Os postos do distrito de Portalegre ainda não enviaram hoje à DGEG preços suficientes para uma média do gasóleo e da gasolina. A lista acima mostra o último preço conhecido de cada posto e a hora em que foi comunicado. A média do distrito, a contagem de postos por concelho e a comparação com os distritos vizinhos voltam a ser calculadas logo que existam dados novos, o que acontece várias vezes por dia útil.`;
@@ -43,7 +43,7 @@ export default defineGuide({
 ${h.table(['Concelho', 'Postos', 'Média', 'Mais baixo'], ord.map((x) => [x.concelho, x.n, h.l(x.media), h.l(x.min)]), 'Gasóleo simples por concelho, do maior número de postos para o menor', ['l', 'r', 'r', 'r'])}
 <h2>Onde há um ou dois postos</h2>
 <p>${poucos.length ? `${poucos.map((x) => x.concelho).join(', ')}: são ${h.num(poucos.length)} concelhos com dois postos ou menos.` : 'Nenhum concelho tem hoje menos de três postos com gasóleo.'} Antes de uma viagem pelo interior do distrito, vale a pena ver na lista qual é o posto mais barato no percurso e a hora da última atualização, porque um preço comunicado há dias pode já ter mudado.${gs ? ` O mais baixo do distrito está hoje a ${h.l(gs.min)} e o mais alto a ${h.l(gs.max)}.` : ''}</p>
-<h2>Portalegre entre Castelo Branco, Santarém e Évora</h2>
+<h2>Os combustíveis em Portalegre, entre Castelo Branco, Santarém e Évora</h2>
 <p>O distrito faz fronteira com Espanha e com três distritos portugueses. ${viz.filter((v) => v.s).map((v) => `${h.a(v.id, v.n)} tem ${h.num(v.q)} postos e gasóleo a ${h.l(v.s!.media)}`).join('; ')}, contra ${h.num(p.total)} postos${gs ? ` e ${h.l(gs.media)}` : ''} em Portalegre. A página dos ${h.a('postos-mais-baratos', 'postos mais baratos')} mostra o ranking de todo o continente.</p>
 <p>${(() => { const g = h.D.statsDe('g95', D), b = h.D.baratos('g95', 1, D)[0], gl = h.D.baratos('gpl', 50, D); return g ? `Na gasolina simples 95, o intervalo no distrito vai de ${h.l(g.min)} a ${h.l(g.max)}${b ? `, e o posto mais barato fica em ${b.concelho}` : ''}. ${gl.length ? `Quem anda a GPL Auto encontra ${h.num(gl.length)} ${gl.length === 1 ? 'posto' : 'postos'} no distrito, em ${[...new Set(gl.map((x) => x.concelho))].join(' e ')}.` : 'Nenhum posto do distrito comunica hoje preço de GPL Auto.'}` : ''; })()}</p>`;
     },
@@ -52,8 +52,8 @@ ${h.table(['Concelho', 'Postos', 'Média', 'Mais baixo'], ord.map((x) => [x.conc
     slug: 'portalegre', nav: 'Portalegre', card: 'Stations in Portalegre district municipality by municipality, where they are scarce and what diesel and petrol cost in each.',
     title: 'Fuel prices in Portalegre today: stations in each area',
     description: 'Fuel prices in Portalegre today: diesel and petrol in each municipality, how many stations each has, where there is only one, and the cheapest in the district.',
-    h1: 'Diesel and petrol in Portalegre today',
-    intro: (h) => `In a district with ${h.num(h.D.postosDistrito(D).total)} stations on the DGEG register, knowing where the next one is matters as much as the price: here are both, municipality by municipality.`,
+    h1: 'Fuel prices in Portalegre today: diesel and petrol',
+    intro: (h) => `In Portalegre district, with ${h.num(h.D.postosDistrito(D).total)} fuel stations on the DGEG register, knowing where the next one is matters as much as the price: here are both, municipality by municipality.`,
     resume: (h) => {
       const { gs, g95, p, poucos, total, rg, rp } = base(h);
       if (!gs || !g95) return `Stations in Portalegre district have not yet sent the DGEG enough prices today for a diesel and petrol average. The list above shows each station’s last known price and the time it was reported. The district average, the station count by municipality and the comparison with neighbouring districts are recomputed as soon as new data arrive, which happens several times each working day.`;
@@ -76,7 +76,7 @@ ${h.table(['Concelho', 'Postos', 'Média', 'Mais baixo'], ord.map((x) => [x.conc
 ${h.table(['Municipality', 'Stations', 'Average', 'Lowest'], ord.map((x) => [x.concelho, x.n, h.l(x.media), h.l(x.min)]), 'Standard diesel by municipality, from most stations to fewest', ['l', 'r', 'r', 'r'])}
 <h2>Where there are only one or two stations</h2>
 <p>${poucos.length ? `${poucos.map((x) => x.concelho).join(', ')}: ${h.num(poucos.length)} municipalities with two stations or fewer.` : 'No municipality has fewer than three diesel stations today.'} Before a drive through the interior of the district, check the list for the cheapest station on your route and its last update time, since a price reported days ago may already have changed.${gs ? ` The district’s lowest is ${h.l(gs.min)} today and its highest ${h.l(gs.max)}.` : ''}</p>
-<h2>Portalegre between Castelo Branco, Santarém and Évora</h2>
+<h2>Fuel prices in Portalegre, between Castelo Branco, Santarém and Évora</h2>
 <p>The district borders Spain and three Portuguese districts. ${viz.filter((v) => v.s).map((v) => `${h.a(v.id, v.n)} has ${h.num(v.q)} stations and diesel at ${h.l(v.s!.media)}`).join('; ')}, against ${h.num(p.total)} stations${gs ? ` and ${h.l(gs.media)}` : ''} in Portalegre. The ${h.a('postos-mais-baratos', 'cheapest stations')} page shows the ranking for the whole mainland.</p>
 <p>${(() => { const g = h.D.statsDe('g95', D), b = h.D.baratos('g95', 1, D)[0], gl = h.D.baratos('gpl', 50, D); return g ? `For standard petrol 95, the range across the district runs from ${h.l(g.min)} to ${h.l(g.max)}${b ? `, and the cheapest station is in ${b.concelho}` : ''}. ${gl.length ? `LPG drivers will find ${h.num(gl.length)} ${gl.length === 1 ? 'station' : 'stations'} in the district, in ${[...new Set(gl.map((x) => x.concelho))].join(' and ')}.` : 'No station in the district reports an LPG price today.'}` : ''; })()}</p>`;
     },

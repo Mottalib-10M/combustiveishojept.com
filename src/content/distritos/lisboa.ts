@@ -9,8 +9,8 @@ export default defineGuide({
     slug: 'lisboa', nav: 'Lisboa', card: 'Gasóleo e gasolina nos 16 concelhos do distrito de Lisboa, do mais barato ao mais caro.',
     title: 'Preço do gasóleo em Lisboa hoje: média por concelho e postos',
     description: 'Preço do gasóleo e da gasolina hoje nos concelhos do distrito de Lisboa, com os postos mais baratos, a hora de atualização e o custo do depósito. Dados DGEG.',
-    h1: 'Combustíveis no distrito de Lisboa hoje',
-    intro: (h) => `Média afixada em cada concelho do distrito e os postos mais baratos, com os dados que ${h.num(h.D.postosDistrito(D).total)} postos comunicam à DGEG.`,
+    h1: 'Preço do gasóleo e da gasolina no distrito de Lisboa hoje',
+    intro: (h) => `Preço médio afixado do gasóleo e da gasolina em cada concelho do distrito de Lisboa e os postos mais baratos, com os dados que ${h.num(h.D.postosDistrito(D).total)} postos comunicam hoje à DGEG.`,
     resume: (h) => {
       const s = h.D.statsDe('gs', D)!, g = h.D.statsDe('g95', D)!, r = h.D.rankDistrito('gs', D), c = h.D.concelhosOrdenados('gs', D);
       return `No distrito de Lisboa, o gasóleo simples está hoje afixado em média a ${h.l(s.media)} e a gasolina simples 95 a ${h.l(g.media)}, em ${h.num(s.n)} postos. Face à média do continente, o gasóleo fica ${h.c(h.D.desvioDistrito('gs', D), true)} por litro, o que põe Lisboa em ${h.ord(r.pos)} lugar entre os 18 distritos, do mais barato para o mais caro. O posto mais barato do distrito pede ${h.l(s.min)}. Entre concelhos, a média do gasóleo vai de ${h.l(c[0].media)} em ${c[0].concelho} a ${h.l(c[c.length - 1].media)} em ${c[c.length - 1].concelho}. Num depósito de 50 litros, abastecer no posto mais barato em vez de um posto à média do distrito poupa ${h.eur((s.media - s.min) * 50, 2)}. Os preços são os comunicados pelos postos à DGEG, com a hora da última atualização de cada um na lista.`;
@@ -23,7 +23,7 @@ export default defineGuide({
     body: (h) => {
       const c = h.D.concelhosOrdenados('gs', D), t = h.D.tipoDistrito('gs', D), m = h.D.marcasDistrito('gs', D, 6), p = h.D.postosDistrito(D);
       const ae = t['Auto-estrada'], hip = t['Área comercial (Hipermercados)'], rua = t['Outro'];
-      return `<h2>Os concelhos, do mais barato ao mais caro</h2>
+      return `<h2>O preço do gasóleo em Lisboa, do concelho mais barato ao mais caro</h2>
 <p>A tabela ordena os concelhos pela média afixada do gasóleo simples. O mínimo é o preço do posto mais barato de cada concelho, e o número de postos ajuda a perceber se a média assenta em muitos postos ou em dois ou três.</p>
 ${h.table(['Concelho', 'Postos', 'Média', 'Mínimo'], c.map((x) => [x.concelho, x.n, h.l(x.media), h.l(x.min)]), 'Gasóleo simples, preço afixado comunicado à DGEG', ['l', 'r', 'r', 'r'])}
 <h2>Rua, hipermercado ou autoestrada</h2>
@@ -39,7 +39,7 @@ ${h.table(['Concelho', 'Postos', 'Média', 'Mínimo'], c.map((x) => [x.concelho,
     title: 'Diesel price in Lisbon today: average by area and stations',
     description: 'Diesel and petrol prices today in every municipality of Lisbon district, with the cheapest stations, their update time and the cost of a full tank. DGEG data.',
     h1: 'Fuel prices in Lisbon district today',
-    intro: (h) => `Posted average in each municipality of the district and the cheapest stations, from the data ${h.num(h.D.postosDistrito(D).total)} stations report to the DGEG.`,
+    intro: (h) => `Average posted diesel and petrol price in each municipality of Lisbon district and the cheapest stations, from the data ${h.num(h.D.postosDistrito(D).total)} stations report to the DGEG today.`,
     resume: (h) => {
       const s = h.D.statsDe('gs', D)!, g = h.D.statsDe('g95', D)!, r = h.D.rankDistrito('gs', D), c = h.D.concelhosOrdenados('gs', D);
       return `In Lisbon district, standard diesel is posted today at ${h.l(s.media)} on average and standard petrol 95 at ${h.l(g.media)}, across ${h.num(s.n)} stations. Compared with the mainland average, diesel is ${h.c(h.D.desvioDistrito('gs', D), true)} a litre, which puts Lisbon ${h.ord(r.pos)} of the 18 districts from cheapest to dearest. The cheapest station in the district asks ${h.l(s.min)}. Between municipalities, the diesel average runs from ${h.l(c[0].media)} in ${c[0].concelho} to ${h.l(c[c.length - 1].media)} in ${c[c.length - 1].concelho}. On a 50-litre tank, filling up at the cheapest station rather than one at the district average saves ${h.eur((s.media - s.min) * 50, 2)}. Prices are those stations report to the DGEG, with each one’s last update time in the list. The calculator below starts on the whole district; choose a municipality to narrow the list, or switch fuel to see petrol, LPG or premium diesel in the same area.`;
@@ -52,7 +52,7 @@ ${h.table(['Concelho', 'Postos', 'Média', 'Mínimo'], c.map((x) => [x.concelho,
     body: (h) => {
       const c = h.D.concelhosOrdenados('gs', D), t = h.D.tipoDistrito('gs', D), m = h.D.marcasDistrito('gs', D, 6), p = h.D.postosDistrito(D);
       const ae = t['Auto-estrada'], hip = t['Área comercial (Hipermercados)'], rua = t['Outro'];
-      return `<h2>Municipalities, cheapest to dearest</h2>
+      return `<h2>Diesel price in Lisbon, municipality by municipality</h2>
 <p>The table ranks municipalities by the posted average for standard diesel. The lowest figure is the price at each municipality’s cheapest station, and the station count shows whether an average rests on many stations or on two or three.</p>
 ${h.table(['Municipality', 'Stations', 'Average', 'Lowest'], c.map((x) => [x.concelho, x.n, h.l(x.media), h.l(x.min)]), 'Standard diesel, posted price reported to the DGEG', ['l', 'r', 'r', 'r'])}
 <h2>Street, hypermarket or motorway</h2>

@@ -11,7 +11,7 @@ export default defineGuide({
     title: 'Impostos nos combustíveis: ISP e IVA em cada litro, hoje',
     description: 'Quanto de cada litro de gasóleo, gasolina ou GPL é imposto: ISP com contribuição rodoviária e taxa de carbono, mais IVA a 23 %, para o preço que escrever.',
     h1: 'Impostos nos combustíveis: quanto é ISP e IVA',
-    intro: () => 'Escreva o preço da bomba e veja a parte do Estado em cada litro e no abastecimento.',
+    intro: () => 'Escreva o preço da bomba e veja a parte dos impostos em cada litro de combustível e no abastecimento.',
     resume: (h) => {
       const [gs, g95] = linhas(h);
       return `Num litro de gasóleo simples à média afixada de hoje, ${h.l(gs.preco)}, os impostos somam ${h.l(gs.iva + gs.isp)}: ${h.l(gs.isp)} de imposto sobre os produtos petrolíferos (ISP), com a contribuição de serviço rodoviário e a taxa de carbono, e ${h.l(gs.iva)} de IVA a 23 %. São ${h.pct(gs.partImpostos)} do preço. Na gasolina simples 95, a ${h.l(g95.preco)}, os impostos chegam a ${h.l(g95.iva + g95.isp)}, ou ${h.pct(g95.partImpostos)}, porque o ISP da gasolina é mais alto. O ISP é um valor fixo por litro, revisto pelo Governo; o IVA é uma percentagem do preço com ISP incluído, por isso também incide sobre o próprio ISP. Os valores de ISP por litro são os da última decomposição do preço de referência publicada pela ENSE. A calculadora refaz a conta para o preço que escrever e para os litros do seu abastecimento.`;
@@ -27,7 +27,7 @@ export default defineGuide({
 ${h.table(['Combustível', 'Preço médio', 'ISP', 'IVA', 'Resto', 'Impostos'], L.map((x) => [h.fn(x.f), h.l(x.preco), h.l(x.isp), h.l(x.iva), h.l(x.semImpostos), h.pct(x.partImpostos)]), 'Média afixada DGEG; ISP da decomposição ENSE; IVA a 23 %', ['l', 'r', 'r', 'r', 'r', 'r'])}
 <h2>O que está no resto</h2>
 <p>A ENSE decompõe o seu preço de referência em cinco partes. Para o gasóleo, na última decomposição: ${d.partes.map((p) => `${p.label.toLowerCase()} ${h.l(p.valor)}`).join(', ')}, num total de ${h.l(d.preco)}. O preço de referência não inclui a margem de retalho, por isso o preço da bomba é mais alto: a diferença é o que o posto e a marca ganham para cobrir a rede, o pessoal e o lucro.</p>
-<h2>Quando muda o imposto</h2>
+<h2>Quando mudam os impostos nos combustíveis</h2>
 <p>O ISP é fixado por portaria e pode mudar a qualquer momento, normalmente com efeito a uma segunda-feira, como as revisões de preço das marcas. Uma mudança anunciada não está nos preços de referência da semana, por isso a ${h.a('proxima-semana', 'estimativa semanal')} não a antecipa. O IVA a 23 % é a taxa normal do continente, fixada no ${h.src('civa18', 'artigo 18.º do Código do IVA')}; na Madeira e nos Açores as taxas são diferentes e esta calculadora não as aplica.</p>`;
     },
   },
@@ -36,7 +36,7 @@ ${h.table(['Combustível', 'Preço médio', 'ISP', 'IVA', 'Resto', 'Impostos'], 
     title: 'Fuel tax in Portugal: ISP and VAT in every litre, today',
     description: 'How much of each litre of diesel, petrol or LPG in Portugal is tax: ISP with the road contribution and carbon levy, plus 23% VAT, for the price you type.',
     h1: 'Fuel tax in Portugal: how much is ISP and VAT',
-    intro: () => 'Type the pump price and see the state’s share in each litre and in your fill.',
+    intro: () => 'Type the pump price and see the fuel tax, the state’s share, in each litre and in your fill.',
     resume: (h) => {
       const [gs, g95] = linhas(h);
       return `In a litre of standard diesel at today’s posted average, ${h.l(gs.preco)}, taxes add up to ${h.l(gs.iva + gs.isp)}: ${h.l(gs.isp)} of tax on petroleum products (ISP), including the road service contribution and the carbon levy, and ${h.l(gs.iva)} of VAT at 23%. That is ${h.pct(gs.partImpostos)} of the price. For standard petrol 95, at ${h.l(g95.preco)}, taxes reach ${h.l(g95.iva + g95.isp)}, or ${h.pct(g95.partImpostos)}, because petrol’s ISP is higher. ISP is a fixed amount per litre, set by the government; VAT is a percentage of the price including ISP, so it is also charged on the ISP itself. The ISP amounts per litre come from the ENSE’s latest breakdown of the reference price. The calculator redoes the sum for the price you type and the litres in your fill.`;
@@ -52,7 +52,7 @@ ${h.table(['Combustível', 'Preço médio', 'ISP', 'IVA', 'Resto', 'Impostos'], 
 ${h.table(['Fuel', 'Average price', 'ISP', 'VAT', 'Rest', 'Tax share'], L.map((x) => [h.fn(x.f), h.l(x.preco), h.l(x.isp), h.l(x.iva), h.l(x.semImpostos), h.pct(x.partImpostos)]), 'DGEG posted average; ISP from the ENSE breakdown; VAT at 23%', ['l', 'r', 'r', 'r', 'r', 'r'])}
 <h2>What the rest is made of</h2>
 <p>The ENSE splits its reference price into five parts. For diesel, in the latest breakdown: ${d.partes.map((p) => `${p.label.toLowerCase()} ${h.l(p.valor)}`).join(', ')}, for a total of ${h.l(d.preco)}. The reference price leaves out the retail margin, so the pump price is higher: the gap is what the station and the brand earn to cover the network, staff and profit.</p>
-<h2>When the tax changes</h2>
+<h2>When fuel tax changes</h2>
 <p>ISP is set by ministerial order and can change at any time, usually effective on a Monday, like the brands’ price reviews. An announced change is not in the week’s reference prices, so the ${h.a('proxima-semana', 'weekly estimate')} does not anticipate it. VAT at 23% is the mainland standard rate, set in ${h.src('civa18', 'article 18 of the VAT Code')}; Madeira and the Azores have different rates, which this calculator does not apply.</p>`;
     },
   },

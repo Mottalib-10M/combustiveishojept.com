@@ -23,7 +23,7 @@ export default defineGuide({
     slug: 'beja', nav: 'Beja', card: 'Gasóleo, gasolina e GPL no distrito de Beja, concelho a concelho, com o posto mais barato do dia.',
     title: 'Gasóleo em Beja hoje: preço médio e postos por concelho',
     description: 'Gasóleo e gasolina hoje no distrito de Beja: quantos postos tem cada concelho, onde está o mais barato do dia, o GPL Auto e a comparação com Évora e Faro.',
-    h1: 'Preço dos combustíveis no distrito de Beja',
+    h1: 'Gasóleo e outros combustíveis no distrito de Beja',
     intro: (h) => `Os ${h.num(h.D.postosDistrito(D).total)} postos do distrito de Beja, concelho a concelho, com o preço que cada um comunicou hoje à DGEG.`,
     resume: (h) => {
       const { gs, g95, p, r, top } = dados(h);
@@ -44,7 +44,7 @@ ${h.table(['Concelho', 'Postos', 'Média', 'Mínimo'], porPreco.map((x) => [x.co
 <p>${lo && hi && porPreco.length > 1 ? `A média mais baixa é a de ${lo.concelho}, ${h.l(lo.media)}, e a mais alta a de ${hi.concelho}, ${h.l(hi.media)}, uma distância de ${h.c(hi.media - lo.media)} por litro.` : ''} ${top ? `Posto a posto, o mais barato é ${top.nome}, a ${h.l(top.preco)}; o mais caro afixa ${h.l(gs.max)}. Num depósito de 50 litros, ir de um ao outro custa ${h.eur((gs.max - top.preco) * 50, 2)}.` : ''} Nos concelhos de um ou dois postos, a média muda de um dia para o outro com a decisão de um único posto, por isso convém olhar também para o mínimo.</p>
 <h2>Gasolina e GPL Auto</h2>
 <p>A gasolina simples 95 está hoje a ${h.l(g95.media)} em média e a ${h.l(g95.min)} no posto mais barato, em ${h.num(g95.n)} postos, o que a deixa ${h.c(Math.abs(g95.media - gs.media))} por litro ${g95.media < gs.media ? 'abaixo' : 'acima'} do gasóleo. ${gpl ? `O GPL Auto é mais raro: ${h.num(p.gpl)} postos, a ${h.l(gpl.media)} em média.` : 'Nenhum posto afixa hoje GPL Auto.'} A página do ${h.a('preco-gpl-auto', 'preço do GPL Auto')} mostra os postos com GPL em todo o continente.</p>
-<h2>Beja, Évora, Setúbal e Faro</h2>
+<h2>Gasóleo e gasolina em Beja, Évora, Setúbal e Faro</h2>
 <p>O distrito faz fronteira com Espanha, mas os preços deste site são apenas os dos postos portugueses comunicados à DGEG. Entre os distritos vizinhos, as médias de hoje são estas:</p>
 ${h.table(['Distrito', 'Gasóleo', 'Gasolina 95'], [[`<strong>${D}</strong>`, h.l(gs.media), h.l(g95.media)], ...viz.map((x) => [h.a(h.D.slug(x.n), x.n), x.gs ? h.l(x.gs.media) : '—', x.g95 ? h.l(x.g95.media) : '—'])], 'Média afixada hoje', ['l', 'r', 'r'])}`;
     },
@@ -53,7 +53,7 @@ ${h.table(['Distrito', 'Gasóleo', 'Gasolina 95'], [[`<strong>${D}</strong>`, h.
     slug: 'beja', nav: 'Beja', card: 'Diesel, petrol and LPG in Beja district, municipality by municipality, with the cheapest station of the day.',
     title: 'Diesel in Beja today: average price and stations by area',
     description: 'Diesel and petrol in Beja district today: how many stations each municipality has, where the cheapest of the day is, LPG, and the gap with Évora and Faro.',
-    h1: 'Fuel prices in Beja district',
+    h1: 'Diesel and fuel prices in Beja district',
     intro: (h) => `The ${h.num(h.D.postosDistrito(D).total)} stations in Beja district, municipality by municipality, with the price each one reported to the DGEG today.`,
     resume: (h) => {
       const { gs, g95, p, r, top } = dados(h);
@@ -74,7 +74,7 @@ ${h.table(['Municipality', 'Stations', 'Average', 'Lowest'], porPreco.map((x) =>
 <p>${lo && hi && porPreco.length > 1 ? `The lowest average is in ${lo.concelho}, ${h.l(lo.media)}, and the highest in ${hi.concelho}, ${h.l(hi.media)}, a distance of ${h.c(hi.media - lo.media)} a litre.` : ''} ${top ? `Station by station, the cheapest is ${top.nome}, at ${h.l(top.preco)}; the dearest posts ${h.l(gs.max)}. On a 50-litre tank, going from one to the other costs ${h.eur((gs.max - top.preco) * 50, 2)}.` : ''} In municipalities with one or two stations, the average can move overnight on the decision of a single forecourt, so it pays to look at the lowest price as well.</p>
 <h2>Petrol and LPG</h2>
 <p>Standard petrol 95 is at ${h.l(g95.media)} on average today and ${h.l(g95.min)} at the cheapest station, across ${h.num(g95.n)} stations, which leaves it ${h.c(Math.abs(g95.media - gs.media))} a litre ${g95.media < gs.media ? 'below' : 'above'} diesel. ${gpl ? `LPG is scarcer: ${h.num(p.gpl)} stations, at ${h.l(gpl.media)} on average.` : 'No station posts an LPG price today.'} The ${h.a('preco-gpl-auto', 'LPG price')} page lists LPG stations across the mainland.</p>
-<h2>Beja, Évora, Setúbal and Faro</h2>
+<h2>Diesel and petrol in Beja, Évora, Setúbal and Faro</h2>
 <p>The district borders Spain, but the prices on this site are only those of Portuguese stations reported to the DGEG. Among the neighbouring districts, today's averages are as follows:</p>
 ${h.table(['District', 'Diesel', 'Petrol 95'], [[`<strong>${D}</strong>`, h.l(gs.media), h.l(g95.media)], ...viz.map((x) => [h.a(h.D.slug(x.n), x.n), x.gs ? h.l(x.gs.media) : '—', x.g95 ? h.l(x.g95.media) : '—'])], 'Posted average today', ['l', 'r', 'r'])}`;
     },

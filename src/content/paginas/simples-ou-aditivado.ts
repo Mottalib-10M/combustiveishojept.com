@@ -11,7 +11,7 @@ export default defineGuide({
     title: 'Gasóleo simples ou aditivado: quanto custa a mais por ano',
     description: 'Diferença de preço entre o gasóleo simples e o aditivado, e entre a gasolina 95 simples e a especial, e quanto custa a mais num ano com os seus quilómetros.',
     h1: 'Combustível simples ou aditivado: a diferença no preço',
-    intro: () => 'O sobrecusto por litro e por ano dos combustíveis especiais, com o preço médio diário da DGEG.',
+    intro: () => 'O sobrecusto por litro e por ano do gasóleo e da gasolina aditivados, com o preço médio diário da DGEG.',
     resume: (h) => {
       const g = gap(h), l = 15000 * 5.5 / 100;
       return `O gasóleo especial, também vendido como aditivado, custou ${h.c(g.gasoleo)} a mais por litro do que o gasóleo simples no preço médio diário da DGEG de ${h.date(g.dia)}; nos preços afixados pelos postos a diferença é de ${h.c(g.afGasoleo)}. Na gasolina 95, a especial custou ${h.c(g.gasolina)} a mais do que a simples. Para um carro a gasóleo que faça 15 000 km por ano a 5,5 litros aos 100 km, ou seja ${h.num(l)} litros, escolher sempre o especial custa ${h.eur(g.gasoleo * l)} a mais por ano. Os combustíveis simples e especiais têm de cumprir as mesmas especificações legais; a diferença está nos aditivos que cada marca junta, de limpeza do sistema de injeção e de desempenho. Esta página não mede o efeito desses aditivos no consumo ou no motor, que as marcas anunciam mas que não há dados oficiais para verificar. Mede só o preço, com a calculadora a fazer a conta para os seus quilómetros.`;
@@ -23,7 +23,7 @@ export default defineGuide({
     ],
     body: (h) => {
       const g = gap(h), km = [10000, 15000, 20000, 30000];
-      return `<h2>O sobrecusto num ano</h2>
+      return `<h2>Simples ou aditivado: o sobrecusto num ano</h2>
 ${h.table(['Quilómetros por ano', 'Gasóleo (5,5 l/100 km)', 'Gasolina 95 (6,5 l/100 km)'], km.map((k) => [h.num(k), h.eur(g.gasoleo * k * 5.5 / 100), h.eur(g.gasolina * k * 6.5 / 100)]), 'Diferença do preço médio diário DGEG entre especial e simples', ['l', 'r', 'r'])}
 <h2>Preço médio diário e preço afixado</h2>
 <p>A diferença no preço médio diário da DGEG, ponderado pelas vendas, é a que mais se aproxima do que os condutores pagam em média. A diferença nos preços afixados, ${h.c(g.afGasoleo)} no gasóleo e ${h.c(g.afGasolina)} na gasolina, compara postos sem ponderação. Cada marca fixa o seu próprio prémio, por isso no seu posto a diferença pode ser outra: a ${h.a('precos-por-marca', 'comparação por marca')} mostra as médias de cada rede.</p>
@@ -35,8 +35,8 @@ ${h.table(['Quilómetros por ano', 'Gasóleo (5,5 l/100 km)', 'Gasolina 95 (6,5 
     slug: 'standard-or-premium', nav: 'Standard or premium', card: 'How much more a year premium (additive) diesel or petrol costs.',
     title: 'Standard or premium diesel in Portugal: the cost per year',
     description: 'Price gap between standard and premium diesel, and between standard and premium petrol 95, in Portugal, and how much more that costs a year for your mileage.',
-    h1: 'Standard or premium fuel: the price gap',
-    intro: () => 'The extra cost per litre and per year of premium fuels, from the DGEG daily average.',
+    h1: 'Standard or premium diesel and petrol: the price gap',
+    intro: () => 'The extra cost per litre and per year of premium diesel and petrol over standard, from the DGEG daily average.',
     resume: (h) => {
       const g = gap(h), l = 15000 * 5.5 / 100;
       return `Premium diesel, sold as “gasóleo especial” or “aditivado”, cost ${h.c(g.gasoleo)} more a litre than standard diesel in the DGEG daily average of ${h.date(g.dia)}; in the prices stations post, the gap is ${h.c(g.afGasoleo)}. For petrol 95, premium cost ${h.c(g.gasolina)} more than standard. For a diesel car doing 15,000 km a year at 5.5 litres per 100 km, that is ${h.num(l)} litres, always choosing premium costs ${h.eur(g.gasoleo * l)} more a year. Standard and premium fuels must meet the same legal specifications; the difference lies in the additives each brand adds, for injection-system cleaning and performance. This page does not measure those additives’ effect on consumption or on the engine, which brands advertise but which there are no official data to check. It measures only the price, with the calculator doing the sum for your mileage.`;
@@ -48,7 +48,7 @@ ${h.table(['Quilómetros por ano', 'Gasóleo (5,5 l/100 km)', 'Gasolina 95 (6,5 
     ],
     body: (h) => {
       const g = gap(h), km = [10000, 15000, 20000, 30000];
-      return `<h2>The extra cost over a year</h2>
+      return `<h2>Standard or premium diesel: the extra cost over a year</h2>
 ${h.table(['Kilometres a year', 'Diesel (5.5 l/100 km)', 'Petrol 95 (6.5 l/100 km)'], km.map((k) => [h.num(k), h.eur(g.gasoleo * k * 5.5 / 100), h.eur(g.gasolina * k * 6.5 / 100)]), 'Gap in the DGEG daily average between premium and standard', ['l', 'r', 'r'])}
 <h2>Daily average and posted price</h2>
 <p>The gap in the DGEG daily average, weighted by sales, is closest to what drivers pay on average. The gap in posted prices, ${h.c(g.afGasoleo)} for diesel and ${h.c(g.afGasolina)} for petrol, compares stations without weighting. Each brand sets its own premium, so at your station the gap may differ: the ${h.a('precos-por-marca', 'brand comparison')} shows each network’s averages.</p>

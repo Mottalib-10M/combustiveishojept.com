@@ -11,7 +11,7 @@ export default defineGuide({
     title: 'Custo do depósito hoje: encher o carro e gastar num ano',
     description: 'Quanto custa encher o depósito ao preço de hoje e quanto gasta em combustível por mês e por ano, com os seus quilómetros, o seu consumo e o preço do seu posto.',
     h1: 'Quanto custa encher o depósito e quanto gasta num ano',
-    intro: () => 'Escreva os quilómetros, o consumo e o preço do seu posto: o resto é feito à média de hoje.',
+    intro: () => 'Para saber o custo do depósito, escreva os quilómetros, o consumo e o preço do seu posto: o resto é feito à média de hoje.',
     resume: (h) => {
       const gs = h.D.statsDe('gs')!, g95 = h.D.statsDe('g95')!, a = ano(h);
       return `Encher um depósito de 50 litros de gasóleo simples custa hoje ${h.eur(gs.media * 50, 2)} à média afixada no continente, ${h.l(gs.media)}, e ${h.eur(gs.min * 50, 2)} no posto mais barato. Com gasolina simples 95, a ${h.l(g95.media)}, o mesmo depósito custa ${h.eur(g95.media * 50, 2)}. Num ano de 15 000 km, um carro a gasóleo que gaste 5,5 litros aos 100 km consome ${h.num(a.gs.litros)} litros e paga ${h.eur(a.gs.custo)}, cerca de ${h.eur(a.gs.mes)} por mês; um carro a gasolina com 6,5 litros aos 100 km paga ${h.eur(a.g95.custo)}. Cada cêntimo a menos por litro vale ${h.eur(a.gs.litros * 0.01, 2)} por ano nesse carro a gasóleo. Estes consumos são exemplos: a calculadora aceita os seus quilómetros, o consumo do seu carro e o preço do seu posto, e mostra o custo de um abastecimento, de um mês e de um ano.`;
@@ -24,7 +24,7 @@ export default defineGuide({
     body: (h) => {
       const gs = h.D.statsDe('gs')!, g95 = h.D.statsDe('g95')!, gpl = h.D.statsDe('gpl')!;
       const tam = [35, 45, 55, 65];
-      return `<h2>O depósito, pelo tamanho</h2>
+      return `<h2>O custo do depósito, pelo tamanho</h2>
 ${h.table(['Depósito', 'Gasóleo simples', 'Gasolina 95', 'GPL Auto'], tam.map((t) => [`${t} l`, h.eur(gs.media * t, 2), h.eur(g95.media * t, 2), h.eur(gpl.media * t, 2)]), 'À média afixada de hoje no continente', ['l', 'r', 'r', 'r'])}
 <p>Um depósito raramente se enche desde zero: entre a luz da reserva e o cheio cabem, em geral, menos litros do que a capacidade do catálogo. Para saber o que paga de facto, escreva na calculadora os litros que costuma meter.</p>
 <h2>Por ano e por mês</h2>
@@ -38,7 +38,7 @@ ${h.table(['Depósito', 'Gasóleo simples', 'Gasolina 95', 'GPL Auto'], tam.map(
     title: 'Full tank cost in Portugal today and your yearly fuel bill',
     description: 'What a full tank costs at today’s prices in Portugal and what you spend on fuel per month and per year, with your own mileage, consumption and pump price.',
     h1: 'What a full tank costs, and your yearly fuel bill',
-    intro: () => 'Type your mileage, consumption and your station’s price: the rest is done at today’s average.',
+    intro: () => 'For the cost of a full tank and your yearly fuel bill, type your mileage, consumption and your station’s price: the rest is done at today’s average.',
     resume: (h) => {
       const gs = h.D.statsDe('gs')!, g95 = h.D.statsDe('g95')!, a = ano(h);
       return `Filling a 50-litre tank with standard diesel costs ${h.eur(gs.media * 50, 2)} today at the mainland posted average of ${h.l(gs.media)}, and ${h.eur(gs.min * 50, 2)} at the cheapest station. With standard petrol 95, at ${h.l(g95.media)}, the same tank costs ${h.eur(g95.media * 50, 2)}. Over 15,000 km a year, a diesel car burning 5.5 litres per 100 km uses ${h.num(a.gs.litros)} litres and pays ${h.eur(a.gs.custo)}, about ${h.eur(a.gs.mes)} a month; a petrol car at 6.5 litres per 100 km pays ${h.eur(a.g95.custo)}. Each cent less per litre is worth ${h.eur(a.gs.litros * 0.01, 2)} a year in that diesel car. These consumptions are examples: the calculator takes your mileage, your car’s consumption and your station’s price, and shows the cost of one fill, a month and a year. A table further down gives the cost of a 35, 45, 55 and 65-litre tank for diesel, petrol 95 and LPG at today’s averages.`;
@@ -51,7 +51,7 @@ ${h.table(['Depósito', 'Gasóleo simples', 'Gasolina 95', 'GPL Auto'], tam.map(
     body: (h) => {
       const gs = h.D.statsDe('gs')!, g95 = h.D.statsDe('g95')!, gpl = h.D.statsDe('gpl')!;
       const tam = [35, 45, 55, 65];
-      return `<h2>The tank, by size</h2>
+      return `<h2>Full tank cost in Portugal today, by tank size</h2>
 ${h.table(['Tank', 'Standard diesel', 'Petrol 95', 'LPG'], tam.map((t) => [`${t} l`, h.eur(gs.media * t, 2), h.eur(g95.media * t, 2), h.eur(gpl.media * t, 2)]), 'At today’s mainland posted average', ['l', 'r', 'r', 'r'])}
 <p>A tank is rarely filled from empty: between the reserve light and full there are usually fewer litres than the brochure capacity. To know what you actually pay, type the litres you usually put in.</p>
 <h2>Per year and per month</h2>

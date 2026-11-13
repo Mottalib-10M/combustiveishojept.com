@@ -21,7 +21,7 @@ export default defineGuide({
     title: 'Gasóleo em Setúbal hoje: concelhos, autoestrada e GPL',
     description: 'Gasóleo e gasolina em Setúbal hoje: diferença entre postos de autoestrada e de rua, concelhos acima e abaixo da média, GPL Auto e vizinhos. Dados DGEG.',
     h1: 'Preço do gasóleo e da gasolina em Setúbal hoje',
-    intro: (h) => `O distrito de Setúbal tem ${h.num(h.D.postosDistrito(D).autoestrada)} postos de autoestrada entre ${h.num(h.D.postosDistrito(D).total)}: veja quanto custa abastecer em cada tipo de posto e em cada concelho.`,
+    intro: (h) => `O distrito de Setúbal tem ${h.num(h.D.postosDistrito(D).autoestrada)} postos de autoestrada entre ${h.num(h.D.postosDistrito(D).total)}: veja quanto custa hoje abastecer em cada tipo de posto e em cada concelho.`,
     resume: (h) => {
       const { gs, g95, ae, rua, p, rg } = base(h);
       if (!gs || !g95) return `Os postos do distrito de Setúbal ainda não comunicaram hoje à DGEG preços suficientes para uma média do gasóleo e da gasolina. A lista acima mostra o último preço de cada posto e a hora do envio. A comparação entre autoestrada e rua, a posição de cada concelho face à média e os preços do GPL Auto são recalculados logo que a DGEG publique dados novos, o que acontece várias vezes por dia.`;
@@ -39,7 +39,7 @@ export default defineGuide({
       const { gs, ae, rua, hip, p, c, cg } = base(h);
       const tipos = ([['Rua', rua], ['Área comercial', hip], ['Autoestrada', ae]] as const).filter(([, s]) => s);
       const abaixo = gs ? c.filter((x) => x.media < gs.media).length : 0;
-      return `<h2>Autoestrada ou fora dela</h2>
+      return `<h2>Gasóleo em Setúbal: autoestrada ou fora dela</h2>
 <p>O distrito tem ${h.num(p.autoestrada)} postos de autoestrada, ${h.num(p.rua)} de rua e ${h.num(p.hiper)} em área comercial. A tabela mostra a média e o preço mais baixo de cada tipo para o gasóleo simples.</p>
 ${h.table(['Tipo de posto', 'Postos', 'Média', 'Mais barato'], tipos.map(([n, s]) => [n, s!.n, h.l(s!.media), h.l(s!.min)]), 'Gasóleo simples no distrito de Setúbal por tipo de posto', ['l', 'r', 'r', 'r'])}
 <p>Numa viagem por autoestrada, a saída para um posto de rua só compensa se o desvio for curto: alguns cêntimos por litro em 50 litros ficam a poucos euros, que um desvio longo consome.</p>
@@ -58,7 +58,7 @@ ${gs ? h.table(['Concelho', 'Postos', 'Média', 'Face ao distrito'], c.map((x) =
     title: 'Diesel in Setúbal today: municipalities, motorway and LPG',
     description: 'Diesel and petrol in Setúbal today: the gap between motorway and street stations, municipalities above and below the average, LPG and neighbouring districts.',
     h1: 'Diesel and petrol prices in Setúbal today',
-    intro: (h) => `Setúbal district has ${h.num(h.D.postosDistrito(D).autoestrada)} motorway stations out of ${h.num(h.D.postosDistrito(D).total)}: see what it costs to fill up at each type of station and in each municipality.`,
+    intro: (h) => `Setúbal district has ${h.num(h.D.postosDistrito(D).autoestrada)} motorway stations out of ${h.num(h.D.postosDistrito(D).total)}: see what it costs today to fill up at each type of station and in each municipality.`,
     resume: (h) => {
       const { gs, g95, ae, rua, p, rg } = base(h);
       if (!gs || !g95) return `Stations in Setúbal district have not yet reported enough prices to the DGEG today for a diesel and petrol average. The list above shows each station’s last price and the time it was sent. The motorway versus street comparison, each municipality’s position against the average and LPG prices are recomputed as soon as the DGEG publishes new data, which happens several times a day.`;
@@ -76,7 +76,7 @@ ${gs ? h.table(['Concelho', 'Postos', 'Média', 'Face ao distrito'], c.map((x) =
       const { gs, ae, rua, hip, p, c, cg } = base(h);
       const tipos = ([['Street', rua], ['Shopping area', hip], ['Motorway', ae]] as const).filter(([, s]) => s);
       const abaixo = gs ? c.filter((x) => x.media < gs.media).length : 0;
-      return `<h2>On the motorway or off it</h2>
+      return `<h2>Diesel in Setúbal: on the motorway or off it</h2>
 <p>The district has ${h.num(p.autoestrada)} motorway stations, ${h.num(p.rua)} street stations and ${h.num(p.hiper)} at shopping areas. The table shows the average and the lowest price of each type for standard diesel.</p>
 ${h.table(['Station type', 'Stations', 'Average', 'Cheapest'], tipos.map(([n, s]) => [n, s!.n, h.l(s!.media), h.l(s!.min)]), 'Standard diesel in Setúbal district by station type', ['l', 'r', 'r', 'r'])}
 <p>On a motorway journey, leaving for a street station only pays if the detour is short: a few cents a litre on 50 litres amounts to a few euros, which a long detour soon eats up.</p>

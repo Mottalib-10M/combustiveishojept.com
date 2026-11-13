@@ -11,7 +11,7 @@ export default defineGuide({
     title: 'Preço da gasolina 95 hoje: média afixada e postos baratos',
     description: 'Preço da gasolina simples 95 hoje no continente: média afixada, posto mais barato, preço médio diário da DGEG e a diferença para o gasóleo, por distrito.',
     h1: 'Preço da gasolina 95 hoje',
-    intro: (h) => `Gasolina simples 95 em ${h.num(h.D.statsDe('g95')!.n)} postos, por distrito e concelho, com os dados da DGEG.`,
+    intro: (h) => `Gasolina simples 95 hoje em ${h.num(h.D.statsDe('g95')!.n)} postos, por distrito e concelho, com os dados da DGEG.`,
     resume: (h) => {
       const s = h.D.statsDe('g95')!, gs = h.D.statsDe('gs')!, p = h.D.pmd('g95')!, e = h.D.est('g95');
       const dif = s.media - gs.media;
@@ -24,7 +24,7 @@ export default defineGuide({
     ],
     body: (h) => {
       const t = top(h), g = h.D.statsDe('g95')!, ge = h.D.statsDe('g95e')!, g98 = h.D.statsDe('g98')!;
-      return `<h2>Gasolina 95 por distrito</h2>
+      return `<h2>Preço da gasolina 95 por distrito</h2>
 ${h.table(['Distrito', 'Postos', 'Média', 'Mínimo'], t.map(([d, s]) => [h.a(h.D.slug(d), d), s.n, h.l(s.media), h.l(s.min)]), 'Gasolina simples 95, preço afixado comunicado à DGEG', ['l', 'r', 'r', 'r'])}
 <h2>Simples, especial ou 98</h2>
 <p>Nas bombas há três gasolinas sem chumbo: a simples 95, hoje a ${h.l(g.media)} em média, a especial 95, a ${h.l(ge.media)}, e a 98, a ${h.l(g98.media)}. A 98 tem um índice de octano mais alto e só faz sentido nos motores que o pedem; a ${h.a('preco-gasolina-98', 'página da gasolina 98')} mostra onde se vende e a que preço. Num depósito de 45 litros, a especial custa ${h.eur((ge.media - g.media) * 45, 2)} a mais e a 98 ${h.eur((g98.media - g.media) * 45, 2)} a mais do que a simples.</p>
@@ -37,7 +37,7 @@ ${h.table(['Distrito', 'Postos', 'Média', 'Mínimo'], t.map(([d, s]) => [h.a(h.
     title: 'Petrol 95 price in Portugal today: posted average and lowest',
     description: 'Standard unleaded 95 price today in mainland Portugal: posted average, cheapest station, the DGEG daily average and the gap with diesel, district by district.',
     h1: 'Petrol 95 price today',
-    intro: (h) => `Standard petrol 95 at ${h.num(h.D.statsDe('g95')!.n)} stations, by district and municipality, from DGEG data.`,
+    intro: (h) => `Standard petrol 95 prices today at ${h.num(h.D.statsDe('g95')!.n)} stations, by district and municipality, from DGEG data.`,
     resume: (h) => {
       const s = h.D.statsDe('g95')!, gs = h.D.statsDe('gs')!, p = h.D.pmd('g95')!, e = h.D.est('g95');
       const dif = s.media - gs.media;
@@ -50,7 +50,7 @@ ${h.table(['Distrito', 'Postos', 'Média', 'Mínimo'], t.map(([d, s]) => [h.a(h.
     ],
     body: (h) => {
       const t = top(h), g = h.D.statsDe('g95')!, ge = h.D.statsDe('g95e')!, g98 = h.D.statsDe('g98')!;
-      return `<h2>Petrol 95 by district</h2>
+      return `<h2>Petrol 95 price by district</h2>
 ${h.table(['District', 'Stations', 'Average', 'Lowest'], t.map(([d, s]) => [h.a(h.D.slug(d), d), s.n, h.l(s.media), h.l(s.min)]), 'Standard petrol 95, posted price reported to the DGEG', ['l', 'r', 'r', 'r'])}
 <h2>Standard, premium or 98</h2>
 <p>Pumps carry three unleaded petrols: standard 95, today at ${h.l(g.media)} on average, premium 95 at ${h.l(ge.media)}, and 98 at ${h.l(g98.media)}. 98 has a higher octane rating and only makes sense in engines that call for it; the ${h.a('preco-gasolina-98', 'petrol 98 page')} shows where it is sold and at what price. On a 45-litre tank, premium costs ${h.eur((ge.media - g.media) * 45, 2)} more and 98 ${h.eur((g98.media - g.media) * 45, 2)} more than standard.</p>

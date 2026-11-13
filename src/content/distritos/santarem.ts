@@ -38,7 +38,7 @@ export default defineGuide({
       const { gs, g95, c } = base(h);
       const viz = VIZ.map(([id, n]) => ({ id, n, gs: h.D.statsDe('gs', n), g95: h.D.statsDe('g95', n) }));
       const baixo = c.slice(0, 5), alto = c.slice(Math.max(5, c.length - 5)).reverse();
-      return `<h2>Santarém no meio de seis distritos</h2>
+      return `<h2>Preço dos combustíveis em Santarém e nos seis distritos à volta</h2>
 <p>Poucos distritos têm tantos vizinhos. A tabela põe lado a lado a média do gasóleo e da gasolina 95 em Santarém e nos seis distritos com que confina, com hiperligações para a página de cada um.</p>
 ${h.table(['Distrito', 'Gasóleo simples', 'Gasolina 95'], [[D, gs ? h.l(gs.media) : '—', g95 ? h.l(g95.media) : '—'], ...viz.map((v) => [h.a(v.id, v.n), v.gs ? h.l(v.gs.media) : '—', v.g95 ? h.l(v.g95.media) : '—'])], 'Preço médio afixado hoje, dados da DGEG', ['l', 'r', 'r'])}
 <p>${(() => { const ok = viz.filter((v) => v.gs && gs); const mais = ok.filter((v) => v.gs!.media < gs!.media).length; return gs ? `Hoje, ${h.num(mais)} dos ${h.num(ok.length)} vizinhos ${mais === 1 ? 'tem' : 'têm'} o gasóleo mais barato do que Santarém e ${h.num(ok.length - mais)} ${ok.length - mais === 1 ? 'tem-no' : 'têm-no'} igual ou mais caro.` : ''; })()} Para quem atravessa o distrito de passagem, compensa mais escolher bem o posto do que o distrito.</p>
@@ -79,7 +79,7 @@ ${h.table(['Mais caros', 'Média', 'Mínimo'], alto.map((x) => [x.concelho, h.l(
 <p>Few districts have so many neighbours. The table sets the diesel and petrol 95 averages in Santarém beside those of the six districts it borders, with a link to each one’s page.</p>
 ${h.table(['District', 'Standard diesel', 'Petrol 95'], [[D, gs ? h.l(gs.media) : '—', g95 ? h.l(g95.media) : '—'], ...viz.map((v) => [h.a(v.id, v.n === 'Lisboa' ? 'Lisbon' : v.n), v.gs ? h.l(v.gs.media) : '—', v.g95 ? h.l(v.g95.media) : '—'])], 'Average posted price today, DGEG data', ['l', 'r', 'r'])}
 <p>${(() => { const ok = viz.filter((v) => v.gs && gs); const mais = ok.filter((v) => v.gs!.media < gs!.media).length; return gs ? `Today ${h.num(mais)} of the ${h.num(ok.length)} neighbours ${mais === 1 ? 'has' : 'have'} cheaper diesel than Santarém and ${h.num(ok.length - mais)} ${ok.length - mais === 1 ? 'has' : 'have'} it at the same price or dearer.` : ''; })()} If you are only passing through, picking the right station pays more than picking the right district.</p>
-<h2>Municipalities at both ends</h2>
+<h2>Fuel prices in Santarém: municipalities at both ends</h2>
 <p>With ${h.num(c.length)} municipalities that have two stations or more, the full order is long. Here are the five with the cheapest diesel and the five with the dearest, with the average and the cheapest station in each.</p>
 ${h.table(['Cheapest', 'Average', 'Lowest'], baixo.map((x) => [x.concelho, h.l(x.media), h.l(x.min)]), 'The five municipalities with the cheapest diesel', ['l', 'r', 'r'])}
 ${h.table(['Dearest', 'Average', 'Lowest'], alto.map((x) => [x.concelho, h.l(x.media), h.l(x.min)]), 'The five municipalities with the dearest diesel', ['l', 'r', 'r'])}

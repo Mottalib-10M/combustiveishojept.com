@@ -14,7 +14,7 @@ export const HOME: Record<'pt' | 'en', HomeText> = {
     title: 'Preço dos combustíveis hoje: gasóleo e gasolina por concelho',
     description: 'Preço do gasóleo e da gasolina hoje em cada concelho, com os dados oficiais da DGEG, os postos mais baratos e a estimativa para segunda-feira, sem registo.',
     h1: 'Preço dos combustíveis hoje',
-    intro: (h) => `Média afixada em cada concelho, postos mais baratos e estimativa para ${h.dia(h.D.est('gs')?.segunda ?? h.D.HOJE, true)}, a partir dos dados oficiais da DGEG.`,
+    intro: (h) => `Preço médio afixado dos combustíveis em cada concelho, postos mais baratos e estimativa para ${h.dia(h.D.est('gs')?.segunda ?? h.D.HOJE, true)}, a partir dos dados oficiais da DGEG.`,
     resume: (h) => {
       const gs = h.D.statsDe('gs')!, g95 = h.D.statsDe('g95')!, e = h.D.est('gs'), e95 = h.D.est('g95');
       const pg = h.D.pmd('gs')!, p95 = h.D.pmd('g95')!;
@@ -34,7 +34,7 @@ export const HOME: Record<'pt' | 'en', HomeText> = {
       const ae = tipos['Auto-estrada'], hip = tipos['Área comercial (Hipermercados)'];
       const isp = h.D.ispLitro('gs'), d = h.E.decompor(gs.media, isp);
       const m = h.D.MADEIRA_ATUAL;
-      return `<h2>Como ler os preços desta página</h2>
+      return `<h2>Como ler os preços dos combustíveis desta página</h2>
 <p>A calculadora parte do registo oficial: cada posto comunica à DGEG o preço que afixa e a hora a que o mudou. Escolha o combustível, o distrito e o concelho, e vê a média dos postos dessa zona, o mais barato e quanto custa encher o depósito. A lista mostra os cinco postos mais baratos com a hora da última atualização, para saber se o preço é de hoje ou de há três dias. A média do continente e o preço médio diário da DGEG aparecem lado a lado, porque não medem o mesmo: o primeiro diz quanto pede um posto típico, o segundo quanto pagou, em média, cada litro vendido.</p>
 <h2>Onde se paga mais e menos</h2>
 <p>Entre distritos, a diferença é menor do que se pensa: hoje o gasóleo vai de ${h.l(x.barato[1].media)} em média no distrito de ${x.barato[0]} a ${h.l(x.caro[1].media)} no de ${x.caro[0]}, ou seja ${h.c(x.caro[1].media - x.barato[1].media)} por litro. Dentro do mesmo concelho a distância costuma ser maior do que entre distritos: o que pesa é o tipo de posto. Nas autoestradas o gasóleo está afixado em média a ${h.l(ae.media)}, nos postos junto a hipermercados a ${h.l(hip.media)}. Num depósito de 50 litros, são ${h.eur((ae.media - hip.media) * 50, 2)} de diferença. Há páginas para cada um dos 18 distritos, como ${h.a('lisboa', 'Lisboa')}, ${h.a('porto', 'Porto')} ou ${h.a('faro', 'Faro')}, e uma com ${h.a('postos-mais-baratos', 'os postos mais baratos do país')}.</p>
@@ -52,7 +52,7 @@ export const HOME: Record<'pt' | 'en', HomeText> = {
     title: 'Fuel prices in Portugal today: diesel and petrol by area',
     description: 'Diesel and petrol prices today in every Portuguese municipality, from official DGEG data, with the cheapest stations and next Monday’s estimate, no sign-up.',
     h1: 'Fuel prices in Portugal today',
-    intro: (h) => `Average posted price in each municipality, cheapest stations and an estimate for ${h.dia(h.D.est('gs')?.segunda ?? h.D.HOJE, true)}, from official DGEG data.`,
+    intro: (h) => `Average posted fuel price in each municipality of Portugal, cheapest stations and an estimate for ${h.dia(h.D.est('gs')?.segunda ?? h.D.HOJE, true)}, from official DGEG data.`,
     resume: (h) => {
       const gs = h.D.statsDe('gs')!, g95 = h.D.statsDe('g95')!, e = h.D.est('gs'), e95 = h.D.est('g95');
       const pg = h.D.pmd('gs')!, p95 = h.D.pmd('g95')!;
@@ -72,7 +72,7 @@ export const HOME: Record<'pt' | 'en', HomeText> = {
       const ae = tipos['Auto-estrada'], hip = tipos['Área comercial (Hipermercados)'];
       const isp = h.D.ispLitro('gs'), d = h.E.decompor(gs.media, isp);
       const m = h.D.MADEIRA_ATUAL;
-      return `<h2>How to read the prices on this page</h2>
+      return `<h2>How to read today’s fuel prices on this page</h2>
 <p>The calculator starts from the official register: each station reports to the DGEG the price it posts and the time it changed it. Pick the fuel, the district and the municipality, and you get the average of the stations there, the cheapest one and what a full tank costs. The list shows the five cheapest stations with the time of their last update, so you can tell whether a price is from today or three days ago. The mainland average and the DGEG daily average sit side by side because they measure different things: the first is what a typical station asks, the second what each litre sold actually cost on average.</p>
 <h2>Where you pay more and less</h2>
 <p>Between districts the gap is smaller than people think: today diesel runs from ${h.l(x.barato[1].media)} on average in ${x.barato[0]} district to ${h.l(x.caro[1].media)} in ${x.caro[0]}, or ${h.c(x.caro[1].media - x.barato[1].media)} a litre. Within one municipality the spread is usually wider than between districts, because what matters is the kind of station. On motorways diesel is posted at ${h.l(ae.media)} on average, at stations next to hypermarkets at ${h.l(hip.media)}. On a 50-litre tank that is ${h.eur((ae.media - hip.media) * 50, 2)}. Each of the 18 districts has its own page, such as ${h.a('lisboa', 'Lisbon')}, ${h.a('porto', 'Porto')} or ${h.a('faro', 'Faro')}, and one lists ${h.a('postos-mais-baratos', 'the cheapest stations in the country')}.</p>

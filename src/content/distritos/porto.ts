@@ -53,7 +53,7 @@ ${cg.length ? h.table(['Concelho', 'Postos com GPL', 'Média', 'Mínimo'], cg.ma
 <h2>As marcas que dominam o distrito</h2>
 <p>Num mercado deste tamanho, a marca diz pouco sobre o preço de um posto concreto, mas a média de cada uma mostra tendências. ${m.slice(0, 3).map((x) => `${x.marca} soma ${h.num(x.n)} postos`).join(', ')}. A tabela completa está em ${h.a('precos-por-marca', 'preços por marca')}.</p>
 ${h.table(['Marca', 'Postos', 'Média do gasóleo'], m.map((x) => [x.marca, x.n, h.l(x.media)]), 'As oito marcas com mais postos de gasóleo no distrito do Porto', ['l', 'r', 'r'])}
-<h2>Os quatro distritos vizinhos</h2>
+<h2>Combustíveis no Porto e nos quatro distritos vizinhos</h2>
 <p>${VIZ.map(([id, n]) => { const s = h.D.statsDe('gs', n); return s ? `${h.a(id, n)} com ${h.l(s.media)}` : ''; }).filter(Boolean).join(', ')}: estas são as médias do gasóleo à volta do Porto, que hoje tem ${gs ? h.l(gs.media) : 'poucos preços'}. A comparação interessa sobretudo a quem trabalha de um lado da fronteira distrital e vive do outro.</p>
 <p>${(() => { const c = h.D.concelhosOrdenados('gs', D), s = h.D.statsDe('gs', D, 'Porto'); return c.length > 1 ? `Por concelho, a média do gasóleo vai hoje de ${h.l(c[0].media)} em ${c[0].concelho} a ${h.l(c[c.length - 1].media)} em ${c[c.length - 1].concelho}.${s ? ` No concelho do Porto propriamente dito, ${h.num(s.n)} postos têm média de ${h.l(s.media)}.` : ''} Com ${h.num(c.length)} concelhos e ${h.num(p.total)} postos, a calculadora acima é a forma mais rápida de encontrar o mais barato perto de casa.` : ''; })()}</p>`;
     },
@@ -91,7 +91,7 @@ ${cg.length ? h.table(['Municipality', 'LPG stations', 'Average', 'Lowest'], cg.
 <h2>The brands that dominate the district</h2>
 <p>In a market this size, the brand says little about the price at any one station, but each brand’s average shows a tendency. ${m.slice(0, 3).map((x) => `${x.marca} has ${h.num(x.n)} stations`).join(', ')}. The full comparison is under ${h.a('precos-por-marca', 'prices by brand')}.</p>
 ${h.table(['Brand', 'Stations', 'Diesel average'], m.map((x) => [x.marca, x.n, h.l(x.media)]), 'The eight brands with most diesel stations in Porto district', ['l', 'r', 'r'])}
-<h2>The four neighbouring districts</h2>
+<h2>Fuel prices in Porto and the four neighbouring districts</h2>
 <p>${VIZ.map(([id, n]) => { const s = h.D.statsDe('gs', n); return s ? `${h.a(id, n)} at ${h.l(s.media)}` : ''; }).filter(Boolean).join(', ')}: these are the diesel averages around Porto, which stands at ${gs ? h.l(gs.media) : 'too few prices to say'} today. The comparison matters mostly to people who work on one side of a district line and live on the other.</p>
 <p>${(() => { const c = h.D.concelhosOrdenados('gs', D), s = h.D.statsDe('gs', D, 'Porto'); return c.length > 1 ? `By municipality, the diesel average runs today from ${h.l(c[0].media)} in ${c[0].concelho} to ${h.l(c[c.length - 1].media)} in ${c[c.length - 1].concelho}.${s ? ` In Porto municipality itself, ${h.num(s.n)} stations average ${h.l(s.media)}.` : ''} With ${h.num(c.length)} municipalities and ${h.num(p.total)} stations, the calculator above is the quickest way to find the cheapest one near home.` : ''; })()}</p>`;
     },

@@ -23,7 +23,7 @@ export default defineGuide({
     ],
     body: (h) => {
       const ds = distritos(h, 'gs'), t = h.D.porTipo('gs');
-      return `<h2>O gasóleo distrito a distrito</h2>
+      return `<h2>O preço do gasóleo distrito a distrito</h2>
 <p>A diferença entre o distrito mais barato e o mais caro é hoje de ${h.c(ds[ds.length - 1][1].media - ds[0][1].media)} por litro na média afixada. É pouco ao lado da diferença entre postos do mesmo distrito, que chega facilmente a duas ou três dezenas de cêntimos. Cada distrito tem a sua página com a tabela dos concelhos.</p>
 ${h.table(['Distrito', 'Postos', 'Média', 'Mínimo'], ds.map(([d, s]) => [h.a(h.D.slug(d), d), s.n, h.l(s.media), h.l(s.min)]), 'Gasóleo simples, preço afixado comunicado à DGEG', ['l', 'r', 'r', 'r'])}
 <h2>O que mais pesa: o tipo de posto</h2>
@@ -37,7 +37,7 @@ ${h.table(['Distrito', 'Postos', 'Média', 'Mínimo'], ds.map(([d, s]) => [h.a(h
     title: 'Diesel price in Portugal today: average, lowest, cheapest',
     description: 'Standard diesel price today in mainland Portugal: posted average, cheapest station, the DGEG daily average and how the 18 districts compare, updated daily.',
     h1: 'Diesel price in Portugal today',
-    intro: (h) => `Standard diesel at ${h.num(h.D.statsDe('gs')!.n)} mainland stations, with each price’s update time.`,
+    intro: (h) => `Today’s standard diesel price at ${h.num(h.D.statsDe('gs')!.n)} mainland stations, with each one’s update time.`,
     resume: (h) => {
       const s = h.D.statsDe('gs')!, p = h.D.pmd('gs')!, sem = h.D.pmdAntes('gs', 7), ano = h.D.pmdAntes('gs', 364), e = h.D.est('gs');
       return `Standard diesel is posted today at ${h.l(s.media)} a litre on average across the ${h.num(s.n)} mainland stations that sell it, with the cheapest at ${h.l(s.min)} and the dearest at ${h.l(s.max)}. The daily average the DGEG publishes, which weights sales and already nets out promotions, was ${h.l(p.media)} on ${h.date(p.dia)}${sem ? `, ${h.c(p.media - sem.media, true)} on the week before` : ''}${ano ? ` and ${h.c(p.media - ano.media, true)} on the same day a year ago` : ''}. Filling a 50-litre tank at the posted average costs ${h.eur(s.media * 50, 2)}; at the cheapest station, ${h.eur(s.min * 50, 2)}. ${e && e.qualidade.publica ? `The estimate for Monday ${h.date(e.segunda)} is ${h.c(e.variacao, true)} a litre.` : ''} Pick a district and municipality in the calculator to see your area’s average and its five cheapest stations. The district table further down ranks all 18 districts by their posted average, and each one links to its own page with every municipality.`;
@@ -49,7 +49,7 @@ ${h.table(['Distrito', 'Postos', 'Média', 'Mínimo'], ds.map(([d, s]) => [h.a(h
     ],
     body: (h) => {
       const ds = distritos(h, 'gs'), t = h.D.porTipo('gs');
-      return `<h2>Diesel district by district</h2>
+      return `<h2>Diesel price today, district by district</h2>
 <p>The gap between the cheapest and the dearest district is ${h.c(ds[ds.length - 1][1].media - ds[0][1].media)} a litre on the posted average today. That is small next to the gap between stations within one district, which easily reaches twenty or thirty cents. Each district has its own page with a table of its municipalities.</p>
 ${h.table(['District', 'Stations', 'Average', 'Lowest'], ds.map(([d, s]) => [h.a(h.D.slug(d), d), s.n, h.l(s.media), h.l(s.min)]), 'Standard diesel, posted price reported to the DGEG', ['l', 'r', 'r', 'r'])}
 <h2>What matters most: the type of station</h2>

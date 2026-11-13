@@ -12,7 +12,7 @@ export default defineGuide({
     title: 'Preço dos combustíveis por marca: Galp, Repsol, BP e outras',
     description: 'Preço médio afixado do gasóleo e da gasolina por marca e por tipo de posto (rua, hipermercado, autoestrada), com o número de postos de cada uma. Dados DGEG.',
     h1: 'Preço dos combustíveis por marca e tipo de posto',
-    intro: () => 'A média afixada de cada marca com pelo menos 20 postos, e a diferença num depósito.',
+    intro: () => 'O preço médio afixado de cada marca com pelo menos 20 postos, e a diferença num depósito.',
     resume: (h) => {
       const m = marcas(h, 'gs'), t = h.D.porTipo('gs'), maior = [...m].sort((a, b) => b[1].n - a[1].n)[0];
       return `No gasóleo simples, a marca com a média afixada mais baixa hoje, entre as que têm pelo menos 20 postos, é ${m[0][0]}, a ${h.l(m[0][1].media)}, e a mais alta ${m[m.length - 1][0]}, a ${h.l(m[m.length - 1][1].media)}: ${h.c(m[m.length - 1][1].media - m[0][1].media)} por litro de diferença, ou ${h.eur((m[m.length - 1][1].media - m[0][1].media) * 50, 2)} num depósito de 50 litros. A maior rede é a ${maior[0]}, com ${h.num(maior[1].n)} postos a ${h.l(maior[1].media)} em média. O tipo de posto pesa tanto como a marca: nas autoestradas o gasóleo está a ${h.l(t['Auto-estrada'].media)}, nos hipermercados a ${h.l(t['Área comercial (Hipermercados)'].media)}. As médias são simples, cada posto conta uma vez, a partir dos preços que cada um comunica à DGEG. Não incluem descontos de cartões, que mudam muito de marca para marca. Na calculadora, escolha o combustível e a marca para ver a sua média e o posto mais barato dessa rede.`;
@@ -24,7 +24,7 @@ export default defineGuide({
     ],
     body: (h) => {
       const m = marcas(h, 'gs'), b = Object.fromEntries(marcas(h, 'g95')), t = h.D.porTipo('gs'), t95 = h.D.porTipo('g95');
-      return `<h2>Marcas com pelo menos 20 postos</h2>
+      return `<h2>Preço dos combustíveis nas marcas com pelo menos 20 postos</h2>
 ${h.table(['Marca', 'Postos', 'Gasóleo simples', 'Gasolina 95'], m.map(([k, s]) => [k, s.n, h.l(s.media), b[k] ? h.l(b[k].media) : '—']), 'Média afixada simples, preços comunicados à DGEG', ['l', 'r', 'r', 'r'])}
 <h2>Rua, hipermercado e autoestrada</h2>
 ${h.table(['Tipo de posto', 'Postos', 'Gasóleo simples', 'Gasolina 95'], Object.entries(t).map(([k, s]) => [TIPO.pt[k as keyof typeof TIPO.pt] ?? k, s.n, h.l(s.media), t95[k] ? h.l(t95[k].media) : '—']), 'Média afixada simples por tipo de posto', ['l', 'r', 'r', 'r'])}
@@ -38,7 +38,7 @@ ${h.table(['Tipo de posto', 'Postos', 'Gasóleo simples', 'Gasolina 95'], Object
     title: 'Fuel prices by brand in Portugal: Galp, Repsol, BP and more',
     description: 'Average posted diesel and petrol price in Portugal by brand and by station type (street, hypermarket, motorway), with each brand’s station count. DGEG data.',
     h1: 'Fuel prices by brand and station type',
-    intro: () => 'The posted average of every brand with at least 20 stations, and what the gap means on a full tank.',
+    intro: () => 'The average posted fuel price of every brand with at least 20 stations, and what the gap means on a full tank.',
     resume: (h) => {
       const m = marcas(h, 'gs'), t = h.D.porTipo('gs'), maior = [...m].sort((a, b) => b[1].n - a[1].n)[0];
       return `For standard diesel, the brand with the lowest posted average today, among those with at least 20 stations, is ${m[0][0]}, at ${h.l(m[0][1].media)}, and the highest is ${m[m.length - 1][0]}, at ${h.l(m[m.length - 1][1].media)}: a gap of ${h.c(m[m.length - 1][1].media - m[0][1].media)} a litre, or ${h.eur((m[m.length - 1][1].media - m[0][1].media) * 50, 2)} on a 50-litre tank. The largest network is ${maior[0]}, with ${h.num(maior[1].n)} stations averaging ${h.l(maior[1].media)}. The type of station matters as much as the brand: on motorways diesel is at ${h.l(t['Auto-estrada'].media)}, at hypermarkets ${h.l(t['Área comercial (Hipermercados)'].media)}. Averages are simple, each station counting once, from the prices each one reports to the DGEG. They exclude loyalty-card discounts, which vary widely from brand to brand. In the calculator, pick a fuel and a brand to see its average and that network’s cheapest station. The tables below list every brand with at least 20 stations and the three station types, for diesel and petrol 95.`;
@@ -50,7 +50,7 @@ ${h.table(['Tipo de posto', 'Postos', 'Gasóleo simples', 'Gasolina 95'], Object
     ],
     body: (h) => {
       const m = marcas(h, 'gs'), b = Object.fromEntries(marcas(h, 'g95')), t = h.D.porTipo('gs'), t95 = h.D.porTipo('g95');
-      return `<h2>Brands with at least 20 stations</h2>
+      return `<h2>Fuel prices of brands with at least 20 stations</h2>
 ${h.table(['Brand', 'Stations', 'Standard diesel', 'Petrol 95'], m.map(([k, s]) => [k, s.n, h.l(s.media), b[k] ? h.l(b[k].media) : '—']), 'Simple posted average, prices reported to the DGEG', ['l', 'r', 'r', 'r'])}
 <h2>Street, hypermarket and motorway</h2>
 ${h.table(['Station type', 'Stations', 'Standard diesel', 'Petrol 95'], Object.entries(t).map(([k, s]) => [TIPO.en[k as keyof typeof TIPO.en] ?? k, s.n, h.l(s.media), t95[k] ? h.l(t95[k].media) : '—']), 'Simple posted average by station type', ['l', 'r', 'r', 'r'])}

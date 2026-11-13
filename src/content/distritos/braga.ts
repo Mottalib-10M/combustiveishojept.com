@@ -46,7 +46,7 @@ ${h.table(['Marca', 'Postos', 'Média', 'Mínimo'], marcas.map((m) => [mk(h, m.m
 ${h.table(['Posto', 'Concelho', 'Preço', 'Atualizado'], top5.map((x) => [x.nome, x.concelho, h.l(x.preco), hora(h, x.atualizado)]), 'Gasóleo simples, preço afixado comunicado à DGEG', ['l', 'l', 'r', 'r'])}
 <h2>Aditivado e gasolina especial</h2>
 <p>${ge ? `O gasóleo aditivado custa hoje ${h.c(ge.media - gs.media, true)} por litro face ao simples.` : 'Hoje nenhum posto afixa gasóleo aditivado.'} ${g95e ? `Na gasolina, a especial 95 está a ${h.l(g95e.media)}, contra ${h.l(g95.media)} da simples, em ${h.num(g95e.n)} postos.` : `A gasolina simples 95 está a ${h.l(g95.media)}.`} O ganho das versões aditivadas não se mede no ecrã da bomba; a página ${h.a('simples-ou-aditivado', 'simples ou aditivado')} resume o que se sabe.</p>
-<h2>Braga e os distritos vizinhos</h2>
+<h2>Preço dos combustíveis em Braga e nos distritos vizinhos</h2>
 <p>No gasóleo, Braga está hoje em ${h.ord(r.pos)} lugar. ${viz.filter((x) => x.s).map((x) => `${h.a(h.D.slug(x.n), x.n)} aparece em ${h.ord(x.r.pos)}, com média de ${h.l(x.s!.media)}`).join('; ')}. A posição de cada distrito pode trocar de um dia para o outro, porque as médias estão separadas por poucos cêntimos. Para quem passa a fronteira distrital todos os dias, o posto escolhido conta mais do que o distrito.</p>`;
     },
   },
@@ -54,8 +54,8 @@ ${h.table(['Posto', 'Concelho', 'Preço', 'Atualizado'], top5.map((x) => [x.nome
     slug: 'braga', nav: 'Braga', card: 'Brands, the five cheapest stations and the cost of premium diesel in Braga district today.',
     title: 'Diesel and petrol in Braga today: brands and cheap stations',
     description: 'Diesel and petrol prices today in Braga district, brand by brand, with the five cheapest stations of the day and the extra cost of premium diesel over standard.',
-    h1: 'Fuel in Braga district: brands and today’s prices',
-    intro: (h) => `Which brands sell cheapest across the ${h.num(h.D.postosDistrito(D).concelhos)} municipalities of Braga district, and where today's lowest-priced stations are.`,
+    h1: 'Diesel and petrol in Braga district: brands and today’s prices',
+    intro: (h) => `Which brands sell diesel and petrol cheapest across the ${h.num(h.D.postosDistrito(D).concelhos)} municipalities of Braga district, and where today's lowest-priced stations are.`,
     resume: (h) => {
       const { gs, g95, ge, r, marcas, grandes } = dados(h);
       const m0 = marcas[0], b0 = grandes[0];
@@ -77,7 +77,7 @@ ${h.table(['Brand', 'Stations', 'Average', 'Lowest'], marcas.map((m) => [mk(h, m
 ${h.table(['Station', 'Municipality', 'Price', 'Updated'], top5.map((x) => [x.nome, x.concelho, h.l(x.preco), hora(h, x.atualizado)]), 'Standard diesel, posted price reported to the DGEG', ['l', 'l', 'r', 'r'])}
 <h2>Premium diesel and premium petrol</h2>
 <p>${ge ? `Premium diesel costs ${h.c(ge.media - gs.media, true)} a litre against standard today.` : 'No station posts premium diesel today.'} ${g95e ? `For petrol, premium 95 is at ${h.l(g95e.media)}, against ${h.l(g95.media)} for standard, at ${h.num(g95e.n)} stations.` : `Standard petrol 95 is at ${h.l(g95.media)}.`} The benefit of premium grades does not show on the pump display; the ${h.a('simples-ou-aditivado', 'standard or premium')} page sums up what is known.</p>
-<h2>Braga and its neighbours</h2>
+<h2>Diesel and petrol in Braga and its neighbours</h2>
 <p>On diesel, Braga ranks ${h.ord(r.pos)} today. ${viz.filter((x) => x.s).map((x) => `${h.a(h.D.slug(x.n), x.n)} ranks ${h.ord(x.r.pos)}, with an average of ${h.l(x.s!.media)}`).join('; ')}. A district's position can swap from one day to the next, because the averages are only a few cents apart. For anyone who crosses the district boundary every day, the station chosen matters more than the district.</p>`;
     },
   },

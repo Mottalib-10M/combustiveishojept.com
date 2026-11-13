@@ -20,7 +20,7 @@ export default defineGuide({
     slug: 'aveiro', nav: 'Aveiro', card: 'Quanto custa hoje encher o depósito nos concelhos do distrito de Aveiro, de gasóleo ou de gasolina.',
     title: 'Combustíveis em Aveiro hoje: gasóleo, gasolina e depósito',
     description: 'Gasóleo e gasolina hoje no distrito de Aveiro: média de cada concelho, o custo de um depósito de 40 a 60 litros e a comparação com Porto, Viseu e Coimbra.',
-    h1: 'Gasóleo e gasolina no distrito de Aveiro',
+    h1: 'Combustíveis no distrito de Aveiro: gasóleo e gasolina',
     intro: (h) => `Preços afixados hoje nos ${h.num(h.D.postosDistrito(D).concelhos)} concelhos do distrito de Aveiro e o que custa, em euros, um depósito cheio.`,
     resume: (h) => {
       const { gs, g95, p, r, rg } = dados(h);
@@ -42,7 +42,7 @@ ${h.table(['Depósito', 'Posto mais barato', 'Média do distrito', 'Autoestrada'
 <h2>Do concelho mais barato ao mais caro</h2>
 <p>${lo && hi && c.length > 1 ? `Hoje é em ${lo.concelho} que o gasóleo tem a média mais baixa, ${h.l(lo.media)}, e em ${hi.concelho} a mais alta, ${h.l(hi.media)}: ${h.c(hi.media - lo.media)} por litro de um extremo ao outro, ${h.eur((hi.media - lo.media) * 50, 2)} num depósito de 50 litros.` : 'Hoje há poucos concelhos com dados suficientes para os ordenar.'} A segunda coluna de preços mostra a gasolina simples 95 no mesmo concelho, que nem sempre segue a ordem do gasóleo.</p>
 ${h.table(['Concelho', 'Postos', 'Gasóleo', 'Gasolina 95'], c.map((x) => [x.concelho, x.n, h.l(x.media), g95c[x.concelho] ? h.l(g95c[x.concelho].media) : '—']), 'Média afixada por concelho, concelhos com dois postos ou mais', ['l', 'r', 'r', 'r'])}
-<h2>Aveiro, Porto, Viseu e Coimbra</h2>
+<h2>Combustíveis em Aveiro, Porto, Viseu e Coimbra</h2>
 <p>${viz.map((x) => `No distrito ${x.n === 'Porto' ? 'do' : 'de'} ${h.a(h.D.slug(x.n), x.n)}, o gasóleo simples está hoje a ${h.l(x.s!.media)}, ${h.c(x.s!.media - gs.media, true)} face a Aveiro`).join('; ')}. Entre distritos vizinhos as médias ficam próximas, e é dentro do próprio concelho, de posto para posto, que se encontram as maiores diferenças.</p>`;
     },
   },
@@ -50,7 +50,7 @@ ${h.table(['Concelho', 'Postos', 'Gasóleo', 'Gasolina 95'], c.map((x) => [x.con
     slug: 'aveiro', nav: 'Aveiro', card: 'What it costs today to fill up with diesel or petrol in each municipality of Aveiro district.',
     title: 'Fuel prices in Aveiro today: diesel, petrol and full tank',
     description: 'Diesel and petrol in Aveiro district today: the average in each municipality, the cost of a 40 to 60-litre tank and a comparison with Porto, Viseu and Coimbra.',
-    h1: 'Diesel and petrol in Aveiro district',
+    h1: 'Fuel prices in Aveiro district: diesel and petrol',
     intro: (h) => `Prices posted today in the ${h.num(h.D.postosDistrito(D).concelhos)} municipalities of Aveiro district, and what a full tank costs in euros.`,
     resume: (h) => {
       const { gs, g95, p, r, rg } = dados(h);
@@ -72,7 +72,7 @@ ${h.table(['Tank', 'Cheapest station', 'District average', 'Motorway'], rows, 'S
 <h2>From the cheapest municipality to the dearest</h2>
 <p>${lo && hi && c.length > 1 ? `Today ${lo.concelho} has the lowest diesel average, ${h.l(lo.media)}, and ${hi.concelho} the highest, ${h.l(hi.media)}: ${h.c(hi.media - lo.media)} a litre from one end to the other, or ${h.eur((hi.media - lo.media) * 50, 2)} on a 50-litre tank.` : 'Today few municipalities have enough data to be ranked.'} The second price column shows standard petrol 95 in the same municipality, which does not always follow the diesel order.</p>
 ${h.table(['Municipality', 'Stations', 'Diesel', 'Petrol 95'], c.map((x) => [x.concelho, x.n, h.l(x.media), g95c[x.concelho] ? h.l(g95c[x.concelho].media) : '—']), 'Posted average by municipality, municipalities with two stations or more', ['l', 'r', 'r', 'r'])}
-<h2>Aveiro, Porto, Viseu and Coimbra</h2>
+<h2>Fuel prices in Aveiro, Porto, Viseu and Coimbra</h2>
 <p>${viz.map((x) => `In ${h.a(h.D.slug(x.n), x.n)} district, standard diesel is at ${h.l(x.s!.media)} today, ${h.c(x.s!.media - gs.media, true)} against Aveiro`).join('; ')}. Between neighbouring districts the averages stay close, and it is within the same municipality, from one station to the next, that the largest differences turn up.</p>`;
     },
   },

@@ -11,7 +11,7 @@ export default defineGuide({
     title: 'Combustíveis na Madeira: preços máximos desta semana (JORAM)',
     description: 'Preço máximo da gasolina 95, do gasóleo rodoviário e do gasóleo colorido na Madeira esta semana, segundo o despacho do JORAM, e a diferença para o continente.',
     h1: 'Preços dos combustíveis na Madeira esta semana',
-    intro: (h) => `Preços máximos em vigor desde ${h.dia(M(h).a.vigor, true)}, fixados por despacho conjunto e publicados no Jornal Oficial.`,
+    intro: (h) => `Preços máximos dos combustíveis em vigor desde ${h.dia(M(h).a.vigor, true)}, fixados por despacho conjunto e publicados no Jornal Oficial.`,
     resume: (h) => {
       const x = M(h), a = x.a, b = x.b;
       return `Na Região Autónoma da Madeira, a gasolina sem chumbo 95 pode ser vendida no máximo a ${h.l(a.g95)} por litro e o gasóleo rodoviário a ${h.l(a.gs)}, desde as 0 horas de ${h.date(a.vigor)}, segundo o despacho conjunto n.º ${a.despacho} publicado no Jornal Oficial da Região (JORAM).${a.colorido ? ` O gasóleo colorido e marcado tem o máximo de ${h.l(a.colorido)}.` : ''} ${b ? `Face ao despacho anterior, em vigor desde ${h.date(b.vigor)}, a gasolina variou ${h.c(a.g95 - b.g95, true)} e o gasóleo ${h.c(a.gs - b.gs, true)}.` : ''} No continente, onde os preços são livres, o preço médio diário da DGEG foi de ${h.l(x.cont.g95)} na gasolina 95 e ${h.l(x.cont.gs)} no gasóleo a ${h.date(x.cont.dia)}: a Madeira fica ${h.c(a.g95 - x.cont.g95, true)} e ${h.c(a.gs - x.cont.gs, true)} por litro face a esses valores. Os preços madeirenses são máximos: um posto pode vender abaixo, mas não acima. A DGEG não recolhe preços das regiões autónomas, por isso não há média por posto para a Madeira.`;
@@ -37,7 +37,7 @@ ${h.table(['', 'Madeira (máximo)', 'Continente (média DGEG)', 'Diferença'], [
     title: 'Fuel prices in Madeira: this week’s maximum prices (JORAM)',
     description: 'Maximum price of petrol 95, road diesel and coloured diesel in Madeira this week, from the order in the JORAM, and how it compares with mainland Portugal.',
     h1: 'Fuel prices in Madeira this week',
-    intro: (h) => `Maximum prices in force since ${h.dia(M(h).a.vigor, true)}, set by joint order and published in the Official Journal.`,
+    intro: (h) => `Maximum fuel prices in force since ${h.dia(M(h).a.vigor, true)}, set by joint order and published in the Official Journal.`,
     resume: (h) => {
       const x = M(h), a = x.a, b = x.b;
       return `In the Autonomous Region of Madeira, unleaded petrol 95 may be sold at no more than ${h.l(a.g95)} a litre and road diesel at ${h.l(a.gs)}, from midnight on ${h.date(a.vigor)}, under joint order ${a.despacho} published in the Region’s Official Journal (JORAM).${a.colorido ? ` Coloured (marked) diesel is capped at ${h.l(a.colorido)}.` : ''} ${b ? `Against the previous order, in force from ${h.date(b.vigor)}, petrol moved ${h.c(a.g95 - b.g95, true)} and diesel ${h.c(a.gs - b.gs, true)}.` : ''} On the mainland, where prices are free, the DGEG daily average was ${h.l(x.cont.g95)} for petrol 95 and ${h.l(x.cont.gs)} for diesel on ${h.date(x.cont.dia)}: Madeira is ${h.c(a.g95 - x.cont.g95, true)} and ${h.c(a.gs - x.cont.gs, true)} a litre against those figures. Madeira’s prices are caps: a station may sell below them, never above. The DGEG does not collect prices from the autonomous regions, so there is no station average for Madeira.`;
@@ -51,7 +51,7 @@ ${h.table(['', 'Madeira (máximo)', 'Continente (média DGEG)', 'Diferença'], [
       const x = M(h);
       return `<h2>The trend over recent weeks</h2>
 <p>We have read the maximum-price joint orders published in the JORAM since ${h.date(x.primeiro.vigor)}: ${h.num(x.d.length)} of them. Some weeks may be missing when the order was not found in the list of publications; such a week is left out, never estimated. Between the first and last orders read, petrol 95 moved ${h.c(x.a.g95 - x.primeiro.g95, true)} and diesel ${h.c(x.a.gs - x.primeiro.gs, true)} a litre.</p>
-<h2>Madeira and the mainland side by side</h2>
+<h2>Fuel prices in Madeira and the mainland side by side</h2>
 ${h.table(['', 'Madeira (cap)', 'Mainland (DGEG average)', 'Gap'], [[h.fn('g95'), h.l(x.a.g95), h.l(x.cont.g95), h.c(x.a.g95 - x.cont.g95, true)], [h.fn('gs'), h.l(x.a.gs), h.l(x.cont.gs), h.c(x.a.gs - x.cont.gs, true)]], `Order ${x.a.despacho}; DGEG daily average of ${h.date(x.cont.dia)}`, ['l', 'r', 'r', 'r'])}
 <p>The comparison sets a cap against an average, so it is indicative: a station in Madeira may sell below the cap. On a 50-litre tank of diesel, today’s gap is worth ${h.eur(Math.abs(x.a.gs - x.cont.gs) * 50, 2)}.</p>
 <h2>Where the figures come from</h2>
