@@ -88,6 +88,22 @@ describe('estimation et rétro-test', () => {
     expect(e.variacao).toBeCloseTo(0.5 * (nivel(39) - nivel(38)), 10);
     expect(e.preco).toBeCloseTo(e.precoBase + e.variacao, 12);
   });
+  it('le lundi, avant toute publication de la semaine, on garde l’estimation de ce lundi', () => {
+    const ref: Record<string, number> = {}, pmd: Record<string, { gs: [number, number, number, number, number] }> = {};
+    const nivel = (w: number) => 1.5 + (w % 3) * 0.02;
+    for (let w = 0; w < 40; w++) {
+      const m = addDays('2025-12-29', 7 * w);
+      for (let i = 0; i < 5; i++) ref[addDays(m, i)] = nivel(w);
+      for (let i = 0; i < 7; i++) pmd[addDays(m, i)] = { gs: [2 + 0.5 * nivel(w - 1), 0, 0, 1, 0] };
+    }
+    const lundi = addDays('2025-12-29', 7 * 40);
+    const e = estimativa(ref, pmd, 'gs', lundi)!;
+    expect(e.segunda).toBe(lundi);
+    expect(e.dias).toBe(5);
+    expect(e.variacao).toBeCloseTo(0.5 * (nivel(39) - nivel(38)), 10);
+    // trois semaines sans rien : pas d'estimation inventée
+    expect(estimativa(ref, pmd, 'gs', addDays(lundi, 14))).toBeNull();
+  });
 });
 
 describe('coûts et impôts', () => {

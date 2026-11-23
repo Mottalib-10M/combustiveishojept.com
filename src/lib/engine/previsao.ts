@@ -94,7 +94,7 @@ export interface Estimativa {
 }
 
 /** Estimation du prochain lundi après `hoje` (dernier jour de données). */
-export function estimativa(ref: Record<string, number>, pmd: PmdFile['dias'], fuel: Fuel, hoje: string): Estimativa | null {
+export function estimativa(ref: Record<string, number>, pmd: PmdFile['dias'], fuel: Fuel, hoje: string, recuo = true): Estimativa | null {
   const seg = proximaSegunda(hoje), base = addDays(seg, -7);
   const s = semanas(ref, pmd, fuel).filter((r) => r.segunda < seg);
   const ultimoEnse = Object.keys(ref).filter((d) => d <= hoje).sort().pop() ?? '';
@@ -102,6 +102,8 @@ export function estimativa(ref: Record<string, number>, pmd: PmdFile['dias'], fu
   // prix de base : le lundi en cours ; à défaut (données en retard), le dernier jour publié de la semaine
   const diasPmd = Object.keys(pmd).filter((d) => d >= base && d <= hoje && pmd[d]?.[fuel]).sort();
   const precoBase = pmd[base]?.[fuel]?.[0] ?? (diasPmd.length ? pmd[diasPmd[0]][fuel]![0] : undefined);
+  // Lundi matin : tant que la DGEG ou l'ENSE n'a rien publié pour la semaine en cours, on garde l'estimation de ce lundi.
+  if ((!a || precoBase == null) && recuo) return estimativa(ref, pmd, fuel, addDays(base, -1), false);
   if (!a || !b || precoBase == null || s.length < 20) return null;
   const bt = beta(s);
   const variacao = bt * (a.media - b.media);
