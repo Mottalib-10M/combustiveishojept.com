@@ -49,7 +49,7 @@ export default function PrevisaoCalc({ lang, ests, fuel: f0 = 'gs', litros: l0 =
         { label: T(lang, 'Sentido certo', 'Direction right'), value: `${pct(e.qualidade.sentido, lang, 0)} (${nr(e.qualidade.semanas, lang)} ${T(lang, 'semanas', 'weeks')})`, note: true },
       ]}
       notes={[T(lang, 'Estimativa estatística, nunca um preço oficial: cada posto fixa o seu preço livremente.', 'A statistical estimate, never an official price: each station sets its own price freely.')]}
-      hyp={T(lang, `Variação = ${nr(e.beta, lang, 2)} × diferença entre a média dos preços de referência ENSE desta semana e a da semana anterior. O coeficiente é ajustado só com semanas passadas.`, `Change = ${nr(e.beta, lang, 2)} × the gap between this week’s and last week’s average ENSE reference price. The coefficient is fitted on past weeks only.`)}
+      hyp={T(lang, `Variação = ${nr(e.beta, lang, 2)} × diferença entre a média dos preços de referência ENSE da semana que antecede essa segunda-feira e a da semana anterior. O coeficiente é ajustado só com semanas passadas.`, `Change = ${nr(e.beta, lang, 2)} × the gap between the average ENSE reference price in the week before that Monday and in the week before that. The coefficient is fitted on past weeks only.`)}
       methodHref={methodHref}
       copyText={`${FUEL_NOME[lang][fuel]} ${diaLongo(e.segunda, lang)}: ${litro(e.preco, lang)} (${cent(e.variacao, lang)})`} />
   } after={

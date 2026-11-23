@@ -1,4 +1,7 @@
-import { defineGuide } from '../../lib/guide-types';
+import { defineGuide, type Helpers } from '../../lib/guide-types';
+
+// Lundi matin, avant les données de la semaine : l'estimation porte sur ce lundi et repose sur la semaine écoulée (previsao.ts, recuo).
+const passada = (h: Helpers) => h.D.est('gs')!.segunda <= h.D.HOJE;
 
 export default defineGuide({
   id: 'proxima-semana', group: 'precos', order: 1, tool: 'previsao',
@@ -9,10 +12,12 @@ export default defineGuide({
     title: 'Combustíveis na próxima semana: sobe ou desce na segunda?',
     description: 'Estimativa da variação do gasóleo e da gasolina para a próxima segunda-feira, calculada com os preços de referência da ENSE e com o erro das semanas passadas.',
     h1: 'Combustíveis na próxima semana: estimativa para segunda-feira',
-    intro: (h) => `Quanto devem mudar os preços dos combustíveis em ${h.dia(h.D.est('gs')!.segunda, true)}, a partir dos preços de referência da ENSE desta semana.`,
+    intro: (h) => passada(h)
+      ? `Quanto mudam os preços dos combustíveis hoje, ${h.dia(h.D.est('gs')!.segunda, true)}, segundo a estimativa feita com os preços de referência da ENSE da semana passada.`
+      : `Quanto devem mudar os preços dos combustíveis em ${h.dia(h.D.est('gs')!.segunda, true)}, a partir dos preços de referência da ENSE desta semana.`,
     resume: (h) => {
       const e = h.D.est('gs')!, g = h.D.est('g95')!;
-      return `Para segunda-feira, ${h.date(e.segunda)}, a estimativa é de ${h.c(e.variacao, true)} por litro no gasóleo simples e de ${h.c(g.variacao, true)} na gasolina simples 95, o que levaria o preço médio diário da DGEG para ${h.l(e.preco)} e ${h.l(g.preco)}. A conta usa ${e.dias} dos 5 dias úteis desta semana já publicados pela ENSE, até ${h.date(e.ultimoEnse)}, e compara-os com a média da semana anterior. Quando a semana fecha, na sexta-feira, a estimativa fica completa. Nas ${h.num(e.qualidade.semanas)} semanas testadas, o erro médio foi de ${h.c(e.qualidade.mae)} no gasóleo e de ${h.c(g.qualidade.mae)} na gasolina, contra ${h.c(e.qualidade.maeIgual)} e ${h.c(g.qualidade.maeIgual)} para quem dissesse que o preço não muda. O sentido da variação foi certo em ${h.pct(e.qualidade.sentido, 0)} das semanas no gasóleo. É uma estimativa estatística, não um preço oficial: cada marca decide o seu preço.`;
+      return `Para segunda-feira, ${h.date(e.segunda)}, a estimativa é de ${h.c(e.variacao, true)} por litro no gasóleo simples e de ${h.c(g.variacao, true)} na gasolina simples 95, o que levaria o preço médio diário da DGEG para ${h.l(e.preco)} e ${h.l(g.preco)}. ${passada(h) ? `A conta usa os ${e.dias} dias úteis da semana passada publicados pela ENSE, até ${h.date(e.ultimoEnse)}, e compara-os com a média da semana anterior. A estimativa para a segunda-feira seguinte começa assim que a DGEG e a ENSE publicarem os dados desta semana.` : `A conta usa ${e.dias} dos 5 dias úteis desta semana já publicados pela ENSE, até ${h.date(e.ultimoEnse)}, e compara-os com a média da semana anterior. Quando a semana fecha, na sexta-feira, a estimativa fica completa.`} Nas ${h.num(e.qualidade.semanas)} semanas testadas, o erro médio foi de ${h.c(e.qualidade.mae)} no gasóleo e de ${h.c(g.qualidade.mae)} na gasolina, contra ${h.c(e.qualidade.maeIgual)} e ${h.c(g.qualidade.maeIgual)} para quem dissesse que o preço não muda. O sentido da variação foi certo em ${h.pct(e.qualidade.sentido, 0)} das semanas no gasóleo. É uma estimativa estatística, não um preço oficial: cada marca decide o seu preço.`;
     },
     faqs: (h) => [
       { q: 'Porque é que os preços mudam à segunda-feira?', a: 'As grandes marcas atualizam os preços uma vez por semana, com efeito à segunda-feira, com base nas cotações dos produtos refinados e no câmbio do euro face ao dólar da semana anterior. Por isso a variação de segunda pode ser estimada antes: os custos que a determinam já são conhecidos durante a semana, através do preço de referência diário que a ENSE publica.' },
@@ -38,10 +43,12 @@ ${h.table(['Combustível', 'Erro médio', 'Erro de «fica igual»', 'Estimativa'
     title: 'Fuel prices next week in Portugal: up or down on Monday?',
     description: 'Estimated change in diesel and petrol prices for next Monday in Portugal, worked out from ENSE reference prices and shown with the error of past weeks.',
     h1: 'Fuel prices next week: the Monday estimate',
-    intro: (h) => `How much fuel prices should move on ${h.dia(h.D.est('gs')!.segunda, true)}, from this week’s ENSE reference prices.`,
+    intro: (h) => passada(h)
+      ? `How much fuel prices move today, ${h.dia(h.D.est('gs')!.segunda, true)}, according to the estimate built from last week’s ENSE reference prices.`
+      : `How much fuel prices should move on ${h.dia(h.D.est('gs')!.segunda, true)}, from this week’s ENSE reference prices.`,
     resume: (h) => {
       const e = h.D.est('gs')!, g = h.D.est('g95')!;
-      return `For Monday ${h.date(e.segunda)}, the estimate is ${h.c(e.variacao, true)} a litre on standard diesel and ${h.c(g.variacao, true)} on standard petrol 95, which would take the DGEG daily average to ${h.l(e.preco)} and ${h.l(g.preco)}. The sum uses ${e.dias} of this week’s 5 working days already published by the ENSE, up to ${h.date(e.ultimoEnse)}, and compares them with last week’s average. Once the week closes on Friday, the estimate is complete. Over ${h.num(e.qualidade.semanas)} tested weeks, the average error was ${h.c(e.qualidade.mae)} on diesel and ${h.c(g.qualidade.mae)} on petrol, against ${h.c(e.qualidade.maeIgual)} and ${h.c(g.qualidade.maeIgual)} for anyone saying the price would not change. The direction was right in ${h.pct(e.qualidade.sentido, 0)} of weeks for diesel. It is a statistical estimate, not an official price: each brand sets its own.`;
+      return `For Monday ${h.date(e.segunda)}, the estimate is ${h.c(e.variacao, true)} a litre on standard diesel and ${h.c(g.variacao, true)} on standard petrol 95, which would take the DGEG daily average to ${h.l(e.preco)} and ${h.l(g.preco)}. ${passada(h) ? `The sum uses last week’s ${e.dias} working days published by the ENSE, up to ${h.date(e.ultimoEnse)}, and compares them with the week before. The estimate for the following Monday starts as soon as the DGEG and the ENSE publish this week’s data.` : `The sum uses ${e.dias} of this week’s 5 working days already published by the ENSE, up to ${h.date(e.ultimoEnse)}, and compares them with last week’s average. Once the week closes on Friday, the estimate is complete.`} Over ${h.num(e.qualidade.semanas)} tested weeks, the average error was ${h.c(e.qualidade.mae)} on diesel and ${h.c(g.qualidade.mae)} on petrol, against ${h.c(e.qualidade.maeIgual)} and ${h.c(g.qualidade.maeIgual)} for anyone saying the price would not change. The direction was right in ${h.pct(e.qualidade.sentido, 0)} of weeks for diesel. It is a statistical estimate, not an official price: each brand sets its own.`;
     },
     faqs: (h) => [
       { q: 'Why do Portuguese fuel prices change on Mondays?', a: 'The big brands update prices once a week, effective on Monday, based on the previous week’s quotes for refined products and the euro–dollar exchange rate. That is why Monday’s move can be estimated in advance: the costs behind it are already known during the week, through the daily reference price the ENSE publishes.' },
