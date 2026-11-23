@@ -59,7 +59,7 @@
         "en": "ENSE, Decree-Law 199/2026: stations must post the “Redução ISP+IVA” from 17 October 2026"
       }
     },
-    "civa18": {
+    "portaria451A": {"url": "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/legislacao/diplomas_legislativos/Documents/portaria-451-a-2026-1.pdf", "label": {"pt": "Portaria n.º 451-A/2026/1, de 9 de outubro: revisão das taxas unitárias do ISP (desconto extraordinário)", "en": "Order 451-A/2026/1 of 9 October: revision of ISP unit rates (temporary discount)"}}, "oe2027": {"url": "https://portugal.gov.pt/gc25/comunicacao/noticias/oe2027-preve-alivio-no-irs-e-investimento-para-enfrentar-fenomenos-climaticos-extremos", "label": {"pt": "Governo, proposta de Orçamento do Estado para 2027", "en": "Government, 2027 State Budget proposal"}}, "civa18": {
       "url": "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/civa_rep/Pages/iva18.aspx",
       "label": {
         "pt": "Código do IVA, artigo 18.º: taxa normal de 23 %",
